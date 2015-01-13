@@ -1,0 +1,13 @@
+db.alerts.save( {
+	type: 'regionpermission',
+	created_time: new Date(),
+	status: 'open',
+	project: 'home garden',
+	details: {
+	place: 'region 1',
+	reason: 'high risk task scheduled at 9:40am',
+	worker_name: 'Adi',
+	task: 'remodeling'
+	}
+	}
+)
