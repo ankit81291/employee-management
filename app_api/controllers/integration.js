@@ -8,7 +8,7 @@ var smtpTransport = require('nodemailer-smtp-transport');
 var email = require('emailjs');
 var CronJob = require('cron').CronJob;
 
-/*new CronJob('0 * * * * 0-6', function(){
+new CronJob('0 * * * * 0-6', function(){
   generateWorkerlateAlert();
   console.log('Generate worker late alert');
 }, null, true, "America/Los_Angeles");

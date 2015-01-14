@@ -52,7 +52,7 @@ app.use(express.cookieParser('your secret here'));
 // app.use(express.session());
 app.use(app.router);
 
-// New call to compress content
+app.set('view engine', 'jade')
 app.use(express.compress());
 
 if ('development' == app.get('env')) {

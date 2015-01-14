@@ -1,0 +1,32 @@
+{
+    "batch_id": "23df6ca0-c6c3-4b9b-926d-f646dec3d832",
+    "carrier_id": "cisco03",
+    "controller_id": "dc402345",
+    "timestamp": "2014-01-14T21:08:56Z",
+    "messages": [
+        {
+            "message_id": "becf248b-d620-4bba-8a0b-0b8c8116a650",
+            "device_id": "device3220040",
+            "type": "in",
+            "valid": "true",
+            "tag": "contractor2014020300012",
+            "timestamp": "2014-01-14T21:08:12Z"
+        },
+        {
+            "message_id": "a4bfd6c2-c9b2-4e8e-9da0-0a48aea70c7e",
+            "device_id": "device3220040",
+            "type": "in",
+            "valid": "true",
+            "tag": "contractor2014020500223",
+            "timestamp": "2014-01-14T21:08:22Z"
+        },
+        {
+            "message_id": "a928e10b-7bcf-4042-aa87-3ec0654bd49b",
+            "device_id": "device3220040",
+            "type": "out",
+            "valid": "false",
+            "tag": "contractor2014020500112",
+            "timestamp": "2014-01-14T21:08:28Z"
+        }
+    ]
+}

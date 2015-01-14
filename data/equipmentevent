@@ -1,0 +1,11 @@
+{
+  "batch_id": "23df6ca0-c6c3-4b9b-926d-f646dec3d832",
+  "carrier_id": "cisco03",
+  "controller_id": "dc402345",
+  "timestamp": "2014-01-14T21:08:12Z",
+  "message_id": "becf248b-d620-4bba-8a0b-0b8c8116a650",
+  "device_id": "device3220040",
+  "equipment_id": "equipment22343243",
+  "type": "issue",
+  "tag": "equipment2014020300012"
+}
