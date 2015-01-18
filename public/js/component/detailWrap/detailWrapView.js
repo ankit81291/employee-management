@@ -1,5 +1,5 @@
 
-define(["detailWrap/detailWrapController"], function(controller){
+define(["detailWrap/detailWrapController","jquery-autocomplete"], function(controller,jquery){
 
 	var detailWrapView = function(){
 		this.oController = controller;
@@ -84,12 +84,12 @@ define(["detailWrap/detailWrapController"], function(controller){
 		$(".detailwrap").append(taskNavDiv);
 		var taskDetailDiv = this.createTaskDetailDiv(obj[0]);
 		$(".detailwrap").append(taskDetailDiv);
-		if(obj[0]["kind"]=="Task"){
+		/*if(obj[0]["kind"]=="Task"){
 			this.buildTaskChart();
 		}
 		else if(obj[0]["kind"]=="Notification"){
 			this.buildNotificationChart();
-		}
+		}*/
 	};
 	detailWrapView.prototype.createTask = function(obj) {
 		var createParentNavDiv = this.createTaskParentNav(obj);
@@ -153,43 +153,78 @@ define(["detailWrap/detailWrapController"], function(controller){
 	};
 	
 	detailWrapView.prototype.createTaskDetailParentNav = function(obj) {
+		var taskName="";
+		if(obj["details"]!=undefined){
+			taskName=obj["details"]["task"];
+		}
+		else{
+			taskName="New Task";
+		}
+		
 		var div1='<div class="col-lg-9 detailList">'+
 			        '<div class="panel panel-default">'+
 				        '<div class="panel-heading">'+
-				        obj['type']+
+				        taskName+    
+				        "<i style='float:right;padding-left: 5px;' class='fa fa-edit' onclick='window.app.component.editTask("+JSON.stringify(obj)+");'></i>"+
+				        "<i style='float:right;' class='fa fa-plus' onclick='window.app.component.addNew("+JSON.stringify(obj)+");'></i>"+
 				        '</div>';
 		return div1;
 	};
 	
 	detailWrapView.prototype.detailTaskDiv = function(obj) {
+		var readOnly="readonly="+true;
+		var taskName= "";
+		var taskType= "";
+		var projectName="";
+		var WorkerName="";
+		var workerId="";
+		var reason="";
+		if(obj["details"]!=undefined){
+			taskName= obj["details"]["task"];
+			taskType= obj["type"];
+			projectName=obj["project"];
+			WorkerName=obj["details"]["worker_name"];
+			workerId=obj["details"]["worker_id"];
+			reason=obj["details"]["reason"];
+		}
+		else{
+			taskName= "";
+			taskType= "";
+			projectName="";
+			WorkerName="";
+			workerId="";
+			reason="";
+			readOnly="";
+		}
 		var taskDetailDiv1 ='<div class="panel-body">'+
-								'<div class="col-lg-3">'+
+								'<div class="col-lg-5">'+
 									'<dl class="dl-horizontal">'+
 							        '<dt>Task</dt>'+
-							        '<dd>'+obj["details"]["task"]+'</dd>'+
-							        '<dt>Created Time Id</dt>'+
-							        '<dd>'+obj["details"]["enter_time"]+'</dd>'+
+							        '<dd> <input class="form-control taskField" placeholder="Task" '+readOnly+' value="'+taskName+'"></dd>'+
+							        '<dt>Type</dt>'+
+							        '<dd><input class="form-control taskField" placeholder="Task Type" '+readOnly +' value="'+taskType+'"></dd>'+
+							        '<dt>Project Name</dt>'+
+							        '<dd><input class="form-control taskField" placeholder="Project Name" '+readOnly +' value="'+projectName+'"></dd>'+
 							        '</dl>'+
 							        '<form role="form">'+
-		                                '<div class="form-group">'+
-		                                    '<label>comments</label>'+
-		                                    '<input class="form-control comments" placeholder="Enter Comments">'+
+		                                '<div class="form-group" style="margin-left:75px;">'+
+		                                    '<label>Reason</label>'+
+		                                    '<input class="form-control reason" placeholder="Brief Description" '+readOnly +' value="'+reason+'">'+
+		                             '</div>'+
+		                             '<div class="form-group parentButton" style="margin-right: 70px;margin-top: 33px;">'+
+		                             	'<button class="btn btn-success buttonAction" type="button" style="float:right;" data-toggle="modal" data-target="#myModal">Take Action</button>'+
 		                             '</div>'+
 		                             '</form>'+
 							     '</div>';
-		var taskDetailDiv2 ='<div class="col-lg-2">'+
+		var taskDetailDiv2 ='<div class="col-lg-5">'+
 								'<dl class="dl-horizontal">'+
 							        '<dt>Worker Name</dt>'+
-							        '<dd>'+obj["details"]["worker_name"]+'</dd>'+
+							        '<dd id="workerDetail"><input id="WorkerName" style="display:inline;" class="form-control taskField" placeholder="Worker Name" '+readOnly +' value="'+WorkerName+'"></dd>'+
 							        '<dt>Worker Id</dt>'+
-							        '<dd>'+obj["details"]["worker_id"]+'</dd>'+
+							        '<dd><input class="form-control taskField" placeholder="Worker Id" '+readOnly +' value="'+workerId+'"></dd>'+
 						        '</dl>'+
 							'</div>';
-		var taskdetailDiv3 = '<div class="col-lg-4 test" id="morris-bar-chart">'+
-								'<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">'+
-								  'Take Action'+
-								'</button>'+
-						
+		var taskdetailDiv3 = 			
 								
 								'<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'+
 								  '<div class="modal-dialog">'+
@@ -206,7 +241,7 @@ define(["detailWrap/detailWrapController"], function(controller){
 	                                  '</div>'+
 	                                  '<div class="form-group">'+
 	                                      '<label>Reason</label>'+
-	                                      '<input class="form-control" value="'+obj["details"]["reason"]+'">'+
+	                                      '<input class="form-control taskField" value="'+reason+'">'+
 	                                  '</div>'+
 									   '<div class="form-group">'+
 	                                      '<label>Notification Status</label>'+
@@ -247,7 +282,7 @@ define(["detailWrap/detailWrapController"], function(controller){
 								'</div>';
 			return taskDetailDiv1+taskDetailDiv2+taskdetailDiv3;
 	};
-	detailWrapView.prototype.buildTaskChart = function() {
+	/*detailWrapView.prototype.buildTaskChart = function() {
 		Morris.Bar({
 	        element: 'morris-bar-chart',
 	        data: [{
@@ -285,19 +320,47 @@ define(["detailWrap/detailWrapController"], function(controller){
 	        hideHover: 'auto',
 	        resize: true
 	    });
-	};
+	};*/
 	detailWrapView.prototype.buildTaskItemDetailUI = function(obj) {
 		$(".detailList").remove();
 		var div = this.createTaskDetailDiv(obj);
 		$(".detailwrap").append(div);
-		if(obj["kind"]=="Task"){
+		/*if(obj["kind"]=="Task"){
 			this.buildTaskChart();
 		}
 		else if(obj["kind"]=="Notification"){
 			this.buildNotificationChart();
-		}
+		}*/
 	};
-	detailWrapView.prototype.buildNotificationChart = function() {
+	
+	detailWrapView.prototype.buildNewTaskUI = function() {
+		var obj={};
+		this.buildTaskItemDetailUI(obj);
+		$(".parentButton").empty();
+		var newtaskbutton='<button class="btn btn-danger" type="button" style="float:right;">Cancel</button>'+
+		  '<button class="btn btn-success" type="button" style="float:right;">Create</button>';
+		$(".parentButton").append(newtaskbutton);
+		var workerNameArray=["Abdul rashid","Mohamed kaif","Zaheer Ahmed","Imran khan","Moin khan","Rameez raja","Mohammad Sami","Naziruddin shah"];
+		$("input#WorkerName").autocomplete({source: workerNameArray});
+		$("#workerDetail").append('<img style="display:inline;" src="img/Add-icon.png">');
+	};
+	
+	detailWrapView.prototype.buildEditTaskUI = function(obj) {
+		
+		var editTaskFieldArray=$(".taskField");
+		
+		for(var i=0;i<editTaskFieldArray.length;i++){
+			editTaskFieldArray[i].readOnly=false;
+		};
+		
+		$(".buttonAction")[0].innerHTML="Save Changes";
+		var workerNameArray=["Abdul rashid","Mohamed kaif","Zaheer Ahmed","Imran khan","Moin khan","Rameez raja","Mohammad Sami","Naziruddin shah"];
+		$("input#WorkerName").autocomplete({source: workerNameArray});
+		$("#workerDetail").append('<img style="display:inline;" src="img/Add-icon.png">');
+		//$("#WorkerName")[0].autocomplete="on";
+	};
+	
+/*	detailWrapView.prototype.buildNotificationChart = function() {
 		 Morris.Donut({
 		        element: 'morris-bar-chart',
 		        data: [{
@@ -312,6 +375,6 @@ define(["detailWrap/detailWrapController"], function(controller){
 		        }],
 		        resize: true
 		    });
-	};
+	};*/
 	return (new detailWrapView());
 });

@@ -28,6 +28,15 @@ define(["detailWrap/detailWrap","navBar/navBar","items/items"], function(detailW
 	Component.prototype.handleItemListClick = function(obj){
 		this.detailWrap.getTaskItemDetailUI(obj);
 	};
+	Component.prototype.addNew = function(obj){
+		if(obj['kind']=="Task" ){
+			this.detailWrap.getNewTaskUI();
+		}
+	};
+	
+	Component.prototype.editTask = function(obj){
+		this.detailWrap.getEditTaskUI(obj);
+	};
 	Component.prototype.buildDonutChart = function(){
 		$("#morris-area-chart").empty();
 		  Morris.Donut({

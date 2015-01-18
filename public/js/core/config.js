@@ -2,6 +2,7 @@ require.config({
 	
 	paths : {
 		"jquery":"jquery",
+		"jquery-autocomplete": "jquery-ui.min",
 		"Bootstrap":"bootstrap.min",
 		"components" : "../component",
 		"core" : ".",
@@ -11,6 +12,10 @@ require.config({
 	},
 	
 	   shim: {
+		   "jquery-autocomplete": {
+	            exports: "$",
+	            deps: ['jquery']
+	        },
 	        "Bootstrap": {
 	            
 	            deps: ["jquery"]
