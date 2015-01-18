@@ -392,3 +392,23 @@ table.dataTable thead .sorting:after {
 	height: 80px;
 	width: 265px;
 }
+
+.firstHalf{
+	width: 50%;
+	display: inline-block;
+}
+.secondHalf{
+	width: 40%;
+	display: inline-block;
+	margin-top: 100px;
+	margin-left: 109px;
+	position: absolute;
+}
+
+.detailLeftList {
+	height: 437px;
+	overflow-y: scroll;
+}
+.detailRight{
+	height: 437px;
+}

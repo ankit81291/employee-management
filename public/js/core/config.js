@@ -10,7 +10,7 @@ require.config({
 		"detailWrap" : "../component/detailWrap",
 		"items" : "../component/items",
 	},
-	
+	waitSeconds: 0,
 	   shim: {
 		   "jquery-autocomplete": {
 	            exports: "$",

@@ -119,7 +119,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 	};
 	detailWrapView.prototype.createTaskParentNav = function(obj) {
 		var div1='<div class="col-lg-3">'+
-			        '<div class="panel panel-default">'+
+			        '<div class="panel panel-default detailLeftList">'+
 				        '<div class="panel-heading">'+obj[0]['kind']+
 				        '</div>';
 		return div1;
@@ -162,7 +162,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 		}
 		
 		var div1='<div class="col-lg-9 detailList">'+
-			        '<div class="panel panel-default">'+
+			        '<div class="panel panel-default detailRight">'+
 				        '<div class="panel-heading">'+
 				        taskName+    
 				        "<i style='float:right;padding-left: 5px;' class='fa fa-edit' onclick='window.app.component.editTask("+JSON.stringify(obj)+");'></i>"+
@@ -342,7 +342,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 		$(".parentButton").append(newtaskbutton);
 		var workerNameArray=["Abdul rashid","Mohamed kaif","Zaheer Ahmed","Imran khan","Moin khan","Rameez raja","Mohammad Sami","Naziruddin shah"];
 		$("input#WorkerName").autocomplete({source: workerNameArray});
-		$("#workerDetail").append('<img style="display:inline;" src="img/Add-icon.png">');
+		$("#workerDetail").append('<img style="display:inline;" data-toggle="modal" data-target="#myModaldialog" src="img/Add-icon.png">');
 	};
 	
 	detailWrapView.prototype.buildEditTaskUI = function(obj) {
@@ -356,7 +356,8 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 		$(".buttonAction")[0].innerHTML="Save Changes";
 		var workerNameArray=["Abdul rashid","Mohamed kaif","Zaheer Ahmed","Imran khan","Moin khan","Rameez raja","Mohammad Sami","Naziruddin shah"];
 		$("input#WorkerName").autocomplete({source: workerNameArray});
-		$("#workerDetail").append('<img style="display:inline;" src="img/Add-icon.png">');
+		$("#workerDetail").append('<img style="display:inline;" data-toggle="modal" data-target="#myModaldialog" src="img/Add-icon.png">');
+		
 		//$("#WorkerName")[0].autocomplete="on";
 	};
 	
