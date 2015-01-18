@@ -13,10 +13,10 @@ var workerSchema = new mongoose.Schema({
 var taskSchema = new mongoose.Schema({
     task_name: {type: String, required: true},
     project_name: {type: String, required: true},
-    planned_start_time: {Date, "default": Date.now},
-    planned_finish_time: {Date, "default": Date.now},
-    start_time: {Date, "default": Date.now},
-    finish_time: {Date, "default": Date.now},
+    planned_start_time: {type: Date, default: Date.now},
+    planned_finish_time: {type: Date, default: Date.now},
+    start_time: {type: Date, default: Date.now},
+    finish_time: {type: Date, default: Date.now},
     status: {type: String, required: true},
     place: {
         name: {type: String, required: true},
@@ -28,3 +28,5 @@ var taskSchema = new mongoose.Schema({
 });
 
 mongoose.model('Task', taskSchema);
+
+//update and add the task - add the worker.

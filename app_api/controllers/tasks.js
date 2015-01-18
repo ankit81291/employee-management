@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var tasks = mongoose.model('Tasks');
+var tasks = mongoose.model('Task');
 
 
 var sendJsonResponse = function(res, status, content) {
@@ -13,20 +13,83 @@ var sendJsonResponse = function(res, status, content) {
 };
 */
 
-/* GET list of locations */
-module.exports.getTasks = function(req, res) {
-   var locations;
-   var results = tasks.find();
-    console.log('tasks Results', results);
-     if (err) {
-      console.log('geoNear error:', err);
-      sendJsonResponse(res, 404, err);
+module.exports.createTask= function(req, res) {
+  console.log(req.body);
+  tasks.create({
+	task_name: req.body.task_name,
+    project_name: req.body.project_name,
+    planned_start_time: req.body.planned_start_time,
+    planned_finish_time: req.body.planned_finish_time,
+    start_time: req.body.start_time,
+	finish_time:req.body.finish_time,
+	status:req.body.status
+  }, function(err, location) {
+    if (err) {
+      console.log(err);
+      sendJsonResponse(res, 400, err);
     } else {
-      locations = buildTasksList(req, res, results);
-      sendJsonResponse(res, 200, locations);
+      console.log(location);
+      sendJsonResponse(res, 201, location);
     }
   });
 };
+
+
+/* GET list of locations */
+module.exports.getTasks = function(req, res) {
+   var tasks_collection={};
+   var results = tasks.find().exec(function(err, results){
+	 if(err){
+        throw err;
+    } else {
+        results.forEach(function(doc){
+          
+	tasks.push({
+		task_name: doc.task_name,
+		project_name: doc.project_name,
+		planned_start_time: doc.planned_start_time,
+		planned_finish_time: doc.planned_finish_time,
+		start_time: doc.start_time,
+		finish_time:doc.finish_time,
+		status:doc.status
+	});
+  });
+	
+	sendJsonResponse(res, 200,tasks_collection);
+   };
+  });
+}
+
+
+
+
+/* PUT /api/tasks/:taskname */
+module.exports.updateTask = function(req, res) {
+  if (!req.params.taskname) {
+    sendJsonResponse(res, 404, {
+      "message": "Not found, locationid is required"
+    });
+    return;
+  }
+  
+  tasks.update( 
+  {task_name: req.params.taskname},
+  {
+		task_name: req.params.task_name,
+		project_name: req.params.project_name,
+		planned_start_time: req.params.planned_start_time,
+		planned_finish_time: req.params.planned_finish_time,
+		start_time: req.params.start_time,
+		finish_time:req.params.finish_time,
+		status:req.params.status
+  },
+  { multi: true }
+  );
+   sendJsonResponse(res, 200, {
+      "message": "Successfully Updated"
+    });
+};
+
 
 var buildTasksList = function(req, res, results) {
 var tasks = [];
