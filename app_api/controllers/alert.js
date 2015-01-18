@@ -24,6 +24,25 @@ var sendJsonResponse = function(res, status, content) {
     }
 });*/
 
+
+/*
+
+{ __v: 0,
+  alert_type: 'riskregionenter',
+  created_time: Sun Jan 18 2015 17:04:00 GMT+0530 (India Standard Time),
+  status: 'open',
+  project_name: 'home garden',
+  details:
+   { task: 'modeling',
+     send_time: Sun Jan 18 2015 17:04:00 GMT+0530 (India Standard Time),
+     enter_time: Sun Jan 18 2015 17:04:00 GMT+0530 (India Standard Time),
+     worker_id: '124343432343df3',
+     worker_name: 'Adi',
+     reason: 'high risk task has scheduled in this region at 9:40am',
+     place: 'region 1' },
+  _id: 54bb9a28e20085981b9ff5b6 }
+  */
+  
 /* GET list of locations */
 module.exports.getAlerts = function(req, res) {
    var alerts;
@@ -38,15 +57,16 @@ module.exports.getAlerts = function(req, res) {
 		 var details ={};
 		//console.log('Alerts document', doc);
 		
-		details.place = doc.place;
-		details.reason = doc.reason;
-		details.supervisor= doc.supervisor;
-		details.supervisorId= doc.supervisorId;
-		details.enterTime = doc.enterTime;
-		details.task= doc.task;
+		details.place = doc.details.place;
+		details.reason = doc.details.reason;
+		details.supervisor= doc.details.worker_name;
+		details.supervisorId= doc.details.worker_id;
+		details.enterTime = doc.details.enter_time;
+		details.send_time = doc.details.send_time;
+		details.task= doc.details.task;
   
 		alertCollections.push({
-			type: doc.type,
+			type: doc.alert_type,
 			created_time: doc.created_time,
 			status: doc.status,
 			project_name: doc.project_name,
