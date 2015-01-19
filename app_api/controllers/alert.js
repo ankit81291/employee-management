@@ -24,25 +24,6 @@ var sendJsonResponse = function(res, status, content) {
     }
 });*/
 
-
-/*
-
-{ __v: 0,
-  alert_type: 'riskregionenter',
-  created_time: Sun Jan 18 2015 17:04:00 GMT+0530 (India Standard Time),
-  status: 'open',
-  project_name: 'home garden',
-  details:
-   { task: 'modeling',
-     send_time: Sun Jan 18 2015 17:04:00 GMT+0530 (India Standard Time),
-     enter_time: Sun Jan 18 2015 17:04:00 GMT+0530 (India Standard Time),
-     worker_id: '124343432343df3',
-     worker_name: 'Adi',
-     reason: 'high risk task has scheduled in this region at 9:40am',
-     place: 'region 1' },
-  _id: 54bb9a28e20085981b9ff5b6 }
-  */
-  
 /* GET list of locations */
 module.exports.getAlerts = function(req, res) {
    var alerts;
@@ -57,16 +38,15 @@ module.exports.getAlerts = function(req, res) {
 		 var details ={};
 		//console.log('Alerts document', doc);
 		
-		details.place = doc.details.place;
-		details.reason = doc.details.reason;
-		details.supervisor= doc.details.worker_name;
-		details.supervisorId= doc.details.worker_id;
-		details.enterTime = doc.details.enter_time;
-		details.send_time = doc.details.send_time;
-		details.task= doc.details.task;
+		details.place = doc.place;
+		details.reason = doc.reason;
+		details.supervisor= doc.supervisor;
+		details.supervisorId= doc.supervisorId;
+		details.enterTime = doc.enterTime;
+		details.task= doc.task;
   
 		alertCollections.push({
-			type: doc.alert_type,
+			type: doc.type,
 			created_time: doc.created_time,
 			status: doc.status,
 			project_name: doc.project_name,
@@ -88,6 +68,40 @@ module.exports.getAlerts = function(req, res) {
   }
 
 
+
+/* PUT /api/alerts/:alertid */
+module.exports.updateAlert = function(req, res) {
+  if (!req.params.alertid) {
+    sendJsonResponse(res, 404, {
+      "message": "Not found, locationid is required"
+    });
+    return;
+  }
+    	 var details ={};
+		//console.log('Alerts document', doc);		
+		details.place = req.params.place;
+		details.reason = req.params.reason;
+		details.supervisor= req.params.supervisor;
+		details.supervisorId= req.params.supervisorId;
+		details.enterTime = req.params.enterTime;
+		details.task= req.params.task;
+  
+  tasks.update( 
+  {_id: req.params.alertid},
+  {
+			type: req.params.type,
+			created_time: req.params.created_time,
+			status: req.params.status,
+			project_name: req.params.project_name,
+			details: details
+  },
+  { multi: true }
+  );
+   sendJsonResponse(res, 200, {
+      "message": "Successfully Updated"
+    });
+};  
+  
 module.exports.getAlert = function(req, res) {   
    console.log('Finding location details', req.params);
   if (req.params && req.params.alerttype) {
