@@ -44,12 +44,13 @@ module.exports.getAlerts = function(req, res) {
 		details.supervisorId= doc.supervisorId;
 		details.enterTime = doc.enterTime;
 		details.task= doc.task;
-  
 		alertCollections.push({
 			type: doc.type,
 			created_time: doc.created_time,
 			status: doc.status,
 			project_name: doc.project_name,
+			kind: doc.kind,
+			alert_class:doc.alert_class,
 			details: details
 			});
         })
@@ -93,6 +94,8 @@ module.exports.updateAlert = function(req, res) {
 			created_time: req.params.created_time,
 			status: req.params.status,
 			project_name: req.params.project_name,
+			kind:req.params.kind,
+	        alert_class:req.params.alert_class,
 			details: details
   },
   { multi: true }

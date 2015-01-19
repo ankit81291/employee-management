@@ -6,6 +6,8 @@ var alertSchema = new mongoose.Schema({
     project_name: {type: String, required: true},
     created_time: {type: Date, required: true},
     status: {type: String, required: true},
+	kind:{type: String, required: true},
+	alert_class:{type: String, required: true},
     details: {type: mongoose.Schema.Types.Mixed, required: true}
 });
 
