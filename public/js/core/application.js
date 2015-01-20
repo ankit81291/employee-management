@@ -10,13 +10,17 @@ define(["component"],function(component) {
 		var navDivContent;
 		var ItemDivContent;
 		var detailWrapDivContent;
-			navDivContent = this.component.buildNavContent(obj);
-			$("#wrapper").prepend(navDivContent);
-			ItemDivContent = this.component.buildItemContent(obj);
-			$("#page-wrapper").append(ItemDivContent);
-			detailWrapDivContent = this.component.buildDetailWrapContent(obj);
-			$("#page-wrapper").append(detailWrapDivContent);
-			this.buildChart();
+		var that=this;
+		$.ajax({url:"http://localhost:3000/api/alerts",success:function(result){
+				alertObj=result;
+				navDivContent = that.component.buildNavContent(obj);
+				$("#wrapper").prepend(navDivContent);
+				ItemDivContent = that.component.buildItemContent(obj);
+				$("#page-wrapper").append(ItemDivContent);
+				detailWrapDivContent = that.component.buildDetailWrapContent(obj);
+				$("#page-wrapper").append(detailWrapDivContent);
+				that.buildChart();
+			  }});
 			
 	};
 	

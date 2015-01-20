@@ -24,6 +24,9 @@ define(["detailWrap/detailWrap","navBar/navBar","items/items"], function(detailW
 		else if(obj['title']=="Alert" || obj['kind']=="Notification"){
 			this.detailWrap.getTaskUI(alertObj);
 		}
+		else if(obj['title']=="Resources"){
+			this.detailWrap.getResourceUI();
+		}
 	};
 	Component.prototype.handleItemListClick = function(obj){
 		this.detailWrap.getTaskItemDetailUI(obj);

@@ -22,7 +22,10 @@ define(["detailWrap/detailWrapView"], function(view){
 		return this.oView.buildEditTaskUI(obj);
 	};
 	
-
+	detailWrap.prototype.getResourceUI = function() {
+		return this.oView.buildResourcesView();
+	};
+	
 	return (new detailWrap());
 });
 
