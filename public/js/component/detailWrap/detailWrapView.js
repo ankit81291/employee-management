@@ -377,5 +377,20 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 		        resize: true
 		    });
 	};*/
+	detailWrapView.prototype.buildResourcesView = function() {
+		$(".detailwrap").remove();
+		var headDiv='<div class="row detailwrap" >'+
+		'<div class="col-lg-12">';
+		
+		var content='<ul id="myTab" class="nav nav-tabs">'+
+				        '<li class="active"><a href="#Equipment" data-toggle="tab">Equipment</a></li>'+
+				        '<li><a href="#Material" data-toggle="tab">Material</a></li>'+
+				        '<li><a href="#Worker" data-toggle="tab">Worker</a></li>'+
+				     '</ul>';
+		var footer='</div>'+
+		'</div>';
+		var completeDiv=headDiv+content+footer;
+		$("#page-wrapper").append(completeDiv);
+	};
 	return (new detailWrapView());
 });
