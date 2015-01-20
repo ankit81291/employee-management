@@ -39,4 +39,4 @@ var equipmentSchema = new mongoose.Schema({
     workforce: {type: [workerSchema], required: true}
 });
 
-mongoose.model('Device', deviceSchema);
+mongoose.model('Equipment', equipmentSchema);
