@@ -203,8 +203,8 @@ db.tasks.save(
     task_name: 'pluming',
     task_id: '4324344321431',
 	project_name: 'Ma aden home',
-	planned_starttime: ISODate('2014-12-03T13:00:00Z'),
-	planned_finishtime: ISODate('2014-12-03T15:00:00Z'),
+	planned_start_time: ISODate('2014-12-03T13:00:00Z'),
+	planned_finish_time: ISODate('2014-12-03T15:00:00Z'),
 	start_time: ISODate('2014-12-03T14:00:00Z'),
 	finish_time: ISODate('2014-12-03T16:00:00Z'),
 	status: 'finished',
@@ -220,16 +220,17 @@ db.tasks.save(
 		],
 		organization: 'AZMEEL Construction'
 	},
-	worker_history: [
+	history: [
 		{
 			first_name: 'Saeed',
 			second_name: 'ajmal',
 			email: 'Saeed.ajmal@gmail.com',
 			phone: '650-334-1982',
 			tag_id: '33234232',
-			sex: 'male'
+			sex: 'male',
+			start_time: ISODate('2014-12-03T14:00:00Z'),
+            finish_time: ISODate('2014-12-03T16:00:00Z'),
+            status: 'finished'
 		}
 	]
 })
-
-db.places.update({"name": "work site 23", "workforce.worker_id": "worker20150118223A"}, {$set: {"workforce.$.status": "alerted"}})

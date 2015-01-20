@@ -7,26 +7,30 @@ var workerSchema = new mongoose.Schema({
     tag_id: {type: String, required: true},
     email: String,
     phone: String,
-    sex: String
+    sex: String,
+    start_time: {type: Date, "default": Date.now},
+    finish_time: {type: Date, "default": Date.now},
+    status: {type: String, required: true}
 });
 
 var taskSchema = new mongoose.Schema({
     task_name: {type: String, required: true},
+    task_id: {type: String, required: true},
     project_name: {type: String, required: true},
-    planned_starttime: {type: Date, "default": Date.now},
-    planned_finishtime: {type: Date, "default": Date.now},
+    planned_start_time: {type: Date, "default": Date.now},
+    planned_finish_time: {type: Date, "default": Date.now},
     start_time: {type: Date, "default": Date.now},
     finish_time: {type: Date, "default": Date.now},
     status: {type: String, required: true},
-    supervisor_id: {type: String, required: true},
-    supervisor_email: {type: String, required: true},
+    supervisor_id: String,
+    supervisor_email: String,
     place: {
         name: {type: String, required: true},
         address: {type: String, required: true},
         coords: {type: [Number], required: true},
         orgnization: String
     },
-    worker_history: {type: [workerSchema], required: true}
+    history: {type: [workerSchema], required: true}
 });
 
 mongoose.model('Task', taskSchema);
