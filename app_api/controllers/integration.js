@@ -2,12 +2,19 @@
  * Created by taolin-pc on 12/5/14.
  */
 var mongoose = require('mongoose');
+var moment = require('moment');
 var Alert = mongoose.model('Alert');
+var Device = mongoose.model('Device');
+var Worker = mongoose.model('Worker');
+var Place = mongoose.model('Place');
+var Task = mongoose.model('Task');
+
+
 var nodemailer = require("nodemailer");
 var smtpTransport = require('nodemailer-smtp-transport');
-var email = require('emailjs');
 var CronJob = require('cron').CronJob;
 
+/*
 new CronJob('0 * * * * 0-6', function(){
   generateWorkerlateAlert();
   console.log('Generate worker late alert');
@@ -23,87 +30,21 @@ new CronJob('0 * * * * 0-6', function(){
   console.log('Generate task late alert');
 }, null, true, "America/Los_Angeles");
 
-/*
-new CronJob('* * * * * *', function(){
-	 generateRiskRegionAlert();
-    console.log('You will see this message every second');
-}, null, true, "America/Los_Angeles");
 */
 
-var server     = email.server.connect({
-   user: 'divpratim@gmail.com',
-   pass: 'Boadmin123',
-   host: "smtp.gmail.com", 
-   ssl:  true,
-   port: 465
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'sctest2004@gmail.com',
+    pass: 'Test2004'
+  }
 });
-
-
-var message    = {
-   text:    "i hope this works", 
-   from:    "<YYY> prasanna.mavinakuli@gmail.com", 
-   to:       "<YYY> prasanna.mavinakuli@gmail.com",
-   cc:      "",  
-   subject:    "testing emailjs"
-};
-
 
 var sendJsonResponse = function(res, status, content) {
   console.log(content);
   res.status(status);
   res.json(content);
 };
-
-
-var transport = nodemailer.createTransport(smtpTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    auth: {
-        user: 'prasanna.mavinakuli@gmail.com',
-        pass: 'Srirama!#4757'
-    }
-}));
-
-var transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: 'prasanna.mavinakuli@gmail.com',
-        pass: 'Srirama!#4757'
-    }
-});
-
-var mailOptions = {
-    from: '<prasanna.mavinakuli@gmail.com>', // sender address
-    to: '<prasanna.mavinakuli@gmail.com>', // list of receivers
-    subject: 'Hello ?', // Subject line
-    text: 'Hello world ?', // plaintext body
-    html: '<b>Hello world ?</b>' // html body
-};
-
-// send mail with defined transport object
-
-
-var createAlert = function(anode) {
-  var alert = new Alert(anode);
-  alert.save(function(err) {  
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(alert);
-	// send the message and get a callback with an error or details of the message that was sent
-	//server.send(message, function(err, message) { console.log(err || message); });
-	// send mail with defined transport object
-	/*transport.sendMail(mailOptions, function(error, response){
-    if(error){
-		console.log("Boo!!!!");
-        console.log(error);
-    }else{
-        console.log("Message sent: " + response.message);
-    }});
-};
-});*/
-}});;
-}
 
 module.exports.equipmentprocess = function(req, res) {
   var obj = new Object();
@@ -145,61 +86,171 @@ module.exports.equipmentprocess = function(req, res) {
 };
 
 module.exports.deviceprocess = function(req, res) {
-  var obj = new Object();
+
   var messagelist = [];
-  /*
-  obj.batch_id = req.body.batch_id;
-  obj.carrier_id = req.body.carrier_id;
-  obj.controller_id = req.body.controller_id;
-  obj.send_time = req.body.timestamp;
   var messages = req.body.messages;
-  */
-  
-  obj.batch_id = "12345";
-  obj.carrier_id = "45678";
-  obj.controller_id = "12345";
-  obj.send_time = new Date();
-  var messages = {};
-  
 
   for(var i = 0; i < messages.length; i++) {
+    var obj = new Object();
+    obj.batch_id = req.body.batch_id;
+    obj.carrier_id = req.body.carrier_id;
+    obj.controller_id = req.body.controller_id;
+    obj.send_time = req.body.timestamp;
     obj.message_id = messages[i].message_id;
     obj.device_id = messages[i].device_id;
     obj.valid = messages[i].valid;
+    obj.type = messages[i].type;
     obj.tag = messages[i].tag;
     obj.created_time = messages[i].timestamp;
     messagelist.push(obj);
-  }
+  };
 
-  devicemessageprocess(messagelist);
+// devicemessageBatch(messagelist);
+
+    checkLateWorker();
 
   sendJsonResponse(res, 200, "");
 };
 
-var devicemessageprocess = function(messagelist) {
-   var obj = messagelist[0];
-  generateRiskRegionAlert(obj);
+var devicemessageBatch = function(messagelist) {
+   for(var i = 0; i < messagelist.length; i++) {
+     var obj = messagelist[i];
+     processMessage(obj);
+   };
 };
 
-var generateRiskRegionAlert = function(mesObj) {
-  var detail = new Object();
-  detail.place = "region 1";
-  detail.reason = "high risk task has scheduled in this region at 9:40am";
-  detail.worker_name = "Adi";
-  detail.worker_id = "124343432343df3";
-  detail.enter_time = new Date();
-  detail.send_time = new Date();
-  
-  detail.task = "modeling";
+var processMessage = function(mesObj) {
+//   handleMessage(mesObj);
+//    console.log(mesObj);
+    Place.findOneAndUpdate({"name": "work site 23", "workforce.worker_id": "worker20150118223A"},
+        { $set: {"workforce.$.status": "alerted"}}
+        );
+/*                               { "$push": {
+     "workforce.$.status": 'alerted'
+     }
+     }*/
+}
 
-  var obj = new Object();
-  obj.alert_type = "riskregionenter";
-  obj.created_time = new Date();
-  obj.status = "open";
-  obj.project_name = "home garden";
-  obj.details = detail;
+var handleMessage = function(mesObj) {
+  Device.findOne({'device_id': mesObj.device_id}, function(err, deviceObj) {
+    if (err) return console.error(err);
+    if(deviceObj !== null) {
+      Worker.findOne({'tag_id': mesObj.tag}, function(err, workerObj) {
+            if (err) return console.error(err);
+            if(workerObj !== null) {
+              Place.findOne({'name': deviceObj.place_name}, function(err, placeObj) {
+                    if (err) return console.error(err);
+                    if(placeObj !== null) {
+                        var worker = placeObj.workforce.filter(function (worker) {
+                               return worker.worker_id === workerObj.worker_id;
+                            }).pop();
+                        if(worker !== null) {
+                            if(worker.status === 'expected') {
+                               // need to change the status
+                            }
+                        }
+                        else {
+                            // Generate RiskEnterRegion Alert
 
-  createAlert(obj);
+                        }
+                        console.log(worker);
+                    }
+                  }
+              )
+            }
+          }
+      )
+    }
+  })
+};
+
+var checkLateWorker = function() {
+    Place.find({}, function(err, places) {
+        places.forEach(function(place) {
+            var workforce = place.workforce;
+            workforce.forEach(function(worker) {
+                var expected_time = worker.planned_time;
+                var m = moment(new Date());
+                var p = moment(expected_time).add(10, 'second');
+                if(m.isAfter(p)) {
+                    Task.findOne({'task_id': worker.task_id}, function(err, task) {
+                        if (err) return console.error(err);
+                        if(task !== null && worker.status === 'expected') {
+                            var obj = createWorkerLateAlert(place, worker, task);
+                            createWorkerLateEmail(obj, task);
+                            console.log(worker);
+                            worker.status = 'alerted';
+                            place.save(function (err, pl) {
+                                if(err){
+                                    console.log('Oh dear', err);
+                                } else {
+                                    console.log('place saved: ');
+                                }
+                            });
+                        }
+                    })
+                }
+            })
+        })
+    })
+};
+
+var createWorkerLateAlert = function(place, worker, task) {
+    var detail = new Object();
+    detail.place = place.name;
+    detail.reason = "This worker enters to a work site without permission";
+    detail.worker_firstname = worker.first_name;
+    detail.worker_secondname = worker.second_name;
+    detail.worker_id = worker.worker_id;
+    detail.enter_time = new Date();
+    detail.planned_start_time = task.planned_starttime;
+
+    var obj = new Object();
+    obj.alert_type = "workerlate";
+    obj.created_time = new Date();
+    obj.status = "open";
+    obj.task_name = worker.task_name;
+    obj.details = detail;
+
+    createAlert(obj);
+    return obj;
+}
+
+var createWorkerLateEmail = function(obj, task) {
+    var body = '<b>Alert Type:  </b>' + obj.alert_type + '<hr>';
+    body = body + '<p><b>Reason: </b>' + 'A worker is late for a task' + '<\p>';
+    body = body + '<p><b>Task: </b>' + obj.task_name + '<\p>';
+    body = body + '<p><b>Worker First Name: </b>' + obj.details.worker_firstname + '<\p>';
+    body = body + '<p><b>Worker Second Name: </b>' + obj.details.worker_secondname + '<\p>';
+    body = body + '<p><b>Worker ID: </b>' + obj.details.worker_id + '<\p>';
+    body = body + '<p><b>Planned Start Time: </b>' + obj.details.planned_start_time + '<\p>';
+    body = body + '<p><b>Enter Time: </b>' + obj.details.enter_time + '<\p>';
+    body = body + '<p><b>Status: </b>' + obj.status + '<\p>';
+
+    var to = 'Task Manager <' + task.supervisor_email + '>';
+    var from = 'Project Manager <sctest2004@gmail.com>';
+    var subject = 'Worker late for task';
+
+    sendEmail(body, from, to, subject);
+}
+
+var sendEmail = function(body, from, to, subject) {
+    var msg = {};
+    msg.html = body;
+    msg.from = from;
+    msg.to = to;
+    msg.subject = subject;
+
+    transporter.sendMail(msg, function (err) {
+        if (err) console.log('Sending to ' + msg.to + ' failed: ' + err);
+    })
+};
+
+var createAlert = function(anode) {
+    var alert = new Alert(anode);
+    alert.save(function(err) {
+        if (err) console.log(err);
+        });
 };
 
 var generateWorkerlateAlert = function() {
@@ -218,12 +269,9 @@ var generateWorkerlateAlert = function() {
   obj.project_name = "home garden";
   obj.details = detail;
 
+  //  createAlert(obj);
   var jsonString= JSON.stringify(obj);
   console.log(jsonString);
-  
-  
-  createAlert(obj);
-
 };
 
 var generateEquipmentlateAlert = function(equipObj) {
@@ -245,7 +293,7 @@ var generateEquipmentlateAlert = function(equipObj) {
   console.log(jsonString);
   
   
-  createAlert(obj);
+//  createAlert(obj);
 
 };
 
@@ -268,7 +316,7 @@ var generateEquipmentmaintenanceAlert = function(equipObj) {
   obj.project_name = "home garden";
   obj.details = detail;
 
-  createAlert(obj);
+//  createAlert(obj);
 
   var jsonString= JSON.stringify(obj);
   console.log(jsonString);
@@ -290,7 +338,7 @@ var generateTasklateAlert = function() {
   obj.project_name = "home garden";
   obj.details = detail;
   
-   createAlert(obj);
+//   createAlert(obj);
 
 
   var jsonString= JSON.stringify(obj);

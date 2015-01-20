@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var alert_model = mongoose.model('Alert');
+var alert = mongoose.model('Alert');
 
 
 var sendJsonResponse = function(res, status, content) {
@@ -42,7 +42,6 @@ module.exports.getAlert = function(req, res) {
     }
   }
 };
-
 
 var buildAlertsList = function(req, res, results) {
 var alerts = [];

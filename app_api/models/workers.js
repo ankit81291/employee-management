@@ -32,6 +32,7 @@ var activitySchema = new mongoose.Schema({
 var workerSchema = new mongoose.Schema({
     first_name: {type: String, required: true},
     second_name: {type: String, required: true},
+    worker_id: {type: String, required: true},
     tag_id: {type: String, required: true},
     email: String,
     phone: String,

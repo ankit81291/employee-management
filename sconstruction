@@ -11,3 +11,225 @@ db.alerts.save( {
 	}
 	}
 )
+
+db.devices.save( {
+	device_name: 'gate_reader12',
+    device_id: 'device201501123B',
+    device_type: 'Passive RFID Reader',
+    vendor: 'Alien',
+    place_name: 'work site 23',
+    created_time: ISODate("2014-12-03T09:00:00Z"),
+    status: 'open'
+}
+
+db.devices.save(
+{
+	device_name: 'region_reader23',
+    device_id: 'device201501123C',
+    device_type: 'Passive RFID Reader',
+    vendor: 'Alien',
+    place_name: 'work site 34',
+    created_time: ISODate("2014-12-03T09:00:00Z"),
+    status: 'open'
+}
+)
+
+db.devices.save(
+{
+	device_name: 'region_reader24',
+    device_id: 'device201501123D',
+    device_type: 'Passive RFID Reader',
+    vendor: 'Alien',
+    place_name: 'work site 35',
+    created_time: ISODate("2014-12-03T09:00:00Z"),
+    status: 'open'
+}
+)
+
+db.workers.save(
+{
+    firstname: 'aron',
+    secondname: 'william',
+    worker_id: 'worker20150118223A',
+    tag_id: 'tag20150118A',
+    email: 'aron.william@gmail.com',
+    phone: '650-334-4523',
+    sex: 'male',
+    skills:
+        [
+          {
+               skill: 'plumbing',
+               level: 7
+          },
+          {
+               skill: 'floor construction',
+               level: 5}
+        ],
+    tasks: [
+         	{
+         	    task_id:  '4324344321431',
+         	    taskname:  'fix floor',
+         	    start_time: ISODate("2014-12-03T09:00:00.000Z"),
+         	    expected: '4 hours',
+         	    location: '3341 Arron St. Sunnyvale'
+         	},
+         	{
+         	    task_id:  '4324344321435',
+         	    taskname:  'fix floor',
+         	    start_time: ISODate("2014-12-03T13:00:00.000Z"),
+         	    expected: '4 hours',
+         	    location: '3341 Arron St. Sunnyvale'
+         	}
+         ],
+    activities: [
+            {
+    	        location: '3341 Arron St. Sunnyvale',
+    	        timestamp: ISODate("2014-12-03T00:56:03.834Z"),
+    	        action: 'Checkin'
+            },
+            {
+    	        location: '3341 Arron St. Sunnyvale',
+    	        timestamp: ISODate("2014-12-03T00:56:03.834Z"),
+    	        action: 'Checkout'
+            }
+        ]
+}
+)
+
+db.workers.save(
+{
+    firstname: 'miny',
+    secondname: 'kalan',
+    worker_id: 'worker20150118225A',
+    tag_id: 'tag20150120A',
+    email: 'miny.kalan@gmail.com',
+    phone: '998-432-2342',
+    sex: 'male',
+    skills:
+        [
+          {
+               skill: 'plumbing',
+               level: 7
+          },
+          {
+               skill: 'floor construction',
+               level: 5}
+        ],
+    tasks: [
+         	{
+         	    task_id:  '4324344321431',
+         	    taskname:  'fix floor',
+         	    start_time: ISODate("2014-12-03T09:00:00.000Z"),
+         	    expected: '4 hours',
+         	    location: '3341 Arron St. Sunnyvale'
+         	},
+         	{
+         	    task_id:  '4324344321435',
+         	    taskname:  'fix floor',
+         	    start_time: ISODate("2014-12-03T13:00:00.000Z"),
+         	    expected: '4 hours',
+         	    location: '3341 Arron St. Sunnyvale'
+         	}
+         ],
+    activities: [
+            {
+    	        location: '3341 Arron St. Sunnyvale',
+    	        timestamp: ISODate("2014-12-03T00:56:03.834Z"),
+    	        action: 'Checkin'
+            },
+            {
+    	        location: '3341 Arron St. Sunnyvale',
+    	        timestamp: ISODate("2014-12-03T00:56:03.834Z"),
+    	        action: 'Checkout'
+            }
+        ]
+}
+)
+
+db.places.save(
+{
+	name: 'work site 23',
+    address: '125 High Street, Reading, RG6 1PS',
+    coords: [-0.9690884, 51.455041],
+    organization: 'Customer 234',
+    tasks: [
+     	{
+     	    task_id:  '4324344321431',
+     	    taskname:  'fix floor',
+     	    project_name: 'Ma aden home',
+     	    start_time: ISODate("2014-12-03T09:00:00.000Z"),
+     	    expected: '4 hours',
+     	    status: 'close'
+     	},
+     	{
+     	    task_id:  '4324344321435',
+     	    taskname:  'fix floor',
+     	    start_time: ISODate("2014-12-03T13:00:00.000Z"),
+     	    expected: '4 hours',
+     	    project_name: 'Ma aden home',
+     	    status: 'open'
+     	}
+     ],
+     workforce: [
+    	{
+    	    first_name: 'aron',
+            second_name: 'william',
+            worker_id: 'worker20150118223A',
+            tag_id: 'tag2015011A',
+            email: 'aron.william@gmail.com',
+            phone: '650-334-4523',
+            status: 'expected',
+            task_id: '4324344321431',
+            task_name: 'mount light',
+            planned_time: ISODate("2014-12-03T13:00:00.000Z")
+     	},
+     	{
+    	    first_name: 'miny',
+            second_name: 'kalan',
+            worker_id: 'worker20150118225B',
+            tag_id: 'tag20150120B',
+            email: 'miny.kalan@gmail.com',
+            phone: '998-432-2342',
+            status: 'expected',
+            task_id: '4324344321432',
+            task_name: 'paint wall',
+            planned_time: ISODate("2014-12-03T13:00:00.000Z")
+     	}
+    ]
+ })
+
+db.tasks.save(
+{
+    task_name: 'pluming',
+    task_id: '4324344321431',
+	project_name: 'Ma aden home',
+	planned_starttime: ISODate('2014-12-03T13:00:00Z'),
+	planned_finishtime: ISODate('2014-12-03T15:00:00Z'),
+	start_time: ISODate('2014-12-03T14:00:00Z'),
+	finish_time: ISODate('2014-12-03T16:00:00Z'),
+	status: 'finished',
+	supervisor_id: 'sup32344343',
+	supervisor_email: 'sctest2004@gmail.com>',
+	place: {
+		place_id: 'place2312122',
+		name: 'head office',
+		address: '125 High Street, Reading, RG6 1PS',
+		coords: [
+			-0.9690884,
+			51.455041
+		],
+		organization: 'AZMEEL Construction'
+	},
+	worker_history: [
+		{
+			first_name: 'Saeed',
+			second_name: 'ajmal',
+			email: 'Saeed.ajmal@gmail.com',
+			phone: '650-334-1982',
+			tag_id: '33234232',
+			sex: 'male'
+		}
+	]
+})
+
+db.places.update({"name": "work site 23", "workforce.worker_id": "worker20150118223A"}, {$set: {"workforce.$.status": "alerted"}})

@@ -22,10 +22,9 @@ module.exports.getWorkers = function(req, res) {
       console.log('geoNear error:', err);
       sendJsonResponse(res, 404, err);
     } else {
-      locations = buildWorkersList(req, res, results);
-      sendJsonResponse(res, 200, locations);
+         workers = buildWorkersList(req, res, results);
+         sendJsonResponse(res, 200, workers);
     }
-  });
 };
 
 var buildWorkersList = function(req, res, results) {

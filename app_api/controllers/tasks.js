@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var tasks = mongoose.model('Tasks');
+var task = mongoose.model('Task');
 
 
 var sendJsonResponse = function(res, status, content) {
@@ -22,10 +22,9 @@ module.exports.getTasks = function(req, res) {
       console.log('geoNear error:', err);
       sendJsonResponse(res, 404, err);
     } else {
-      locations = buildTasksList(req, res, results);
-      sendJsonResponse(res, 200, locations);
-    }
-  });
+         locations = buildTasksList(req, res, results);
+         sendJsonResponse(res, 200, locations);
+     }
 };
 
 var buildTasksList = function(req, res, results) {
