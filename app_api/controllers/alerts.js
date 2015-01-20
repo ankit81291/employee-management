@@ -29,7 +29,7 @@ module.exports.getAlerts = function(req, res) {
    var alerts;
    var alertCollections = [];
 
-   var results = alert_model.find().exec(function(err, results){
+   var results = alert.find().exec(function(err, results){
     if(err){
         throw err;
     } else {
