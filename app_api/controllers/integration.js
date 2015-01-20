@@ -223,6 +223,8 @@ var createWorkerLateAlert = function(place, worker, task) {
     obj.details = detail;
 
     createAlert(obj);
+
+    return obj;
 }
 
 var createRiskEnterRegionAlertEmail = function(obj, emailObj) {
