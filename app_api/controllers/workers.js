@@ -13,19 +13,67 @@ var sendJsonResponse = function(res, status, content) {
 };
 */
 
-/* GET list of locations */
+/* GET list of workers */
 module.exports.getWorkers = function(req, res) {
-   var alerts;
-   var results = workers_model.find();
-    console.log('tasks Results', results);
-     if (err) {
-      console.log('geoNear error:', err);
-      sendJsonResponse(res, 404, err);
+   var workers_collection={};
+   var results = workers_model.find().exec(function(err, results){
+	 if(err){
+        throw err;
     } else {
          workers = buildWorkersList(req, res, results);
          sendJsonResponse(res, 200, workers);
+
+        results.forEach(function(doc){
+          
+   workers_collection.push({
+    first_name: doc.first_name,
+    second_name: doc.second_name,
+    tag_id: doc.tag_id,
+    email: doc.email,
+	phone: doc.phone,
+	sex: doc.sex
+    });
+  });
+	sendJsonResponse(res, 200,workers_collection);
+   }
+  })
+  }
+
+
+module.exports.createWorker = function(req, res) {
+
+ var skillSchema ={};
+  skillSchema.skill = req.body.skills.skill;
+  skillSchema.number = req.body.skills.level;
+  
+  workers.push({
+    first_name: doc.obj.first_name,
+    second_name: doc.obj.second_name,
+    tag_id: doc.obj.tag_id,
+    email: doc.obj.email,
+	phone: doc.obj.phone,
+	sex: doc.obj.sex,
+	skills : skillSchema
+  });
+   console.log(req.body);
+   workers_model.create({
+	first_name: req.body.first_name,
+    second_name: req.body.second_name,
+    tag_id: req.body.tag_id,
+    email: req.body.email,
+	phone: req.body.phone,
+	sex: req.body.sex,
+	skills : skillSchema
+  }, function(err, location) {
+    if (err) {
+      console.log(err);
+      sendJsonResponse(res, 400, err);
+    } else {
+      console.log(location);
+      sendJsonResponse(res, 201, location);
     }
-};
+  })
+}
 
 var buildWorkersList = function(req, res, results) {
 var workers = [];

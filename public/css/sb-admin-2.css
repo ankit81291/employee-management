@@ -369,3 +369,46 @@ table.dataTable thead .sorting:after {
 .dropIcon{
 	color:white
 }
+.addButton{
+	float:right;
+}
+.control-label{
+	min-width:40%
+}
+.control-group {
+	display: block;
+}
+
+.controls {
+	display: inline;
+}
+.taskField{
+	width:158px;
+	height: 30px;
+	margin-bottom: 3px;
+}
+
+.reason {
+	height: 80px;
+	width: 265px;
+}
+
+.firstHalf{
+	width: 50%;
+	display: inline-block;
+}
+.secondHalf{
+	width: 40%;
+	display: inline-block;
+	margin-top: 100px;
+	margin-left: 109px;
+	position: absolute;
+}
+
+.detailLeftList {
+	height: 437px;
+	overflow-y: scroll;
+}
+.detailRight{
+	height: 437px;
+}

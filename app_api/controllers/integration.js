@@ -25,12 +25,13 @@ new CronJob('0 * * * * 0-6', function(){
   console.log('Generate equipment late alert');
 }, null, true, "America/Los_Angeles");
 
+ */
+
 new CronJob('0 * * * * 0-6', function(){
-  generateRiskRegionAlert();
-  console.log('Generate task late alert');
+ checkLateWorker();
+//  console.log('Generate task late alert');
 }, null, true, "America/Los_Angeles");
 
-*/
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -105,9 +106,7 @@ module.exports.deviceprocess = function(req, res) {
     messagelist.push(obj);
   };
 
-// devicemessageBatch(messagelist);
-
-    checkLateWorker();
+    devicemessageBatch(messagelist);
 
   sendJsonResponse(res, 200, "");
 };
@@ -115,21 +114,9 @@ module.exports.deviceprocess = function(req, res) {
 var devicemessageBatch = function(messagelist) {
    for(var i = 0; i < messagelist.length; i++) {
      var obj = messagelist[i];
-     processMessage(obj);
+       handleMessage(obj);
    };
 };
-
-var processMessage = function(mesObj) {
-//   handleMessage(mesObj);
-//    console.log(mesObj);
-    Place.findOneAndUpdate({"name": "work site 23", "workforce.worker_id": "worker20150118223A"},
-        { $set: {"workforce.$.status": "alerted"}}
-        );
-/*                               { "$push": {
-     "workforce.$.status": 'alerted'
-     }
-     }*/
-}
 
 var handleMessage = function(mesObj) {
   Device.findOne({'device_id': mesObj.device_id}, function(err, deviceObj) {
@@ -145,13 +132,19 @@ var handleMessage = function(mesObj) {
                                return worker.worker_id === workerObj.worker_id;
                             }).pop();
                         if(worker !== null) {
-                            if(worker.status === 'expected') {
-                               // need to change the status
+                            if(worker.status === 'planned' || worker.status === 'alerted') {
+                                worker.status = 'arrived';
+                                place.save(function (err, pl) {
+                                    if(err){
+                                        console.log('Oh dear', err);
+                                    } else {
+                                        console.log('place saved: ');
+                                    }
+                                })
                             }
                         }
                         else {
-                            // Generate RiskEnterRegion Alert
-
+                            createRiskEnterRegionAlert(placeObj, worker);
                         }
                         console.log(worker);
                     }
@@ -164,6 +157,25 @@ var handleMessage = function(mesObj) {
   })
 };
 
+var createRiskEnterRegionAlert = function(place, worker) {
+    var detail = new Object();
+    detail.worker_firstname = worker.first_name;
+    detail.worker_secondname = worker.second_name;
+    detail.worker_id = worker.worker_id;
+    detail.enter_time = new Date();
+    detail.task_name = worker.task_name;
+
+    var obj = new Object();
+    obj.alert_type = "RiskRegionEnter";
+    obj.reason = "This worker enters to a work site without permission";
+    obj.created_time = new Date();
+    obj.status = "open";
+    obj.place_name = place.name;
+    obj.details = detail;
+
+    createAlert(obj);
+}
+
 var checkLateWorker = function() {
     Place.find({}, function(err, places) {
         places.forEach(function(place) {
@@ -175,10 +187,9 @@ var checkLateWorker = function() {
                 if(m.isAfter(p)) {
                     Task.findOne({'task_id': worker.task_id}, function(err, task) {
                         if (err) return console.error(err);
-                        if(task !== null && worker.status === 'expected') {
+                        if(task !== null && worker.status === 'planned') {
                             var obj = createWorkerLateAlert(place, worker, task);
                             createWorkerLateEmail(obj, task);
-                            console.log(worker);
                             worker.status = 'alerted';
                             place.save(function (err, pl) {
                                 if(err){
@@ -197,8 +208,6 @@ var checkLateWorker = function() {
 
 var createWorkerLateAlert = function(place, worker, task) {
     var detail = new Object();
-    detail.place = place.name;
-    detail.reason = "This worker enters to a work site without permission";
     detail.worker_firstname = worker.first_name;
     detail.worker_secondname = worker.second_name;
     detail.worker_id = worker.worker_id;
@@ -207,22 +216,41 @@ var createWorkerLateAlert = function(place, worker, task) {
 
     var obj = new Object();
     obj.alert_type = "workerlate";
+    obj.reason = "This worker is late for task: " + worker.task_name;
     obj.created_time = new Date();
     obj.status = "open";
-    obj.task_name = worker.task_name;
+    obj.place_name = place.name;
     obj.details = detail;
 
     createAlert(obj);
-    return obj;
+}
+
+var createRiskEnterRegionAlertEmail = function(obj, emailObj) {
+    var body = '<b>Alert Type:  </b>' + obj.alert_type + '<hr>';
+    body = body + '<p><b>Reason: </b>' + 'A worker enters a region without permission' + '<\p>';
+    body = body + '<p><b>Task: </b>' + obj.details.task_name + '<\p>';
+    body = body + '<p><b>Worker First Name: </b>' + obj.details.worker_firstname + '<\p>';
+    body = body + '<p><b>Worker Second Name: </b>' + obj.details.worker_secondname + '<\p>';
+    body = body + '<p><b>Worker ID: </b>' + obj.details.worker_id + '<\p>';
+    body = body + '<p><b>Place: </b>' + obj.place_name + '<\p>';
+    body = body + '<p><b>Enter Time: </b>' + obj.details.enter_time + '<\p>';
+    body = body + '<p><b>Status: </b>' + obj.status + '<\p>';
+
+    var to = 'Task Manager <' + emailObj + '>';
+    var from = 'Project Manager <sctest2004@gmail.com>';
+    var subject = 'Worker Enter A Region without Permission';
+
+    sendEmail(body, from, to, subject);
 }
 
 var createWorkerLateEmail = function(obj, task) {
     var body = '<b>Alert Type:  </b>' + obj.alert_type + '<hr>';
     body = body + '<p><b>Reason: </b>' + 'A worker is late for a task' + '<\p>';
-    body = body + '<p><b>Task: </b>' + obj.task_name + '<\p>';
+    body = body + '<p><b>Task: </b>' + obj.details.task_name + '<\p>';
     body = body + '<p><b>Worker First Name: </b>' + obj.details.worker_firstname + '<\p>';
     body = body + '<p><b>Worker Second Name: </b>' + obj.details.worker_secondname + '<\p>';
     body = body + '<p><b>Worker ID: </b>' + obj.details.worker_id + '<\p>';
+    body = body + '<p><b>Place: </b>' + obj.place_name + '<\p>';
     body = body + '<p><b>Planned Start Time: </b>' + obj.details.planned_start_time + '<\p>';
     body = body + '<p><b>Enter Time: </b>' + obj.details.enter_time + '<\p>';
     body = body + '<p><b>Status: </b>' + obj.status + '<\p>';
@@ -253,26 +281,6 @@ var createAlert = function(anode) {
         });
 };
 
-var generateWorkerlateAlert = function() {
-  var detail = new Object();
-  detail.place = "region 1";
-  detail.reason = "This worker has not shown up 20 minutes after work start";
-  detail.worker_name = "Ali";
-  detail.workerId = "124343432343df3";
-  detail.enter_time = new Date();
-  detail.task = "modeling";
-
-  var obj = new Object();
-  obj.alert_type = "workerlate";
-  obj.created_time = new Date();
-  obj.status = "open";
-  obj.project_name = "home garden";
-  obj.details = detail;
-
-  //  createAlert(obj);
-  var jsonString= JSON.stringify(obj);
-  console.log(jsonString);
-};
 
 var generateEquipmentlateAlert = function(equipObj) {
   var detail = new Object();

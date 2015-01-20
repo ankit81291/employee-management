@@ -26,7 +26,7 @@ define(["items/itemsController"], function(controller){
 					        '<div class="panel-heading">'+
 					            '<div class="row">'+
 					                '<div class="col-xs-3">'+
-					                    '<i class="fa fa-comments fa-5x"></i>'+
+					                    '<i class="'+itemModel[i]["class-icon"]+'"></i>'+
 					                '</div>'+
 					                '<div class="col-xs-9 text-right">'+
 					                    '<div class="huge">'+itemModel[i]["count"]+'</div>'+

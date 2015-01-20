@@ -5,10 +5,11 @@
 var mongoose = require( 'mongoose' );
 
 var taskSchema = new mongoose.Schema({
+    task_id: {type: String, required: true},
     task_name: {type: String, required: true},
     project_name: {type: String, required: true},
     start_time: {type: Date, "default": Date.now},
-    expected: {type: Number, required: true},
+    expected: {type: String, required: true},
     status: {type: String, required: true}
 });
 
@@ -22,7 +23,8 @@ var workerSchema = new mongoose.Schema({
     phone: String,
     task_id: {type: String, required: true},
     task_name: {type: String, required: true},
-    planned_time: {type: Date, "default": Date.now}
+    planned_time: {type: Date, "default": Date.now},
+    start_time: {type: Date, "default": Date.now}
 });
 
 var placeSchema = new mongoose.Schema({
@@ -30,7 +32,6 @@ var placeSchema = new mongoose.Schema({
     address: {type: String, required: true},
     coords: {type: [Number], required: false},
     orgnization: String,
-    status: {type: String, required: true},
     tasks: {type: [taskSchema], required: true},
     workforce: {type: [workerSchema], required: true}
 });
