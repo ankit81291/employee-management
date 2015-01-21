@@ -34,7 +34,6 @@ var placeSchema = new mongoose.Schema({
     orgnization: String,
     supervisor_id: String,
     supervisor_email: String,
-
     tasks: {type: [taskSchema], required: true},
     workforce: {type: [workerSchema], required: true}
 });

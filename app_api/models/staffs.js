@@ -5,7 +5,6 @@
 var mongoose = require( 'mongoose' );
 
 var taskSchema = new mongoose.Schema({
-    task_id: mongoose.Schema.ObjectId,
     task_name: {type: String, required: true},
     project_name: {type: String, required: true},
     planned_start_time: Date,

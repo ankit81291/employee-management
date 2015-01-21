@@ -15,7 +15,6 @@ var sendJsonResponse = function(res, status, content) {
 
 /* GET list of workers */
 module.exports.getWorkers = function(req, res) {
-   var workers_collection={};
    var results = workers_model.find().exec(function(err, results){
 	 if(err){
         throw err;
@@ -65,7 +64,7 @@ module.exports.createWorker = function(req, res) {
 var buildWorkersList = function(req, res, results) {
 var workers = [];
 results.forEach(function(doc) {
-  
+
   workers.push({
     first_name: doc.first_name,
     second_name: doc.second_name,
