@@ -22,19 +22,6 @@ module.exports.getWorkers = function(req, res) {
     } else {
          workers = buildWorkersList(req, res, results);
          sendJsonResponse(res, 200, workers);
-
-        results.forEach(function(doc){
-          
-   workers_collection.push({
-    first_name: doc.first_name,
-    second_name: doc.second_name,
-    tag_id: doc.tag_id,
-    email: doc.email,
-	phone: doc.phone,
-	sex: doc.sex
-    });
-  });
-	sendJsonResponse(res, 200,workers_collection);
    }
   })
   }
@@ -78,18 +65,18 @@ module.exports.createWorker = function(req, res) {
 var buildWorkersList = function(req, res, results) {
 var workers = [];
 results.forEach(function(doc) {
-  var skillSchema ={};
-  skillSchema.skill = doc.obj.skills.skill;
-  skillSchema.number = doc.obj.skills.level;
   
   workers.push({
-    first_name: doc.obj.first_name,
-    second_name: doc.obj.second_name,
-    tag_id: doc.obj.tag_id,
-    email: doc.obj.email,
-	phone: doc.obj.phone,
-	sex: doc.obj.sex,
-	skills : skillSchema
+    first_name: doc.first_name,
+    second_name: doc.second_name,
+      worker_id: doc.worker_id,
+    tag_id: doc.tag_id,
+    email: doc.email,
+	phone: doc.phone,
+	sex: doc.sex,
+	skills : doc.skills,
+      tasks: doc.tasks,
+      activities: doc.activities
   });
 });
   return workers;

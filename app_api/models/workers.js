@@ -10,7 +10,6 @@ var skillSchema = new mongoose.Schema({
 });
 
 var taskSchema = new mongoose.Schema({
-    task_id: mongoose.Schema.ObjectId,
     task_name: {type: String, required: true},
     project_name: {type: String, required: true},
     planned_start_time: Date,
@@ -25,8 +24,7 @@ var activitySchema = new mongoose.Schema({
     place: {type: String, required: true},
     timestamp: {type: Date, required: true},
     action: String,
-    valid: Boolean,
-    sex: String
+    valid: Boolean
 });
 
 var workerSchema = new mongoose.Schema({

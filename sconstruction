@@ -109,60 +109,13 @@ db.devices.save(
 }
 )
 
-db.workers.save(
-{
-    firstname: 'aron',
-    secondname: 'william',
-    worker_id: 'worker20150118223A',
-    tag_id: 'tag20150118A',
-    email: 'aron.william@gmail.com',
-    phone: '650-334-4523',
-    sex: 'male',
-    skills:
-        [
-          {
-               skill: 'plumbing',
-               level: 7
-          },
-          {
-               skill: 'floor construction',
-               level: 5}
-        ],
-    tasks: [
-         	{
-         	    task_id:  '4324344321431',
-         	    taskname:  'fix floor',
-         	    start_time: ISODate("2014-12-03T09:00:00.000Z"),
-         	    expected: '4 hours',
-         	    location: '3341 Arron St. Sunnyvale'
-         	},
-         	{
-         	    task_id:  '4324344321435',
-         	    taskname:  'fix floor',
-         	    start_time: ISODate("2014-12-03T13:00:00.000Z"),
-         	    expected: '4 hours',
-         	    location: '3341 Arron St. Sunnyvale'
-         	}
-         ],
-    activities: [
-            {
-    	        location: '3341 Arron St. Sunnyvale',
-    	        timestamp: ISODate("2014-12-03T00:56:03.834Z"),
-    	        action: 'Checkin'
-            },
-            {
-    	        location: '3341 Arron St. Sunnyvale',
-    	        timestamp: ISODate("2014-12-03T00:56:03.834Z"),
-    	        action: 'Checkout'
-            }
-        ]
-}
-)
+
+
 
 db.workers.save(
 {
-    firstname: 'miny',
-    secondname: 'kalan',
+    first_name: 'miny',
+    second_name: 'kalan',
     worker_id: 'worker20150118225A',
     tag_id: 'tag20150120A',
     email: 'miny.kalan@gmail.com',
@@ -180,18 +133,18 @@ db.workers.save(
         ],
     tasks: [
          	{
-         	    task_id:  '4324344321431',
-         	    taskname:  'fix floor',
+         	    task_name:  'fix floor',
          	    start_time: ISODate("2014-12-03T09:00:00.000Z"),
-         	    expected: '4 hours',
-         	    location: '3341 Arron St. Sunnyvale'
+         	    planned_start_time: ISODate("2014-12-23T09:00:00.000Z"),
+         	    place: '3341 Arron St. Sunnyvale',
+         	    status: 'finished'
          	},
          	{
-         	    task_id:  '4324344321435',
-         	    taskname:  'fix floor',
+         	    task_name:  'fix floor',
          	    start_time: ISODate("2014-12-03T13:00:00.000Z"),
-         	    expected: '4 hours',
-         	    location: '3341 Arron St. Sunnyvale'
+         	    planned_start_time: ISODate("2014-12-23T09:00:00.000Z"),
+         	    place: '3341 Arron St. Sunnyvale',
+         	    status: 'finished'
          	}
          ],
     activities: [
@@ -206,8 +159,7 @@ db.workers.save(
     	        action: 'Checkout'
             }
         ]
-}
-)
+})
 
 db.places.save(
 {
