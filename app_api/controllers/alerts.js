@@ -34,24 +34,14 @@ module.exports.getAlerts = function(req, res) {
         throw err;
     } else {
         results.forEach(function(doc){
-           //console.log('Alerts document', docs);
-		 var details ={};
-		//console.log('Alerts document', doc);
-		
-		details.place = doc.place;
-		details.reason = doc.reason;
-		details.supervisor= doc.supervisor;
-		details.supervisorId= doc.supervisorId;
-		details.enterTime = doc.enterTime;
-		details.task= doc.task;
+
 		alertCollections.push({
-			type: doc.type,
+			alert_type: doc.alert_type,
+            reason: doc.reason,
 			created_time: doc.created_time,
 			status: doc.status,
-			project_name: doc.project_name,
-			kind: doc.kind,
-			alert_class:doc.alert_class,
-			details: details
+			place_name: doc.place_name,
+			details: doc.details
 			});
         })
     }
@@ -78,25 +68,16 @@ module.exports.updateAlert = function(req, res) {
     });
     return;
   }
-    	 var details ={};
-		//console.log('Alerts document', doc);		
-		details.place = req.params.place;
-		details.reason = req.params.reason;
-		details.supervisor= req.params.supervisor;
-		details.supervisorId= req.params.supervisorId;
-		details.enterTime = req.params.enterTime;
-		details.task= req.params.task;
   
   tasks.update( 
   {_id: req.params.alertid},
   {
-			type: req.params.type,
+			alert_type: req.params.alert_type,
+            reason: req.params.reason,
 			created_time: req.params.created_time,
 			status: req.params.status,
-			project_name: req.params.project_name,
-			kind:req.params.kind,
-	        alert_class:req.params.alert_class,
-			details: details
+			place_name: req.params.place_name,
+			details: req.params.details
   },
   { multi: true }
   );
@@ -106,9 +87,8 @@ module.exports.updateAlert = function(req, res) {
 };  
   
 module.exports.getAlert = function(req, res) {   
-   console.log('Finding location details', req.params);
   if (req.params && req.params.alerttype) {
-    var results = alert_model.find({type: req.params.alerttype});
+    var results = alert_model.find({type: req.params.alert_type});
     console.log('Alerts Results', results);
      if (err) {
       console.log('geoNear error:', err);
@@ -125,21 +105,14 @@ var buildAlertsList = function(req, res, results) {
 var alerts = [];
 
 results.forEach(function(doc) {
-
-  var details ={};
-  details.place = doc.obj.place;
-  details.reason = doc.obj.reason;
-  details.supervisor= doc.obj.supervisor;
-  details.supervisorId= doc.obj.supervisorId;
-  details.enterTime = doc.obj.enterTime;
-  details.task= doc.obj.task;
   
   alerts.push({
-    type: doc.obj.type,
-    created_time: doc.obj.created_time,
-    status: doc.obj.status,
-    project: doc.obj.project,
-	details: details
+      alert_type: doc.alert_type,
+      reason: doc.reason,
+      created_time: doc.created_time,
+      status: doc.status,
+      place_name: doc.place_name,
+      details: doc.details
   });
 });
   return alerts;

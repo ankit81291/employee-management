@@ -1,16 +1,79 @@
-db.alerts.save( {
-	type: 'regionpermission',
-	created_time: new Date(),
-	status: 'open',
-	project: 'home garden',
-	details: {
-	place: 'region 1',
-	reason: 'high risk task scheduled at 9:40am',
-	worker_name: 'Adi',
-	task: 'remodeling'
-	}
-	}
-)
+
+db.alerts.save({
+	alert_type: 'RiskRegionEnter',
+    reason: 'This worker enters to a work site without permission',
+    created_time: ISODate("2014-12-03T09:00:00Z"),
+    status: 'open',
+    place_name: 'work site 23',
+    details: {
+    	firstname: 'miny',
+        secondname: 'kalan',
+        worker_id: 'worker20150118225A',
+        enter_time: ISODate("2014-12-03T13:00:00.000Z"),
+        supervisor_email: 'Saeed.ajmal@gmail.com'
+    }
+})
+
+db.alerts.save({
+	alert_type: 'WorkerLate',
+	reason: 'This worker is late for fix floor task in work site 32',
+	create_time: ISODate("2014-12-03T09:00:00Z"),
+    status: 'open',
+    place_name: 'work site 23',
+    details: {
+		firstname: 'miny',
+        secondname: 'kalan',
+        worker_id: 'worker20150118225A',
+        task_name: 'Fix floor',
+        planned_start_time: ISODate("2014-12-03T13:00:00.000Z"),
+        supervisor_email: 'Saeed.ajmal@gmail.com'
+    }
+})
+
+db.alerts.save({
+	alert_type: 'EquipmentLate',
+    reason: 'Equipment is late for floor fixing task in Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00.000Z"),
+    status: 'open',
+    place_name: 'Work Site 23',
+    details:
+     { supervisor_email: 'aron.william@gmail.com',
+       task_name: 'modeling',
+       equipment_id: 'act11234122',
+       equipment_name: 'Croal'
+     }
+})
+
+db.alerts.save({
+	alert_type: 'TaskLate',
+    reason: 'No enough materials for task modeling in Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00.000Z"),
+    status: 'open',
+    place_name: 'Work Site 23',
+    details:
+     { task: 'modeling',
+       supervisor_email: 'aron.william@gmail.com',
+       supervisor_id: '3254543543542' }
+})
+
+db.alerts.save({
+	alert_type: 'EquipmentMaintenance',
+    reason: 'This equipment is required to be maintained',
+    created_time: ISODate("2014-12-03T13:00:00.000Z"),
+    status: 'open',
+    place_name: 'Work Site 23',
+    details:
+     { task: 'Fix Engine',
+       estimated_time: '2 hours',
+       scheduled_time:  ISODate("2014-12-03T13:00:00.000Z"),
+       repairer_id: '44f3eaeaf4',
+       repairer: 'Cliff',
+       equipment_id: 'act11234122',
+       equipment_name: 'Coral' }
+})
+
+
+
 
 db.devices.save( {
 	device_name: 'gate_reader12',

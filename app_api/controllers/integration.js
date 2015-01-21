@@ -164,6 +164,7 @@ var createRiskEnterRegionAlert = function(place, worker) {
     detail.worker_id = worker.worker_id;
     detail.enter_time = new Date();
     detail.task_name = worker.task_name;
+    detail.supervisor_email = place.supervisor_email;
 
     var obj = new Object();
     obj.alert_type = "RiskRegionEnter";
@@ -211,12 +212,13 @@ var createWorkerLateAlert = function(place, worker, task) {
     detail.worker_firstname = worker.first_name;
     detail.worker_secondname = worker.second_name;
     detail.worker_id = worker.worker_id;
-    detail.enter_time = new Date();
-    detail.planned_start_time = task.planned_starttime;
+    detail.task_name = worker.task_name;
+    detail.planned_start_time = task.planned_start_time;
+    detail.supervisor_email = task.supervisor_email;
 
     var obj = new Object();
-    obj.alert_type = "workerlate";
-    obj.reason = "This worker is late for task: " + worker.task_name;
+    obj.alert_type = "WorkerLate";
+    obj.reason = "This worker is late for task: " + worker.task_name + "in " + place.name;
     obj.created_time = new Date();
     obj.status = "open";
     obj.place_name = place.name;
@@ -230,7 +232,6 @@ var createWorkerLateAlert = function(place, worker, task) {
 var createRiskEnterRegionAlertEmail = function(obj, emailObj) {
     var body = '<b>Alert Type:  </b>' + obj.alert_type + '<hr>';
     body = body + '<p><b>Reason: </b>' + 'A worker enters a region without permission' + '<\p>';
-    body = body + '<p><b>Task: </b>' + obj.details.task_name + '<\p>';
     body = body + '<p><b>Worker First Name: </b>' + obj.details.worker_firstname + '<\p>';
     body = body + '<p><b>Worker Second Name: </b>' + obj.details.worker_secondname + '<\p>';
     body = body + '<p><b>Worker ID: </b>' + obj.details.worker_id + '<\p>';
@@ -254,7 +255,6 @@ var createWorkerLateEmail = function(obj, task) {
     body = body + '<p><b>Worker ID: </b>' + obj.details.worker_id + '<\p>';
     body = body + '<p><b>Place: </b>' + obj.place_name + '<\p>';
     body = body + '<p><b>Planned Start Time: </b>' + obj.details.planned_start_time + '<\p>';
-    body = body + '<p><b>Enter Time: </b>' + obj.details.enter_time + '<\p>';
     body = body + '<p><b>Status: </b>' + obj.status + '<\p>';
 
     var to = 'Task Manager <' + task.supervisor_email + '>';
@@ -284,73 +284,63 @@ var createAlert = function(anode) {
 };
 
 
-var generateEquipmentlateAlert = function(equipObj) {
+var generateEquipmentlateAlert = function() {
   var detail = new Object();
-  detail.place = "Region 1";
-  detail.reason = "Equipment has not shown up 20 minutes work start";
   detail.equipment_name = "Croal";
   detail.equipment_id = "11";
-  detail.task = "modeling";
+  detail.task_name = "modeling";
+    detail.supervisor_email = "aron.william@gmail.com";
 
   var obj = new Object();
-  obj.alert_type = "equipmentlate";
-  obj.created_time = new Date();;
+  obj.alert_type = "EquipmentLate";
+    obj.reason = "Equipment is late for floor fixing task in Work Site 23"
+  obj.created_time = new Date();
   obj.status = "open";
-  obj.project_name = "home garden";
+  obj.place_name = "Work Site 23";
   obj.details = detail;
 
   var jsonString= JSON.stringify(obj);
   console.log(jsonString);
   
-  
-//  createAlert(obj);
+  createAlert(obj);
 
 };
 
-var generateEquipmentmaintenanceAlert = function(equipObj) {
+var generateEquipmentmaintenanceAlert = function() {
   var detail = new Object();
-  detail.place = "region 1";
-  detail.reason = "This equipment is required to be maintained";
   detail.equipment_name = "Coral";
-  detail.equipment_id = "12";
+  detail.equipment_id = "act11234122";
   detail.repairer = "Cliff";
   detail.repairer_id = "44f3eaeaf4";
   detail.scheduled_time =  new Date(2014, 12, 03, 9, 39, 52, 808);
   detail.estimated_time = "2 hours";
-  detail.task = "modeling";
+  detail.task = "Fix Engine";
 
-  var obj = new Object();
-  obj.alert_type = "equipmentmaintenance";
-  obj.created_time = new Date();
-  obj.status = "open";
-  obj.project_name = "home garden";
-  obj.details = detail;
+    var obj = new Object();
+    obj.alert_type = "EquipmentMaintenance";
+    obj.reason = "This equipment is required to be maintained"
+    obj.created_time = new Date();
+    obj.status = "open";
+    obj.place_name = "Work Site 23";
+    obj.details = detail;
 
-//  createAlert(obj);
+  createAlert(obj);
 
-  var jsonString= JSON.stringify(obj);
-  console.log(jsonString);
 };
 
 var generateTasklateAlert = function() {
   var detail = new Object();
-  detail.place = "region 1";
-  detail.reason = "No enough materials";
-  detail.supervisor = "Bado";
   detail.supervisor_id = "3254543543542";
-  detail.enter_time =  new Date(2014, 12, 03, 9, 39, 52, 808);
+    detail.supervisor_email = "aron.william@gmail.com";
   detail.task = "modeling";
 
-  var obj = new Object();
-  obj.alert_type = "tasklate";
-  obj.created_time = new Date();
-  obj.status = "open";
-  obj.project_name = "home garden";
-  obj.details = detail;
+    var obj = new Object();
+    obj.alert_type = "TaskLate";
+    obj.reason = "No enough materials for task modeling in Work Site 23",
+    obj.created_time = new Date();
+    obj.status = "open";
+    obj.place_name = "Work Site 23";
+    obj.details = detail;
   
-//   createAlert(obj);
-
-
-  var jsonString= JSON.stringify(obj);
-  console.log(jsonString);
+ createAlert(obj);
 };
