@@ -5,4 +5,7 @@ module.exports = function(app){
   require('./tasks')(app);
   require('./devices')(app);
   require('./workers')(app);
+  require('./places')(app);
+  require('./staffs')(app);
+  require('./equips')(app);
 };

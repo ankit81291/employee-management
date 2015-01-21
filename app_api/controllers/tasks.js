@@ -43,7 +43,6 @@ module.exports.createTask= function(req, res) {
 
 /* GET list of locations */
 module.exports.getTasks = function(req, res) {
-    var tasks_collection = {};
     var results = tasks.find().exec(function (err, results) {
         if (err) {
             throw err;

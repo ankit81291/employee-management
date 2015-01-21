@@ -49,8 +49,8 @@ process.on('SIGTERM', function() {
 require('./locations');
 require('./alerts');
 require('./devices');
-require('./equipments');
 require('./places');
 require('./staffs');
 require('./tasks');
 require('./workers');
+require('./equips');

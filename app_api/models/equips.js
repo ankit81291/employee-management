@@ -1,5 +1,5 @@
 /**
- * Created by taolin-pc on 1/17/15.
+ * Created by taolin-pc on 1/21/15.
  */
 
 var mongoose = require( 'mongoose' );
@@ -8,6 +8,7 @@ var taskSchema = new mongoose.Schema({
     task_id: {type: String, required: true},
     task_name: {type: String, required: true},
     project_name: {type: String, required: true},
+    planned_start_time: {type: Date, "default": Date.now},
     start_time: {type: Date, "default": Date.now},
     expected: {type: String, required: true},
     status: {type: String, required: true}
@@ -27,10 +28,11 @@ var workerSchema = new mongoose.Schema({
     start_time: {type: Date, "default": Date.now}
 });
 
-var equipmentSchema = new mongoose.Schema({
+var equipSchema = new mongoose.Schema({
     equipment_name: {type: String, required: true},
     equipment_id: {type: String, required: true},
     equipment_type: {type: String, required: true},
+    commercial_type: {type: String, required: true},
     vendor: {type: String},
     place_name: {type: String, required: true},
     created_time: {type: Date, required: true},
@@ -39,4 +41,4 @@ var equipmentSchema = new mongoose.Schema({
     workforce: {type: [workerSchema], required: true}
 });
 
-mongoose.model('Equipment', equipmentSchema);
+mongoose.model('Equip', equipSchema);

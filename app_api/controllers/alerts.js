@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var alert = mongoose.model('Alert');
+var Alert = mongoose.model('Alert');
 
 
 var sendJsonResponse = function(res, status, content) {
@@ -26,10 +26,9 @@ var sendJsonResponse = function(res, status, content) {
 
 /* GET list of locations */
 module.exports.getAlerts = function(req, res) {
-   var alerts;
    var alertCollections = [];
 
-   var results = alert.find().exec(function(err, results){
+   var results = Alert.find().exec(function(err, results){
     if(err){
         throw err;
     } else {

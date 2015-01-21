@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var workers_model = mongoose.model('Worker');
+var Worker = mongoose.model('Worker');
 
 
 var sendJsonResponse = function(res, status, content) {
@@ -15,11 +15,13 @@ var sendJsonResponse = function(res, status, content) {
 
 /* GET list of workers */
 module.exports.getWorkers = function(req, res) {
-   var results = workers_model.find().exec(function(err, results){
+
+    Worker.find().exec(function(err, results){
 	 if(err){
         throw err;
     } else {
-         workers = buildWorkersList(req, res, results);
+         console.log(results);
+         var workers = buildWorkersList(req, res, results);
          sendJsonResponse(res, 200, workers);
    }
   })

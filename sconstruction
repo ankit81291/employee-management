@@ -72,9 +72,6 @@ db.alerts.save({
        equipment_name: 'Coral' }
 })
 
-
-
-
 db.devices.save( {
 	device_name: 'gate_reader12',
     device_id: 'device201501123B',
@@ -109,8 +106,125 @@ db.devices.save(
 }
 )
 
+db.equipments.save({
+	equipment_name: 'Excavator 123',
+	equipment_id: 'YC35123',
+	equipment_type: 'Excavator',
+	vendor: 'Yuchai',
+	commercial_type: 'rental',
+	place_name: 'Work Site 23',
+	create_time: ISODate("2014-12-03T13:00:00Z"),
+	status: 'Operation',
+	tasks: [
+         {
+         	task_id: 'task112345',
+         	task_name:  'fix floor',
+         	project_name: 'site construction',
+         	planned_start_time: ISODate("2014-12-23T09:00:00.000Z"),
+         	start_time: ISODate("2014-12-23T09:00:00.000Z"),
+         	expected: '4 hours',
+         	status: 'open'
+         },
+         {
+            task_id: 'task112236',
+            task_name:  'fix floor',
+            project_name: 'site construction',
+            planned_start_time: ISODate("2014-12-23T09:00:00.000Z"),
+            start_time: ISODate("2014-12-23T09:00:00.000Z"),
+            expected: '4 hours',
+            status: 'open'
+         }
+    ],
+	workforce: [
+	  	{
+            first_name: 'aron',
+            second_name: 'william',
+            worker_id: 'worker20150118223A',
+            tag_id: 'tag2015011A',
+            email: 'aron.william@gmail.com',
+            phone: '650-334-4523',
+            status: 'planned',
+            task_id: '4324344321431',
+            task_name: 'mount light',
+            planned_time: ISODate("2014-12-03T13:00:00.000Z"),
+            start_time: ISODate("2014-12-03T13:00:00.000Z")
+        },
+        {
+            first_name: 'miny',
+            second_name: 'kalan',
+            worker_id: 'worker20150118225B',
+            tag_id: 'tag20150120B',
+            email: 'miny.kalan@gmail.com',
+            phone: '998-432-2342',
+            status: 'planned',
+            task_id: '4324344321432',
+            task_name: 'paint wall',
+            planned_time: ISODate("2014-12-03T13:00:00.000Z"),
+            start_time: ISODate("2014-12-03T13:00:00.000Z")
+        }
 
+	]
+})
 
+db.equips.save({
+    equipment_name: 'Excavator 123',
+    equipment_id: 'YC35123',
+    equipment_type: 'Excavator',
+    vendor: 'Yuchai',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation',
+    tasks: [
+         {
+            task_id: 'task112345',
+            task_name:  'fix floor',
+            project_name: 'site construction',
+            planned_start_time: ISODate("2014-12-23T09:00:00.000Z"),
+            start_time: ISODate("2014-12-23T09:00:00.000Z"),
+            expected: '4 hours',
+            status: 'open'
+         },
+         {
+            task_id: 'task112236',
+            task_name:  'fix floor',
+            project_name: 'site construction',
+            planned_start_time: ISODate("2014-12-23T09:00:00.000Z"),
+            start_time: ISODate("2014-12-23T09:00:00.000Z"),
+            expected: '4 hours',
+            status: 'open'
+         }
+    ],
+    workforce: [
+        {
+            first_name: 'aron',
+            second_name: 'william',
+            worker_id: 'worker20150118223A',
+            tag_id: 'tag2015011A',
+            email: 'aron.william@gmail.com',
+            phone: '650-334-4523',
+            status: 'planned',
+            task_id: '4324344321431',
+            task_name: 'mount light',
+            planned_time: ISODate("2014-12-03T13:00:00.000Z"),
+            start_time: ISODate("2014-12-03T13:00:00.000Z")
+        },
+        {
+            first_name: 'miny',
+            second_name: 'kalan',
+            worker_id: 'worker20150118225B',
+            tag_id: 'tag20150120B',
+            email: 'miny.kalan@gmail.com',
+            phone: '998-432-2342',
+            status: 'planned',
+            task_id: '4324344321432',
+            task_name: 'paint wall',
+            planned_time: ISODate("2014-12-03T13:00:00.000Z"),
+            start_time: ISODate("2014-12-03T13:00:00.000Z")
+        }
+
+    ]
+})
 
 db.workers.save(
 {
@@ -161,12 +275,55 @@ db.workers.save(
         ]
 })
 
+db.staffs.save(
+{
+    first_name: 'miny',
+    second_name: 'kalan',
+    staff_id: 'worker20150118225A',
+    tag_id: 'tag20150120A',
+    email: 'miny.kalan@gmail.com',
+    phone: '998-432-2342',
+    sex: 'male',
+    position: 'Site Manager',
+    organization: 'Construction Development',
+    tasks: [
+            {
+                task_name:  'fix floor',
+                start_time: ISODate("2014-12-03T09:00:00.000Z"),
+                planned_start_time: ISODate("2014-12-23T09:00:00.000Z"),
+                place: '3341 Arron St. Sunnyvale',
+                status: 'finished'
+            },
+            {
+                task_name:  'fix floor',
+                start_time: ISODate("2014-12-03T13:00:00.000Z"),
+                planned_start_time: ISODate("2014-12-23T09:00:00.000Z"),
+                place: '3341 Arron St. Sunnyvale',
+                status: 'finished'
+            }
+         ],
+    activities: [
+            {
+                place: '3341 Arron St. Sunnyvale',
+                timestamp: ISODate("2014-12-03T00:56:03.834Z"),
+                action: 'Checkin'
+            },
+            {
+                place: '3341 Arron St. Sunnyvale',
+                timestamp: ISODate("2014-12-03T00:56:03.834Z"),
+                action: 'Checkout'
+            }
+        ]
+})
+
 db.places.save(
 {
 	name: 'work site 23',
     address: '125 High Street, Reading, RG6 1PS',
     coords: [-0.9690884, 51.455041],
     organization: 'Customer 234',
+    supervisor_id: 'staff20140304123A',
+    supervisor_email: 'sctest2004@gmail.com',
     tasks: [
      	{
      	    task_id:  '4324344321431',
@@ -196,7 +353,8 @@ db.places.save(
             status: 'planned',
             task_id: '4324344321431',
             task_name: 'mount light',
-            planned_time: ISODate("2014-12-03T13:00:00.000Z")
+            planned_time: ISODate("2014-12-03T13:00:00.000Z"),
+            start_time: ISODate("2014-12-03T13:00:00.000Z")
      	},
      	{
     	    first_name: 'miny',
@@ -208,7 +366,8 @@ db.places.save(
             status: 'planned',
             task_id: '4324344321432',
             task_name: 'paint wall',
-            planned_time: ISODate("2014-12-03T13:00:00.000Z")
+            planned_time: ISODate("2014-12-03T13:00:00.000Z"),
+            start_time: ISODate("2014-12-03T13:00:00.000Z")
      	}
     ]
  })
