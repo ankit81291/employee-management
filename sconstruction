@@ -345,7 +345,7 @@ db.tasks.save(
 		],
 		organization: 'AZMEEL Construction'
 	},
-	history: [
+	workforce: [
 		{
 			first_name: 'Saeed',
 			second_name: 'ajmal',
@@ -357,5 +357,5 @@ db.tasks.save(
             finish_time: ISODate('2014-12-03T16:00:00Z'),
             status: 'finished'
 		}
-	]
+		]
 })

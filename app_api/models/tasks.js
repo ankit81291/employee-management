@@ -30,7 +30,7 @@ var taskSchema = new mongoose.Schema({
         coords: {type: [Number], required: true},
         orgnization: String
     },
-    history: {type: [workerSchema], required: true}
+    workforce: {type: [workerSchema], required: true}
 });
 
 mongoose.model('Task', taskSchema);
