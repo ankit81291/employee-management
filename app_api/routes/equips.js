@@ -5,5 +5,5 @@
 var ctrl = require('../controllers/equips');
 
 module.exports = function(app){
-    app.get('/api/equips', ctrl.getEquips);
+    app.get('/api/equipments', ctrl.getEquipments);
 };
