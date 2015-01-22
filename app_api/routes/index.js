@@ -8,4 +8,5 @@ module.exports = function(app){
   require('./places')(app);
   require('./staffs')(app);
   require('./equips')(app);
+  require('./materials')(app);
 };
