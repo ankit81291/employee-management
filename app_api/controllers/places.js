@@ -28,12 +28,12 @@ var buildPlacesList = function(req, res, results) {
     results.forEach(function(doc) {
 
         places.push({
-            name: doc.name,
-            address: doc.address,
+            'Name': doc.name,
+            'Address': doc.address,
             coords: doc.coords,
-            organization: doc.organization,
-            supervisor_id: doc.supervisor_id,
-            supervisor_email: doc.supervisor_email,
+            'Organization': doc.organization,
+            'Supervisor ID': doc.supervisor_id,
+            'Supervisor Email': doc.supervisor_email,
             tasks: doc.tasks,
             workforce: doc.workforce
         });

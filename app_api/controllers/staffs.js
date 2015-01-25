@@ -27,15 +27,15 @@ var buildStaffsList = function(req, res, results) {
     results.forEach(function(doc) {
 
         staffs.push({
-            first_name: doc.first_name,
-            second_name: doc.second_name,
-            staff_id: doc.staff_id,
-            tag_id: doc.tag_id,
-            email: doc.email,
-            phone: doc.phone,
-            sex: doc.sex,
-            position: doc.position,
-            organization : doc.organization,
+            'First Name': doc.first_name,
+            'Second Name': doc.second_name,
+            'Staff ID': doc.staff_id,
+            'Tag ID': doc.tag_id,
+            'Email': doc.email,
+            'Phone': doc.phone,
+            'Sex': doc.sex,
+            'Position': doc.position,
+            'Organization': doc.organization,
             tasks: doc.tasks,
             activities: doc.activities        });
     });

@@ -26,16 +26,16 @@ var buildEquipmentsList = function(req, res, results) {
     results.forEach(function(doc) {
 
         equipments.push({
-            equipment_name: doc.equipment_name,
-            equipment_id: doc.equipment_id,
-            equipment_type: doc.equipment_type,
-            vendor: doc.vendor,
-            commercial_type: doc.commercial_type,
-            place_name: doc.place_name,
-            created_time: doc.created_time,
-            status: doc.status,
-            tasks: doc.tasks,
-            workforce : doc.workforce
+            'Equipment Name': doc.equipment_name,
+            'Equipment ID': doc.equipment_id,
+            'Equipment Type': doc.equipment_type,
+            'Vendor': doc.vendor,
+            'Commercial Type': doc.commercial_type,
+            'Place Name': doc.place_name,
+            'Created Time': doc.created_time,
+            'Status': doc.status,
+            'tasks': doc.tasks,
+            'workforce' : doc.workforce
         });
     });
     return equipments;

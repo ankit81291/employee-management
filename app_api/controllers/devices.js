@@ -27,13 +27,13 @@ var buildDevicesList = function(req, res, results) {
     results.forEach(function(doc) {
 
         devices.push({
-            device_name: doc.device_name,
-            device_id: doc.device_id,
-            device_type: doc.device_type,
-            vendor: doc.vendor,
-            place_name: doc.place_name,
-            created_time: doc.created_time,
-            status : doc.status
+            'Device Name': doc.device_name,
+            'Device ID': doc.device_id,
+            'Device Type': doc.device_type,
+            'Vendor': doc.vendor,
+            'Place Name': doc.place_name,
+            'Created Time': doc.created_time,
+            'Status' : doc.status
         });
     });
     return devices;

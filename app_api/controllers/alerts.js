@@ -35,11 +35,11 @@ module.exports.getAlerts = function(req, res) {
         results.forEach(function(doc){
 
 		alertCollections.push({
-			alert_type: doc.alert_type,
-            reason: doc.reason,
-			created_time: doc.created_time,
-			status: doc.status,
-			place_name: doc.place_name,
+			'Alert Type': doc.alert_type,
+            'Reason': doc.reason,
+			'Created Time': doc.created_time,
+			'Status': doc.status,
+			'Place Name': doc.place_name,
 			details: doc.details
 			});
         })

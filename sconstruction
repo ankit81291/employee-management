@@ -6,11 +6,11 @@ db.alerts.save({
     status: 'open',
     place_name: 'work site 23',
     details: {
-    	firstname: 'miny',
-        secondname: 'kalan',
-        worker_id: 'worker20150118225A',
-        enter_time: ISODate("2014-12-03T13:00:00.000Z"),
-        supervisor_email: 'Saeed.ajmal@gmail.com'
+    	'First Name': 'miny',
+        'Second Name': 'kalan',
+        'Worker ID': 'worker20150118225A',
+        'Enter Time': ISODate("2014-12-03T13:00:00.000Z"),
+        'Supervisor Email': 'Saeed.ajmal@gmail.com'
     }
 })
 
@@ -21,12 +21,12 @@ db.alerts.save({
     status: 'open',
     place_name: 'work site 23',
     details: {
-		firstname: 'miny',
-        secondname: 'kalan',
-        worker_id: 'worker20150118225A',
-        task_name: 'Fix floor',
-        planned_start_time: ISODate("2014-12-03T13:00:00.000Z"),
-        supervisor_email: 'Saeed.ajmal@gmail.com'
+		'First Name': 'miny',
+        'Second Name': 'kalan',
+        'Worker ID': 'worker20150118225A',
+        'Task Name': 'Fix floor',
+        'Planned Start Time': ISODate("2014-12-03T13:00:00.000Z"),
+        'Supervisor Email': 'Saeed.ajmal@gmail.com'
     }
 })
 
@@ -37,10 +37,10 @@ db.alerts.save({
     status: 'open',
     place_name: 'Work Site 23',
     details:
-     { supervisor_email: 'aron.william@gmail.com',
-       task_name: 'modeling',
-       equipment_id: 'act11234122',
-       equipment_name: 'Croal'
+     { 'Supervisor Email': 'aron.william@gmail.com',
+       'Task Name': 'modeling',
+       'Equipment ID': 'act11234122',
+       'Equipment Name': 'Croal'
      }
 })
 
@@ -51,9 +51,9 @@ db.alerts.save({
     status: 'open',
     place_name: 'Work Site 23',
     details:
-     { task: 'modeling',
-       supervisor_email: 'aron.william@gmail.com',
-       supervisor_id: '3254543543542' }
+     { 'Task': 'modeling',
+       'Supervisor Email': 'aron.william@gmail.com',
+       'Supervisor ID': '3254543543542' }
 })
 
 db.alerts.save({
@@ -63,13 +63,13 @@ db.alerts.save({
     status: 'open',
     place_name: 'Work Site 23',
     details:
-     { task: 'Fix Engine',
-       estimated_time: '2 hours',
-       scheduled_time:  ISODate("2014-12-03T13:00:00.000Z"),
-       repairer_id: '44f3eaeaf4',
-       repairer: 'Cliff',
-       equipment_id: 'act11234122',
-       equipment_name: 'Coral' }
+     { 'Task': 'Fix Engine',
+       'Estimated Time': '2 hours',
+       'Scheduled Time':  ISODate("2014-12-03T13:00:00.000Z"),
+       'Repairer ID': '44f3eaeaf4',
+       'Repairer Name': 'Cliff',
+       'Equipment ID': 'act11234122',
+       'Equipment Name': 'Coral' }
 })
 
 db.devices.save( {
@@ -117,50 +117,50 @@ db.equips.save({
     status: 'Operation',
     tasks: [
          {
-            task_id: 'task112345',
-            task_name:  'fix floor',
-            project_name: 'site construction',
-            planned_start_time: ISODate("2014-12-23T09:00:00.000Z"),
-            start_time: ISODate("2014-12-23T09:00:00.000Z"),
-            expected: '4 hours',
-            status: 'open'
+            'Task ID': 'task112345',
+            'Task Name':  'fix floor',
+            'Project Name': 'site construction',
+            'Planned Start Time': ISODate("2014-12-23T09:00:00.000Z"),
+            'Start Time': ISODate("2014-12-23T09:00:00.000Z"),
+            'Expected': '4 hours',
+            'Status': 'open'
          },
          {
-            task_id: 'task112236',
-            task_name:  'fix floor',
-            project_name: 'site construction',
-            planned_start_time: ISODate("2014-12-23T09:00:00.000Z"),
-            start_time: ISODate("2014-12-23T09:00:00.000Z"),
-            expected: '4 hours',
-            status: 'open'
+            'Task ID': 'task112236',
+            'Task Name':  'fix floor',
+            'Project Name': 'site construction',
+            'Planned Start Time': ISODate("2014-12-23T09:00:00.000Z"),
+            'Start Time': ISODate("2014-12-23T09:00:00.000Z"),
+            'Expected': '4 hours',
+            'Status': 'open'
          }
     ],
     workforce: [
         {
-            first_name: 'aron',
-            second_name: 'william',
-            worker_id: 'worker20150118223A',
-            tag_id: 'tag2015011A',
-            email: 'aron.william@gmail.com',
-            phone: '650-334-4523',
-            status: 'planned',
-            task_id: '4324344321431',
-            task_name: 'mount light',
-            planned_time: ISODate("2014-12-03T13:00:00.000Z"),
-            start_time: ISODate("2014-12-03T13:00:00.000Z")
+            'First Name': 'aron',
+            'Second Name': 'william',
+            'Worker ID': 'worker20150118223A',
+            'Tag ID': 'tag2015011A',
+            'Email': 'aron.william@gmail.com',
+            'Phone': '650-334-4523',
+            'Status': 'planned',
+            'Task ID': '4324344321431',
+            'Task Name': 'mount light',
+            'Planned Time': ISODate("2014-12-03T13:00:00.000Z"),
+            'Start Time': ISODate("2014-12-03T13:00:00.000Z")
         },
         {
-            first_name: 'miny',
-            second_name: 'kalan',
-            worker_id: 'worker20150118225B',
-            tag_id: 'tag20150120B',
-            email: 'miny.kalan@gmail.com',
-            phone: '998-432-2342',
-            status: 'planned',
-            task_id: '4324344321432',
-            task_name: 'paint wall',
-            planned_time: ISODate("2014-12-03T13:00:00.000Z"),
-            start_time: ISODate("2014-12-03T13:00:00.000Z")
+            'First Name': 'miny',
+            'Second Name': 'kalan',
+            'Worker ID': 'worker20150118225B',
+            'Tag ID': 'tag20150120B',
+            'Email': 'miny.kalan@gmail.com',
+            'Phone': '998-432-2342',
+            'Status': 'planned',
+            'Task ID': '4324344321432',
+            'Task Name': 'paint wall',
+            'Planned Time': ISODate("2014-12-03T13:00:00.000Z"),
+            'Start Time': ISODate("2014-12-03T13:00:00.000Z")
         }
     ]
 })
@@ -177,39 +177,39 @@ db.workers.save(
     skills:
         [
           {
-               skill: 'plumbing',
-               level: 7
+               'Skill': 'plumbing',
+               'Level': 7
           },
           {
-               skill: 'floor construction',
-               level: 5}
+               'Skill': 'floor construction',
+               'Level': 5}
         ],
     tasks: [
          	{
-         	    task_name:  'fix floor',
-         	    start_time: ISODate("2014-12-03T09:00:00.000Z"),
-         	    planned_start_time: ISODate("2014-12-23T09:00:00.000Z"),
-         	    place: '3341 Arron St. Sunnyvale',
-         	    status: 'finished'
+         	    'Task Name':  'fix floor',
+         	    'Start Time': ISODate("2014-12-03T09:00:00.000Z"),
+         	    'Planned Start Time': ISODate("2014-12-23T09:00:00.000Z"),
+         	    'Place': '3341 Arron St. Sunnyvale',
+         	    'Status': 'finished'
          	},
          	{
-         	    task_name:  'fix floor',
-         	    start_time: ISODate("2014-12-03T13:00:00.000Z"),
-         	    planned_start_time: ISODate("2014-12-23T09:00:00.000Z"),
-         	    place: '3341 Arron St. Sunnyvale',
-         	    status: 'finished'
+         	    'Task Name':  'fix floor',
+         	    'Start Time': ISODate("2014-12-03T13:00:00.000Z"),
+         	    'Planned Start Time': ISODate("2014-12-23T09:00:00.000Z"),
+         	    'Place': '3341 Arron St. Sunnyvale',
+         	    'Status': 'finished'
          	}
          ],
     activities: [
             {
-    	        location: '3341 Arron St. Sunnyvale',
-    	        timestamp: ISODate("2014-12-03T00:56:03.834Z"),
-    	        action: 'Checkin'
+    	        'Location': '3341 Arron St. Sunnyvale',
+    	        'Timestamp': ISODate("2014-12-03T00:56:03.834Z"),
+    	        'Action': 'Checkin'
             },
             {
-    	        location: '3341 Arron St. Sunnyvale',
-    	        timestamp: ISODate("2014-12-03T00:56:03.834Z"),
-    	        action: 'Checkout'
+    	        'Location': '3341 Arron St. Sunnyvale',
+    	        'Timestamp': ISODate("2014-12-03T00:56:03.834Z"),
+    	        'Action': 'Checkout'
             }
         ]
 })
@@ -239,30 +239,30 @@ db.staffs.save(
     organization: 'Construction Development',
     tasks: [
             {
-                task_name:  'fix floor',
-                start_time: ISODate("2014-12-03T09:00:00.000Z"),
-                planned_start_time: ISODate("2014-12-23T09:00:00.000Z"),
-                place: '3341 Arron St. Sunnyvale',
-                status: 'finished'
+                'Task Name':  'fix floor',
+                'Start Time': ISODate("2014-12-03T09:00:00.000Z"),
+                'Planned Start Time': ISODate("2014-12-23T09:00:00.000Z"),
+                'Place': '3341 Arron St. Sunnyvale',
+                'Status': 'finished'
             },
             {
-                task_name:  'fix floor',
-                start_time: ISODate("2014-12-03T13:00:00.000Z"),
-                planned_start_time: ISODate("2014-12-23T09:00:00.000Z"),
-                place: '3341 Arron St. Sunnyvale',
-                status: 'finished'
+                'Task Name':  'fix floor',
+                'Start Time': ISODate("2014-12-03T13:00:00.000Z"),
+                'Planned Start Time': ISODate("2014-12-23T09:00:00.000Z"),
+                'Place': '3341 Arron St. Sunnyvale',
+                'Status': 'finished'
             }
          ],
     activities: [
             {
-                place: '3341 Arron St. Sunnyvale',
-                timestamp: ISODate("2014-12-03T00:56:03.834Z"),
-                action: 'Checkin'
+                'Place': '3341 Arron St. Sunnyvale',
+                'Timestamp': ISODate("2014-12-03T00:56:03.834Z"),
+                'Action': 'Checkin'
             },
             {
-                place: '3341 Arron St. Sunnyvale',
-                timestamp: ISODate("2014-12-03T00:56:03.834Z"),
-                action: 'Checkout'
+                'Place': '3341 Arron St. Sunnyvale',
+                'Timestamp': ISODate("2014-12-03T00:56:03.834Z"),
+                'Action': 'Checkout'
             }
         ]
 })
@@ -277,48 +277,48 @@ db.places.save(
     supervisor_email: 'sctest2004@gmail.com',
     tasks: [
      	{
-     	    task_id:  '4324344321431',
-     	    task_name:  'fix floor',
-     	    project_name: 'Ma aden home',
-     	    start_time: ISODate("2014-12-03T09:00:00.000Z"),
-     	    expected: '4 hours',
-     	    status: 'close'
+     	    'Task ID':  '4324344321431',
+     	    'Task Name':  'fix floor',
+     	    'Project Name': 'Ma aden home',
+     	    'Start Time': ISODate("2014-12-03T09:00:00.000Z"),
+     	    'Expected': '4 hours',
+     	    'Status': 'close'
      	},
      	{
-     	    task_id:  '4324344321435',
-     	    task_name:  'fix floor',
-     	    start_time: ISODate("2014-12-03T13:00:00.000Z"),
-     	    expected: '4 hours',
-     	    project_name: 'Ma aden home',
-     	    status: 'open'
+     	    'Task ID':  '4324344321435',
+     	    'Task Name':  'fix floor',
+     	    'Start Time': ISODate("2014-12-03T13:00:00.000Z"),
+     	    'Expected': '4 hours',
+     	    'Project Name': 'Ma aden home',
+     	    'Status': 'open'
      	}
      ],
      workforce: [
     	{
-    	    first_name: 'aron',
-            second_name: 'william',
-            worker_id: 'worker20150118223A',
-            tag_id: 'tag2015011A',
-            email: 'aron.william@gmail.com',
-            phone: '650-334-4523',
-            status: 'planned',
-            task_id: '4324344321431',
-            task_name: 'mount light',
-            planned_time: ISODate("2014-12-03T13:00:00.000Z"),
-            start_time: ISODate("2014-12-03T13:00:00.000Z")
+    	    'First Name': 'aron',
+            'Second Name': 'william',
+            'Worker ID': 'worker20150118223A',
+            'Tag ID': 'tag2015011A',
+            'Email': 'aron.william@gmail.com',
+            'Phone': '650-334-4523',
+            'Status': 'planned',
+            'Task ID': '4324344321431',
+            'Task Name': 'mount light',
+            'Planned Time': ISODate("2014-12-03T13:00:00.000Z"),
+            'Start Time': ISODate("2014-12-03T13:00:00.000Z")
      	},
      	{
-    	    first_name: 'miny',
-            second_name: 'kalan',
-            worker_id: 'worker20150118225B',
-            tag_id: 'tag20150120B',
-            email: 'miny.kalan@gmail.com',
-            phone: '998-432-2342',
-            status: 'planned',
-            task_id: '4324344321432',
-            task_name: 'paint wall',
-            planned_time: ISODate("2014-12-03T13:00:00.000Z"),
-            start_time: ISODate("2014-12-03T13:00:00.000Z")
+    	    'First Name': 'miny',
+            'Second Name': 'kalan',
+            'Worker ID': 'worker20150118225B',
+            'Tag ID': 'tag20150120B',
+            'Email': 'miny.kalan@gmail.com',
+            'Phone': '998-432-2342',
+            'Status': 'planned',
+            'Task ID': '4324344321432',
+            'Task Name': 'paint wall',
+            'Planned Time': ISODate("2014-12-03T13:00:00.000Z"),
+            'Start Time': ISODate("2014-12-03T13:00:00.000Z")
      	}
     ]
  })
@@ -336,26 +336,26 @@ db.tasks.save(
 	supervisor_id: 'sup32344343',
 	supervisor_email: 'sctest2004@gmail.com>',
 	place: {
-		place_id: 'place2312122',
-		name: 'head office',
-		address: '125 High Street, Reading, RG6 1PS',
+		'Place ID': 'place2312122',
+		'Name': 'head office',
+		'Address': '125 High Street, Reading, RG6 1PS',
 		coords: [
 			-0.9690884,
 			51.455041
 		],
-		organization: 'AZMEEL Construction'
+		'Organization': 'AZMEEL Construction'
 	},
 	workforce: [
 		{
-			first_name: 'Saeed',
-			second_name: 'ajmal',
-			email: 'Saeed.ajmal@gmail.com',
-			phone: '650-334-1982',
-			tag_id: '33234232',
-			sex: 'male',
-			start_time: ISODate('2014-12-03T14:00:00Z'),
-            finish_time: ISODate('2014-12-03T16:00:00Z'),
-            status: 'finished'
+			'First Name': 'Saeed',
+			'Second Name': 'ajmal',
+			'Email': 'Saeed.ajmal@gmail.com',
+			'Phone': '650-334-1982',
+			'Tag ID': '33234232',
+			'Sex': 'male',
+			'Start Time': ISODate('2014-12-03T14:00:00Z'),
+            'Finish Time': ISODate('2014-12-03T16:00:00Z'),
+            'Status': 'finished'
 		}
 		]
 })
