@@ -13,6 +13,19 @@ var sendJsonResponse = function(res, status, content) {
 };
 */
 
+module.exports.getWorkerNames = function(req, res) {
+    console.log("get work names")
+    Worker.find().exec(function(err, results){
+        if(err){
+            throw err;
+        } else {
+            console.log(results);
+            var workers = buildWorkerNameList(req, res, results);
+            sendJsonResponse(res, 200, workers);
+        }
+    })
+}
+
 /* GET list of workers */
 module.exports.getWorkers = function(req, res) {
 
@@ -83,7 +96,25 @@ results.forEach(function(doc) {
   return workers;
 };
 
+var buildWorkerNameList = function (req, res, results) {
+    console.log("worker name list");
 
+    var workernames = [];
+
+    results.forEach(function (doc) {
+
+        workernames.push( {
+            worker_id: doc.worker_id,
+            worker_name: capitalize(doc.first_name) + '  ' + capitalize(doc.second_name)
+        })
+    });
+    return workernames;
+};
+
+function capitalize(s)
+{
+    return s && s[0].toUpperCase() + s.slice(1);
+}
 /*
 
 
