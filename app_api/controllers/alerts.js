@@ -35,12 +35,12 @@ module.exports.getAlerts = function(req, res) {
         results.forEach(function(doc){
 
 		alertCollections.push({
-			'Alert Type': doc.alert_type,
-            'Reason': doc.reason,
-			'Created Time': doc.created_time,
-			'Status': doc.status,
-			'Place Name': doc.place_name,
-			details: doc.details
+			'alert_type': doc.alert_type,
+      'reason': doc.reason,
+      'created_time': doc.created_time,
+      'status': doc.status,
+      'place_name': doc.place_name,
+      'details': doc.details
 			});
         })
     }
@@ -72,7 +72,7 @@ module.exports.updateAlert = function(req, res) {
   {_id: req.params.alertid},
   {
 			alert_type: req.params.alert_type,
-            reason: req.params.reason,
+      reason: req.params.reason,
 			created_time: req.params.created_time,
 			status: req.params.status,
 			place_name: req.params.place_name,

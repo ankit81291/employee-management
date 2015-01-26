@@ -106,17 +106,17 @@ var buildTasksList = function(req, res, results) {
 var tasks = [];
   results.forEach(function(doc) {
       tasks.push({
-          'Task Name': doc.task_name,
-          'Task ID': doc.task_id,
-          'Project Name': doc.project_name,
-          'Planned Start Time': doc.planned_start_time,
-          'Planned Finish Time': doc.planned_finish_time,
-          'Start Time': doc.start_time,
-          'Finish Time':doc.finish_time,
-          'Status':doc.status,
-          'Supervisor ID': doc.supervisor_id,
-          'Supervisor Email': doc.supervisor_email,
-          'Place': doc.place,
+          'task_name': doc.task_name,
+          'task_id': doc.task_id,
+          'project_name': doc.project_name,
+          'planned_start_time': doc.planned_start_time,
+          'planned_finish_time': doc.planned_finish_time,
+          'start_time': doc.start_time,
+          'finish_time':doc.finish_time,
+          'status':doc.status,
+          'supervisor_id': doc.supervisor_id,
+          'supervisor_email': doc.supervisor_email,
+          'place': doc.place,
           workforce: doc.workforce
         });
     });

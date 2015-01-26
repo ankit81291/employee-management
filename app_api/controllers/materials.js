@@ -27,13 +27,13 @@ var buildMaterialList = function(req, res, results) {
     results.forEach(function(doc) {
 
         materials.push({
-            'Name': doc.name,
-            'SKU': doc.sku,
-            'Order Number': doc.order_number,
-            'Quantity': doc.quantity,
-            'Consumed': doc.consumed,
-            'Created Time': doc.created_time,
-            'Place Name': doc.place_name
+            'name': doc.name,
+            'sku': doc.sku,
+            'order_number': doc.order_number,
+            'quantity': doc.quantity,
+            'consumed': doc.consumed,
+            'created_time': doc.created_time,
+            'place_name': doc.place_name
         });
     });
     return materials;

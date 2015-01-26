@@ -81,13 +81,13 @@ var workers = [];
 results.forEach(function(doc) {
 
   workers.push({
-    'First Name': doc.first_name,
-    'Second Name': doc.second_name,
-      'Worker ID': doc.worker_id,
-    'Tag ID': doc.tag_id,
-    'Email': doc.email,
-	'Phone': doc.phone,
-	'Sex': doc.sex,
+    'first_name': doc.first_name,
+    'second_name': doc.second_name,
+      'worker_id': doc.worker_id,
+    'tag_id': doc.tag_id,
+    'email': doc.email,
+	'phone': doc.phone,
+	'sex': doc.sex,
 	skills : doc.skills,
       tasks: doc.tasks,
       activities: doc.activities
