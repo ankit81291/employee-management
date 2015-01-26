@@ -8,9 +8,9 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 	detailWrapView.prototype.createContent = function(obj) {
 	var dashBoardChartDiv='<div class="row detailwrap" >'+
 						'<div class="col-lg-8">'+
-							'<div class="panel panel-default">'+
+							'<div class="panel panel-default" style="height: 422px;overflow-y: scroll;">'+
 					                 '<div class="panel-heading">'+
-					                     '<i class="fa fa-bar-chart-o fa-fw"></i>Employee Analysis'+
+					                     '<i class="fa fa-bar-chart-o fa-fw"></i>Task Performance'+
 					                     '<div class="pull-right">'+
 					                         '<div class="btn-group">'+
 					                             '<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Actions'+
@@ -31,7 +31,8 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 							                                '</li>'+
 							                            '</ul>'+
 					                                 '</li>'+
-					                                 '<li><a href="#">Something else here</a>'+
+					                                 '<li>'+
+					                                 "<a href='#' onclick='window.app.buildTable();'>Tabular data</a>"+
 					                                 '</li>'+
 					                             '</ul>'+
 					                         '</div>'+
@@ -53,7 +54,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 	};
 	detailWrapView.prototype.getNotification = function() {
 		var notificationstartDiv='<div class="col-lg-4">'+
-							        '<div class="panel panel-default">'+
+							        '<div class="panel panel-default" style="height: 422px;overflow-y: scroll;">'+
 								        '<div class="panel-heading">'+
 								            '<i class="fa fa-bell fa-fw"></i> Notifications Panel'+
 								        '</div>';
@@ -61,9 +62,10 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 		var NotificationDiv='<div class="panel-body">';
 		var notifyDiv="";
 							for(var i=0;i<alertObj.length;i++){
+								cssClass=this.getStatusClass(alertObj[i]['status']);
 								
-						    var tempDiv='<div class="'+alertObj[i]['class']+'">'+
-						            '<i class="fa fa-comment fa-fw"></i>'+alertObj[i]['type']+
+						    var tempDiv='<div class="'+cssClass+'">'+
+						            '<i class="fa fa-comment fa-fw"></i>'+alertObj[i]['alert_type']+
 						            '<span class="pull-right text-muted small"><em>'+alertObj[i]['status']+'</em>'+
 						            '</span>'+
 						        '</div>';
@@ -84,13 +86,16 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 		$(".detailwrap").append(taskNavDiv);
 		var taskDetailDiv = this.createTaskDetailDiv(obj[0]);
 		$(".detailwrap").append(taskDetailDiv);
-		/*if(obj[0]["kind"]=="Task"){
-			this.buildTaskChart();
-		}
-		else if(obj[0]["kind"]=="Notification"){
-			this.buildNotificationChart();
-		}*/
 	};
+	
+	detailWrapView.prototype.buildNotificationDetail = function(obj) {
+		$(".detailwrap").empty();
+		var notificationNavDiv=this.createNotification(obj);
+		$(".detailwrap").append(notificationNavDiv);
+		var notificationDetailDiv = this.createNotificationDetailDiv(obj[0]);
+		$(".detailwrap").append(notificationDetailDiv);
+	};
+	
 	detailWrapView.prototype.createTask = function(obj) {
 		var createParentNavDiv = this.createTaskParentNav(obj);
 		var createNavSearch = this.createSearchDiv();
@@ -99,14 +104,15 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 					for(var i=0;i<obj.length;i++){
 							var tempDiv="";
 							var JsonString = JSON.stringify(obj[i]);
+							cssClass=this.getStatusClass(obj[i]['status']);
 								if(i==0){
-									   tempDiv="<div class='firstSelect "+obj[i]["class"]+"' onclick='window.app.component.handleItemListClick("+JsonString+");'>";	
+									   tempDiv="<div class='firstSelect "+cssClass+"' onclick='window.app.component.handleItemListClick("+JsonString+");'>";	
 									   
 								}
 								else{
-									tempDiv="<div class='"+obj[i]["class"]+"' onclick='window.app.component.handleItemListClick("+JsonString+");'>";
+									tempDiv="<div class='"+cssClass+"' onclick='window.app.component.handleItemListClick("+JsonString+");'>";
 								}
-						    var temp2Div=obj[i]['type']+
+						    var temp2Div=obj[i]['alert_type']+
 						            		'<span class="pull-right text-muted small"><em>'+obj[i]['status']+'</em>'+
 						            	'</div>';
 						    taskTempDiv = taskTempDiv+tempDiv+temp2Div;
@@ -117,10 +123,46 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 								
 			return createParentNavDiv+createNavSearch+TaskDiv+taskTempDiv+taskDiv1+taskendDiv;
 	};
+	
+	detailWrapView.prototype.createNotification = function(obj) {
+		var createParentNavDiv = this.createNotificationParentNav(obj);
+		var createNavSearch = this.createSearchDiv();
+		var NotificationDiv='<div class="panel-body">';
+		var NotificationTempDiv="";
+					for(var i=0;i<obj.length;i++){
+							var tempDiv="";
+							var JsonString = JSON.stringify(obj[i]);
+							cssClass=this.getStatusClass(obj[i]['status']);
+								if(i==0){
+									   tempDiv="<div class='firstSelect "+cssClass+"' onclick='window.app.component.handleNotificationListClick("+JsonString+");'>";	
+									   
+								}
+								else{
+									tempDiv="<div class='"+cssClass+"' onclick='window.app.component.handleNotificationListClick("+JsonString+");'>";
+								}
+						    var temp2Div=obj[i]['alert_type']+
+						            		'<span class="pull-right text-muted small"><em>'+obj[i]['status']+'</em>'+
+						            	'</div>';
+						    NotificationTempDiv = NotificationTempDiv+tempDiv+temp2Div;
+								}
+			var NotificationDiv1='</div>';	
+			var NotificationendDiv='</div>'+
+			'</div>';
+								
+			return createParentNavDiv+createNavSearch+NotificationDiv+NotificationTempDiv+NotificationDiv1+NotificationendDiv;
+	};
 	detailWrapView.prototype.createTaskParentNav = function(obj) {
 		var div1='<div class="col-lg-3">'+
 			        '<div class="panel panel-default detailLeftList">'+
-				        '<div class="panel-heading">'+obj[0]['kind']+
+				        '<div class="panel-heading"> Task'+
+				        '</div>';
+		return div1;
+	};
+	
+	detailWrapView.prototype.createNotificationParentNav = function(obj) {
+		var div1='<div class="col-lg-3">'+
+			        '<div class="panel panel-default detailLeftList">'+
+				        '<div class="panel-heading"> Notification'+
 				        '</div>';
 		return div1;
 	};
@@ -151,11 +193,18 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 					'</div>';
 		return div1+ div2 + div3;
 	};
+	detailWrapView.prototype.createNotificationDetailDiv = function(obj) {
+		var div1 =this.createNotificationDetailParentNav(obj);
+		var div2 = this.detailNotificationDiv(obj);
+		var div3 = '</div>'+
+					'</div>';
+		return div1+ div2 + div3;
+	};
 	
 	detailWrapView.prototype.createTaskDetailParentNav = function(obj) {
 		var taskName="";
-		if(obj["details"]!=undefined){
-			taskName=obj["details"]["task"];
+		if(obj["task_name"]!=undefined){
+			taskName=obj["task_name"];
 		}
 		else{
 			taskName="New Task";
@@ -164,9 +213,19 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 		var div1='<div class="col-lg-9 detailList">'+
 			        '<div class="panel panel-default detailRight">'+
 				        '<div class="panel-heading">'+
-				        taskName+    
+				        taskName+  
 				        "<i style='float:right;padding-left: 5px;' class='fa fa-edit' onclick='window.app.component.editTask("+JSON.stringify(obj)+");'></i>"+
 				        "<i style='float:right;' class='fa fa-plus' onclick='window.app.component.addNew("+JSON.stringify(obj)+");'></i>"+
+				        '</div>';
+		return div1;
+	};
+	
+	detailWrapView.prototype.createNotificationDetailParentNav = function(obj) {
+		var notificationName=obj["alert_type"];
+		var div1='<div class="col-lg-9 detailList">'+
+			        '<div class="panel panel-default detailRight">'+
+				        '<div class="panel-heading">'+
+				        notificationName+    
 				        '</div>';
 		return div1;
 	};
@@ -174,26 +233,32 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 	detailWrapView.prototype.detailTaskDiv = function(obj) {
 		var readOnly="readonly="+true;
 		var taskName= "";
-		var taskType= "";
+		var taskId= "";
 		var projectName="";
-		var WorkerName="";
+		var supervisor_email="";
 		var workerId="";
-		var reason="";
-		if(obj["details"]!=undefined){
-			taskName= obj["details"]["task"];
-			taskType= obj["type"];
-			projectName=obj["project"];
-			WorkerName=obj["details"]["worker_name"];
-			workerId=obj["details"]["worker_id"];
-			reason=obj["details"]["reason"];
+		var organization="";
+		var address="";
+		var name="";
+		if(obj["task_name"]!=undefined){
+			taskName= obj["task_name"];
+			taskId= obj["task_id"];
+			projectName=obj["project_name"];
+			supervisor_email=obj["supervisor_email"];
+			workerId=obj["supervisor_id"];
+			organization=obj["place"]["organization"];
+			address=obj["place"]["address"];
+			name=obj["place"]["name"];
 		}
 		else{
 			taskName= "";
-			taskType= "";
+			taskId= "";
 			projectName="";
-			WorkerName="";
+			supervisor_email="";
 			workerId="";
-			reason="";
+			organization="";
+			address="";
+			name="";
 			readOnly="";
 		}
 		var taskDetailDiv1 ='<div class="panel-body">'+
@@ -202,46 +267,81 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 							        '<dt>Task</dt>'+
 							        '<dd> <input class="form-control taskField" placeholder="Task" '+readOnly+' value="'+taskName+'"></dd>'+
 							        '<dt>Type</dt>'+
-							        '<dd><input class="form-control taskField" placeholder="Task Type" '+readOnly +' value="'+taskType+'"></dd>'+
+							        '<dd><input class="form-control taskField" placeholder="Task Id" '+readOnly +' value="'+taskId+'"></dd>'+
 							        '<dt>Project Name</dt>'+
 							        '<dd><input class="form-control taskField" placeholder="Project Name" '+readOnly +' value="'+projectName+'"></dd>'+
+							        '<dt>Supervisor Email</dt>'+
+							        '<dd id="workerDetail"><input id="WorkerName" style="display:inline;" class="form-control taskField" placeholder="Supervisor Email" '+readOnly +' value="'+supervisor_email+'"></dd>'+
+							        '<dt>Supervisor Id</dt>'+
+							        '<dd><input class="form-control taskField" placeholder="Project Name" '+readOnly +' value="'+workerId+'"></dd>'+
 							        '</dl>'+
-							        '<form role="form">'+
-		                                '<div class="form-group" style="margin-left:75px;">'+
-		                                    '<label>Reason</label>'+
-		                                    '<input class="form-control reason" placeholder="Brief Description" '+readOnly +' value="'+reason+'">'+
-		                             '</div>'+
-		                             '<div class="form-group parentButton" style="margin-right: 70px;margin-top: 33px;">'+
-		                             	'<button class="btn btn-success buttonAction" type="button" style="float:right;" data-toggle="modal" data-target="#myModal">Take Action</button>'+
-		                             '</div>'+
-		                             '</form>'+
 							     '</div>';
 		var taskDetailDiv2 ='<div class="col-lg-5">'+
 								'<dl class="dl-horizontal">'+
-							        '<dt>Worker Name</dt>'+
-							        '<dd id="workerDetail"><input id="WorkerName" style="display:inline;" class="form-control taskField" placeholder="Worker Name" '+readOnly +' value="'+WorkerName+'"></dd>'+
-							        '<dt>Worker Id</dt>'+
-							        '<dd><input class="form-control taskField" placeholder="Worker Id" '+readOnly +' value="'+workerId+'"></dd>'+
+							        '<dt>Organization</dt>'+
+							        '<dd><input id="Organization" style="display:inline;" class="form-control taskField" placeholder="Organization" '+readOnly +' value="'+organization+'"></dd>'+
+							        '<dt>Organization Name</dt>'+
+							        '<dd><input class="form-control taskField" placeholder="Organization Name" '+readOnly +' value="'+name+'"></dd>'+
+							        '<dt>Organization Address</dt>'+
+							        '<dd><input style="width:100%;" class="form-control taskField" placeholder="Address" '+readOnly +' value="'+address+'"></dd>'+
 						        '</dl>'+
+						        '<div class="parentButton">'+
+						        '</div>'+
 							'</div>';
-		var taskdetailDiv3 = 			
-								
-								'<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'+
+		var taskdetailDiv3 = '</div>';
+			return taskDetailDiv1+taskDetailDiv2+taskdetailDiv3;
+	};
+	
+	detailWrapView.prototype.detailNotificationDiv = function(obj) {
+		var notificationObj=obj["details"];
+		var keyArray = Object.keys(notificationObj);
+		
+		var taskTempDiv1 ='<div class="panel-body">'+
+								'<div class="col-lg-5">'+
+									'<dl class="dl-horizontal">';
+									var tempDiv="";
+									for(var i=0;i<3;i++){
+										var tempDiv1="";
+										tempDiv1='<dt>'+keyArray[i]+'</dt>'+
+							        '<dd> <input class="form-control taskField" value="'+notificationObj[keyArray[i]]+'"></dd>';
+										tempDiv=tempDiv+tempDiv1;
+									}
+									
+							 var taskTempDiv2='</dl>'+
+							     '</div>';
+        var taskDetailDiv1=taskTempDiv1+tempDiv+taskTempDiv2;
+		var taskTempDiv3 ='<div class="col-lg-5">'+
+								'<dl class="dl-horizontal">';
+        							var tempDiv2="";
+        							for(var j=3;j<keyArray.length;j++){
+        								var tempDiv3='<dt>'+keyArray[j]+'</dt>'+
+							        '<dd><input id="Organization" style="display:inline;" class="form-control taskField" value="'+notificationObj[keyArray[j]]+'"></dd>';
+        								tempDiv2=tempDiv2+tempDiv3;
+        							}
+        				
+        			var taskTempDiv4='</dl>'+
+	        								'<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">'+
+	        								'Take Action'+
+	        								'</button>'+
+							'</div>';
+		
+        var taskDetailDiv2=taskTempDiv3+tempDiv2+taskTempDiv4;
+        var taskdetailDiv3 = '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'+
 								  '<div class="modal-dialog">'+
 								    '<div class="modal-content">'+
 								      '<div class="modal-header">'+
 								        '<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>'+
-								        '<h4 class="modal-title" id="myModalLabel">'+obj["kind"]+'</h4>'+
+								        '<h4 class="modal-title" id="myModalLabel">Notification</h4>'+
 								      '</div>'+
 								      '<div class="modal-body">'+
 								      '<div class="form-group">'+
 	                                      '<label>Project</label>'+
 	                         
-	                                      '<input class="form-control" value="'+obj["project"]+'">'+
+	                                      '<input class="form-control" value="'+obj["alert_type"]+'">'+
 	                                  '</div>'+
 	                                  '<div class="form-group">'+
 	                                      '<label>Reason</label>'+
-	                                      '<input class="form-control taskField" value="'+reason+'">'+
+	                                      '<input class="form-control taskField" value="'+notificationObj["reason"]+'">'+
 	                                  '</div>'+
 									   '<div class="form-group">'+
 	                                      '<label>Notification Status</label>'+
@@ -282,55 +382,16 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 								'</div>';
 			return taskDetailDiv1+taskDetailDiv2+taskdetailDiv3;
 	};
-	/*detailWrapView.prototype.buildTaskChart = function() {
-		Morris.Bar({
-	        element: 'morris-bar-chart',
-	        data: [{
-	            y: '2006',
-	            a: 100,
-	            b: 90
-	        }, {
-	            y: '2007',
-	            a: 75,
-	            b: 65
-	        }, {
-	            y: '2008',
-	            a: 50,
-	            b: 40
-	        }, {
-	            y: '2009',
-	            a: 75,
-	            b: 65
-	        }, {
-	            y: '2010',
-	            a: 50,
-	            b: 40
-	        }, {
-	            y: '2011',
-	            a: 75,
-	            b: 65
-	        }, {
-	            y: '2012',
-	            a: 100,
-	            b: 90
-	        }],
-	        xkey: 'y',
-	        ykeys: ['a', 'b'],
-	        labels: ['Series A', 'Series B'],
-	        hideHover: 'auto',
-	        resize: true
-	    });
-	};*/
 	detailWrapView.prototype.buildTaskItemDetailUI = function(obj) {
 		$(".detailList").remove();
 		var div = this.createTaskDetailDiv(obj);
 		$(".detailwrap").append(div);
-		/*if(obj["kind"]=="Task"){
-			this.buildTaskChart();
-		}
-		else if(obj["kind"]=="Notification"){
-			this.buildNotificationChart();
-		}*/
+	};
+	
+	detailWrapView.prototype.buildNotificationItemDetailUI = function(obj) {
+		$(".detailList").remove();
+		var div = this.createNotificationDetailDiv(obj);
+		$(".detailwrap").append(div);
 	};
 	
 	detailWrapView.prototype.buildNewTaskUI = function() {
@@ -353,44 +414,401 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 			editTaskFieldArray[i].readOnly=false;
 		};
 		
-		$(".buttonAction")[0].innerHTML="Save Changes";
 		var workerNameArray=["Abdul rashid","Mohamed kaif","Zaheer Ahmed","Imran khan","Moin khan","Rameez raja","Mohammad Sami","Naziruddin shah"];
 		$("input#WorkerName").autocomplete({source: workerNameArray});
 		$("#workerDetail").append('<img style="display:inline;" data-toggle="modal" data-target="#myModaldialog" src="img/Add-icon.png">');
 		
-		//$("#WorkerName")[0].autocomplete="on";
 	};
 	
-/*	detailWrapView.prototype.buildNotificationChart = function() {
-		 Morris.Donut({
-		        element: 'morris-bar-chart',
-		        data: [{
-		            label: "Download Sales",
-		            value: 12
-		        }, {
-		            label: "In-Store Sales",
-		            value: 30
-		        }, {
-		            label: "Mail-Order Sales",
-		            value: 20
-		        }],
-		        resize: true
-		    });
-	};*/
+	detailWrapView.prototype.buildNewResourceWorkerUI = function() {
+		var obj={};
+		this.buildResourcesWorkerDetailView(obj);
+		var newtaskbutton='<button class="btn btn-danger" type="button" style="float:right;">Cancel</button>'+
+		  '<button class="btn btn-success" type="button" style="float:right;">Create</button>';
+		$(".parentButton").append(newtaskbutton);
+		var workerNameArray=["Abdul rashid","Mohamed kaif","Zaheer Ahmed","Imran khan","Moin khan","Rameez raja","Mohammad Sami","Naziruddin shah"];
+		$("input#WorkerName").autocomplete({source: workerNameArray});
+		$("#workerDetail").append('<img style="display:inline;" data-toggle="modal" data-target="#myModaldialog" src="img/Add-icon.png">');
+	};
+	
+	detailWrapView.prototype.buildEditResourceWorkerUI = function(obj) {
+		
+		var editTaskFieldArray=$(".taskField");
+		
+		for(var i=0;i<editTaskFieldArray.length;i++){
+			editTaskFieldArray[i].readOnly=false;
+		};
+		
+		var workerNameArray=["Abdul rashid","Mohamed kaif","Zaheer Ahmed","Imran khan","Moin khan","Rameez raja","Mohammad Sami","Naziruddin shah"];
+		$("input#WorkerName").autocomplete({source: workerNameArray});
+		$("#workerDetail").append('<img style="display:inline;" data-toggle="modal" data-target="#myModaldialog" src="img/Add-icon.png">');
+		
+	};
+	
+	detailWrapView.prototype.buildNewResourceUI = function() {
+		var obj={};
+		this.buildResourcesDetailView(obj);
+		var newtaskbutton='<button class="btn btn-danger" type="button" style="float:right;">Cancel</button>'+
+		  '<button class="btn btn-success" type="button" style="float:right;">Create</button>';
+		$(".parentButton").append(newtaskbutton);
+	};
+	
+	detailWrapView.prototype.buildEditResourceUI = function(obj) {
+		
+		var editTaskFieldArray=$(".taskField");
+		
+		for(var i=0;i<editTaskFieldArray.length;i++){
+			editTaskFieldArray[i].readOnly=false;
+		};		
+	};
 	detailWrapView.prototype.buildResourcesView = function() {
 		$(".detailwrap").remove();
-		var headDiv='<div class="row detailwrap" >'+
+		var headDiv='<div class="row detailwrap detailResourcewrap" >'+
 		'<div class="col-lg-12">';
 		
 		var content='<ul id="myTab" class="nav nav-tabs">'+
 				        '<li class="active"><a href="#Equipment" data-toggle="tab">Equipment</a></li>'+
 				        '<li><a href="#Material" data-toggle="tab">Material</a></li>'+
 				        '<li><a href="#Worker" data-toggle="tab">Worker</a></li>'+
-				     '</ul>';
+				     '</ul>'+
+				     '<div id="myTabContent" class="tab-content">';
+		var resourceContent=this.buildEquipmentResourceDetail();
+		var resourceWorkerContent = this.buildWorkerResourceDetail();
 		var footer='</div>'+
+			'</div>'+
 		'</div>';
-		var completeDiv=headDiv+content+footer;
+		var completeDiv=headDiv+content+resourceContent+resourceWorkerContent+footer;
 		$("#page-wrapper").append(completeDiv);
 	};
+	detailWrapView.prototype.buildEquipmentResourceDetail = function() {
+		var equipmentheadDiv= '<div class="tab-pane fade in active resourceMain" id="Equipment">';
+		var equipmentDivList=this.createResource(deviceObj);
+		var equipmentDivDetail = this.createResourceDetailDiv(deviceObj[0]);
+		var equipmentFootDiv='</div>';
+		var equipmentDiv=equipmentheadDiv+equipmentDivList+equipmentDivDetail+equipmentFootDiv;
+		return equipmentDiv;
+	};
+	
+	detailWrapView.prototype.buildWorkerResourceDetail = function() {
+		var workerheadDiv= '<div class="tab-pane fade in active resourceMain" id="Worker">';
+		var workerDivList=this.createResourceWorker(workerObj);
+		var workerDivDetail = this.createResourceWorkerDetailDiv(workerObj[0]);
+		var workerFootDiv='</div>';
+		var workerDiv=workerheadDiv+workerDivList+workerDivDetail+workerFootDiv;
+		return workerDiv;
+	};
+	
+	detailWrapView.prototype.createResource = function(obj) {
+		var createParentNavDiv = this.createResourceParentNav(obj);
+		var createNavSearch = this.createSearchDiv();
+		var ResourceDiv='<div class="panel-body">';
+		var ResourceTempDiv="";
+					for(var i=0;i<obj.length;i++){
+							var tempDiv="";
+							var JsonString = JSON.stringify(obj[i]);
+								if(i==0){
+									   tempDiv="<div class='firstSelect alert alert-info' onclick='window.app.component.handleResorceListClick("+JsonString+");'>";	
+									   
+								}
+								else{
+									tempDiv="<div class='alert alert-info' onclick='window.app.component.handleResorceListClick("+JsonString+");'>";
+								}
+						    var temp2Div=obj[i]['device_name']+
+						            		'<span class="pull-right text-muted small"><em>'+obj[i]['status']+'</em>'+
+						            	'</div>';
+						    ResourceTempDiv = ResourceTempDiv+tempDiv+temp2Div;
+								}
+			var ResourceDiv1='</div>';	
+			var ResourceEndDiv='</div>'+
+			'</div>';
+								
+			return createParentNavDiv+createNavSearch+ResourceDiv+ResourceTempDiv+ResourceDiv1+ResourceEndDiv;
+	};
+	
+	detailWrapView.prototype.createResourceWorker = function(obj) {
+		var createParentNavDiv = this.createResourceWorkerParentNav(obj);
+		var createNavSearch = this.createSearchDiv();
+		var ResourceDiv='<div class="panel-body">';
+		var ResourceTempDiv="";
+					for(var i=0;i<obj.length;i++){
+							var tempDiv="";
+							var JsonString = JSON.stringify(obj[i]);
+								if(i==0){
+									   tempDiv="<div class='firstSelect alert alert-info' onclick='window.app.component.handleResorceWorkerListClick("+JsonString+");'>";	
+									   
+								}
+								else{
+									tempDiv="<div class='alert alert-info' onclick='window.app.component.handleResorceWorkerListClick("+JsonString+");'>";
+								}
+						    var temp2Div=obj[i]['worker_name']+
+						            		'<span class="pull-right text-muted small"><em>'+obj[i]['sex']+'</em>'+
+						            	'</div>';
+						    ResourceTempDiv = ResourceTempDiv+tempDiv+temp2Div;
+								}
+			var ResourceDiv1='</div>';	
+			var ResourceEndDiv='</div>'+
+			'</div>';
+								
+			return createParentNavDiv+createNavSearch+ResourceDiv+ResourceTempDiv+ResourceDiv1+ResourceEndDiv;
+	};
+	detailWrapView.prototype.createResourceParentNav = function(obj) {
+		var div1='<div class="col-lg-3">'+
+			        '<div class="panel panel-default detailResourceLeftList">'+
+				        '<div class="panel-heading">'+obj[0]['device_type']+
+				        '</div>';
+		return div1;
+	};
+	
+	detailWrapView.prototype.createResourceWorkerParentNav = function(obj) {
+		var div1='<div class="col-lg-3">'+
+			        '<div class="panel panel-default detailResourceLeftList">'+
+				        '<div class="panel-heading">'+obj[0]['worker_name']+
+				        '</div>';
+		return div1;
+	};
+	detailWrapView.prototype.createSearchDiv = function(obj) {
+		var div1='<div>'+
+					'<ul class="nav">'+
+						'<li class="sidebar-search">'+
+							        '<div class="input-group custom-search-form">'+
+							        '<input type="text" class="form-control" placeholder="Search...">'+
+							        '<span class="input-group-btn">'+
+							        '<button class="btn btn-default" type="button">'+
+							            '<i class="fa fa-search"></i>'+
+							        '</button>'+
+							    '</span>'+
+							    '</div>'+
+							 '</li>'+
+					  '</ul>'+
+					'</div>';
+				
+		return div1;
+	};
+	
+	detailWrapView.prototype.createResourceDetailDiv = function(obj) {
+		var div1 =this.createResourceDetailParentNav(obj);
+		var div2 = this.detailResourceDiv(obj);
+		var div3 = '</div>'+
+					'</div>';
+		return div1+ div2 + div3;
+	};
+	
+	detailWrapView.prototype.createResourceWorkerDetailDiv = function(obj) {
+		var div1 =this.createResourceWorkerDetailParentNav(obj);
+		var div2 = this.detailResourceWorkerDiv(obj);
+		var div3 = '</div>'+
+					'</div>';
+		return div1+ div2 + div3;
+	};
+	
+	detailWrapView.prototype.createResourceDetailParentNav = function(obj) {
+		var ResourceName="";
+		if(obj["device_name"]!=undefined){
+			ResourceName=obj["device_name"];
+		}
+		else{
+			ResourceName="New Equipment";
+		}
+		
+		var div1='<div class="col-lg-9 detailListResource">'+
+			        '<div class="panel panel-default detailResourceRight">'+
+				        '<div class="panel-heading">'+
+				        ResourceName+    
+				        "<i style='float:right;padding-left: 5px;' class='fa fa-edit' onclick='window.app.component.editResource("+JSON.stringify(obj)+");'></i>"+
+				        "<i style='float:right;' class='fa fa-plus' onclick='window.app.component.addNewResource("+JSON.stringify(obj)+");'></i>"+
+				        '</div>';
+		return div1;
+	};
+	
+	detailWrapView.prototype.createResourceWorkerDetailParentNav = function(obj) {
+		var ResourceName="";
+		if(obj["worker_id"]!=undefined){
+			ResourceName=obj["worker_id"];
+		}
+		else{
+			ResourceName="New Worker";
+		}
+		
+		var div1='<div class="col-lg-9 detailListResource">'+
+			        '<div class="panel panel-default detailResourceRight">'+
+				        '<div class="panel-heading">'+
+				        ResourceName+    
+				        "<i style='float:right;padding-left: 5px;' class='fa fa-edit' onclick='window.app.component.editResourceWorker("+JSON.stringify(obj)+");'></i>"+
+				        "<i style='float:right;' class='fa fa-plus' onclick='window.app.component.addNewResourceWorker("+JSON.stringify(obj)+");'></i>"+
+				        '</div>';
+		return div1;
+	};
+	detailWrapView.prototype.detailResourceDiv = function(obj) {
+		var readOnly="readonly="+true;
+		var deviceName= "";
+		var deviceType= "";
+		var vendor="";
+		var PlaceName="";
+		var deviceId="";
+		var reason="";
+		if(obj["device_name"]!=undefined){
+			deviceName= obj["device_name"];
+			deviceType= obj["device_type"];
+			vendor=obj["vendor"];
+			PlaceName=obj["place_name"];
+			deviceId=obj["device_id"];
+			reason="";
+		}
+		else{
+			deviceName= "";
+			deviceType= "";
+			vendor="";
+			PlaceName="";
+			deviceId="";
+			reason="";
+			readOnly="";
+		}
+		var taskDetailDiv1 ='<div class="panel-body">'+
+								'<div class="col-lg-5">'+
+									'<dl class="dl-horizontal">'+
+							        '<dt>Device</dt>'+
+							        '<dd> <input class="form-control taskField" placeholder="Device" '+readOnly+' value="'+deviceName+'"></dd>'+
+							        '<dt>Type</dt>'+
+							        '<dd><input class="form-control taskField" placeholder="Device Type" '+readOnly +' value="'+deviceType+'"></dd>'+
+							        '<dt>Vendor Name</dt>'+
+							        '<dd><input class="form-control taskField" placeholder="vendor Name" '+readOnly +' value="'+vendor+'"></dd>'+
+							        '</dl>'+
+							        '<form role="form">'+
+		                                '<div class="form-group" style="margin-left:75px;">'+
+		                                    '<label>Reason</label>'+
+		                                    '<input class="form-control reason" placeholder="Brief Description" '+readOnly +' value="'+reason+'">'+
+		                             '</div>'+
+		                             '</form>'+
+							     '</div>';
+		var taskDetailDiv2 ='<div class="col-lg-5">'+
+								'<dl class="dl-horizontal">'+
+							        '<dt>Place Name</dt>'+
+							        '<dd id="PlaceNameDetail"><input id="PlaceName" style="display:inline;" class="form-control taskField" placeholder="Place Name" '+readOnly +' value="'+PlaceName+'"></dd>'+
+							        '<dt>Device Id</dt>'+
+							        '<dd><input class="form-control taskField" placeholder="Device Id" '+readOnly +' value="'+deviceId+'"></dd>'+
+						        '</dl>'+
+						        '<div class="parentButton">'+
+						        '</div>'+						        
+							'</div>';
+		var taskdetailDiv3 = '</div>';
+			return taskDetailDiv1+taskDetailDiv2+taskdetailDiv3;
+	};
+	
+	detailWrapView.prototype.detailResourceWorkerDiv = function(obj) {
+		var readOnly="readonly="+true;
+		var workerName="";
+		var workerId="";
+		var tagId="";
+		var email="";
+		var phone="";
+		var sex="";
+		if(obj["worker_id"]!=undefined){
+			 workerName=obj["worker_name"];
+			 workerId=obj["worker_id"];
+			 tagId=obj["tag_id"];
+			 email=obj["email"];
+			 phone=obj["phone"];
+			 sex=obj["sex"];
+		}
+		else{
+			workerName="";
+			workerId="";
+			tagId="";
+			email="";
+			phone="";
+			sex="";
+			readOnly="";
+		}
+		var taskDetailDiv1 ='<div class="panel-body">'+
+								'<div class="col-lg-5">'+
+									'<dl class="dl-horizontal">'+
+							        '<dt>Worker Name</dt>'+
+							        '<dd id="workerDetail"> <input id="WorkerName" style="display:inline; class="form-control taskField" placeholder="Worker Name" '+readOnly+' value="'+workerName+'"></dd>'+
+							        '<dt>Worker Id</dt>'+
+							        '<dd><input class="form-control taskField" placeholder="Id" '+readOnly +' value="'+workerId+'"></dd>'+
+							        '<dt>Tag Id</dt>'+
+							        '<dd><input class="form-control taskField" placeholder="TagId" '+readOnly +' value="'+tagId+'"></dd>'+
+							        '</dl>'+
+							     '</div>';
+		var taskDetailDiv2 ='<div class="col-lg-5">'+
+								'<dl class="dl-horizontal">'+
+							        '<dt>Email</dt>'+
+							        '<dd><input id="PlaceName" style="display:inline;" class="form-control taskField" placeholder="emailId" '+readOnly +' value="'+email+'"></dd>'+
+							        '<dt>Phone</dt>'+
+							        '<dd><input class="form-control taskField" placeholder="phone number" '+readOnly +' value="'+phone+'"></dd>'+
+							        '<dt>Sex</dt>'+
+							        '<dd><input class="form-control taskField" placeholder="Gender" '+readOnly +' value="'+sex+'"></dd>'+
+						        '</dl>'+
+						        '<div class="parentButton">'+
+						        '</div>'+						        
+							'</div>';
+		var taskdetailDiv3 = '</div>';
+			return taskDetailDiv1+taskDetailDiv2+taskdetailDiv3;
+	};
+	
+	detailWrapView.prototype.buildResourcesDetailView = function(obj) {
+		$(".detailListResource").remove();
+		var div = this.createResourceDetailDiv(obj);
+		$(".resourceMain").append(div);
+	};
+	
+	detailWrapView.prototype.buildResourcesWorkerDetailView = function(obj) {
+		$(".detailListResource").remove();
+		var div = this.createResourceWorkerDetailDiv(obj);
+		$(".resourceMain").append(div);
+	};
+	detailWrapView.prototype.getPlaceFrameUI = function() {
+		$(".detailwrap").remove();
+		var headDiv='<div class="row detailwrap detailPlacewrap" >'+
+		'<div class="col-lg-12" style="height:440px;">';
+		var content='<input id="pac-input" class="controls" type="text" placeholder="Search Box">'+
+	    			'<div id="map-canvas"></div>';
+		var footer='</div>'+
+					'</div>';
+		var completeDiv=headDiv+content+footer;
+		$("#page-wrapper").append(completeDiv);
+		initialize();
+		
+		var anim = google.maps.Animation.DROP;
+		var infowindow = new google.maps.InfoWindow();
+		for(var i=0;i<workerObj.length;i++){
+			var marker=new google.maps.Marker({
+			  position:new google.maps.LatLng(workerObj[i].Latitude,workerObj[i].Longitude),
+			  map:window.app.googleMap,
+			  animation:anim
+			  });
+			marker.setMap(window.app.googleMap);
+				marker.html='<div id="content">'+
+								'<h3>'+workerObj[i].firstname+" "+workerObj[i].secondname+'</h3>'+
+								'<hr>'+
+								'<h6>Task  :'+workerObj[i]["tasks"][0].taskname +'</h6>'+
+								'<h6>Estimated Time :'+workerObj[i]["tasks"][0].expected +'</h6>'+    
+							'</div>';
+			google.maps.event.addListener(marker, 'click', function() {
+			  infowindow.setContent(this.html);
+			  infowindow.open(window.app.googleMap,this);
+			  });
+	};
+};
+detailWrapView.prototype.getStatusClass = function(type) {
+	var cssClass="";
+	switch(type){
+		case "open":
+			cssClass="alert alert-info";
+			break;
+		case "delay":
+			cssClass="alert alert-danger";
+			break;
+		case "finished":
+			cssClass="alert alert-success";
+			break;
+		case "inprogress":
+			cssClass="alert alert-info";
+			break;
+		default:
+			cssClass=""	;
+	}
+	return cssClass;
+};
 	return (new detailWrapView());
 });

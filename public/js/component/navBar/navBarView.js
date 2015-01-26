@@ -35,12 +35,12 @@ define(["navBar/navBarController"], function(controller){
 				            '<a href="#">'+
 				            	'<div>'+
 				                	'<p>'+
-				                		'<strong>'+taskObj[i]["details"]["task"]+'</strong>'+
-				                		'<span class="pull-right text-muted">'+taskObj[i]["percentage"]+'</span>'+
+				                		'<strong>'+taskObj[i]["task_name"]+'</strong>'+
+				                		'<span class="pull-right text-muted">100%</span>'+
 				                	'</p>'+
 				                	'<div class="progress progress-striped active">'+
 				                    	'<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">'+
-				                        	'<span class="sr-only">'+taskObj[i]["percentage"]+' '+taskObj[i]["status"]+'</span>'+
+				                        	'<span class="sr-only">100% '+taskObj[i]["status"]+'</span>'+
 				                        '</div>'+
 				                    '</div>'+
 				                 '</div>'+

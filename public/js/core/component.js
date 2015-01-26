@@ -22,24 +22,52 @@ define(["detailWrap/detailWrap","navBar/navBar","items/items"], function(detailW
 			this.detailWrap.getTaskUI(taskObj);	
 		}
 		else if(obj['title']=="Alert" || obj['kind']=="Notification"){
-			this.detailWrap.getTaskUI(alertObj);
+			this.detailWrap.getNotificationUI(alertObj);
 		}
 		else if(obj['title']=="Resources"){
 			this.detailWrap.getResourceUI();
 		}
+		else if(obj['title']=="Place"){
+			this.detailWrap.getPlaceUI();
+		}
 	};
+	Component.prototype.handleResorceListClick = function(obj){
+		this.detailWrap.getResourceDetailUI(obj);
+	};
+	Component.prototype.handleResorceWorkerListClick = function(obj){
+		this.detailWrap.getResorceWorkerDetailUI(obj);
+	};
+	Component.prototype.handleNotificationListClick = function(obj){
+		this.detailWrap.getNotificationDetailUI(obj);
+	};
+	
 	Component.prototype.handleItemListClick = function(obj){
 		this.detailWrap.getTaskItemDetailUI(obj);
 	};
 	Component.prototype.addNew = function(obj){
-		if(obj['kind']=="Task" ){
 			this.detailWrap.getNewTaskUI();
-		}
+	};
+	
+	Component.prototype.editResource = function(obj){
+		this.detailWrap.getEditResourceUI(obj);
+	};
+	
+	Component.prototype.addNewResource = function(obj){
+		this.detailWrap.getNewResourceUI();
+	};
+
+	Component.prototype.editResourceWorker = function(obj){
+		this.detailWrap.getEditResourceWorkerUI(obj);
+	};
+	
+	Component.prototype.addNewResourceWorker = function(obj){
+		this.detailWrap.getNewResourceWorkerUI();
 	};
 	
 	Component.prototype.editTask = function(obj){
 		this.detailWrap.getEditTaskUI(obj);
 	};
+	
 	Component.prototype.buildDonutChart = function(){
 		$("#morris-area-chart").empty();
 		  Morris.Donut({

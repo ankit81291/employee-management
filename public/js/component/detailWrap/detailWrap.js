@@ -11,6 +11,9 @@ define(["detailWrap/detailWrapView"], function(view){
 	detailWrap.prototype.getTaskUI = function(obj) {
 		return this.oView.buildTaskDetail(obj);
 	};
+	detailWrap.prototype.getNotificationUI = function(obj) {
+		return this.oView.buildNotificationDetail(obj);
+	};
 	detailWrap.prototype.getTaskItemDetailUI = function(obj) {
 		return this.oView.buildTaskItemDetailUI(obj);
 	};
@@ -22,10 +25,36 @@ define(["detailWrap/detailWrapView"], function(view){
 		return this.oView.buildEditTaskUI(obj);
 	};
 	
+	detailWrap.prototype.getNewResourceUI = function() {
+		return this.oView.buildNewResourceUI();
+	};
+
+	detailWrap.prototype.getEditResourceUI = function(obj) {
+		return this.oView.buildEditResourceUI(obj);
+	};
+	
+	detailWrap.prototype.getNewResourceWorkerUI = function() {
+		return this.oView.buildNewResourceWorkerUI();
+	};
+
+	detailWrap.prototype.getEditResourceWorkerUI = function(obj) {
+		return this.oView.buildEditResourceWorkerUI(obj);
+	};
 	detailWrap.prototype.getResourceUI = function() {
 		return this.oView.buildResourcesView();
 	};
-	
+	detailWrap.prototype.getResourceDetailUI = function(obj) {
+		return this.oView.buildResourcesDetailView(obj);
+	};
+	detailWrap.prototype.getResorceWorkerDetailUI = function(obj) {
+		return this.oView.buildResourcesWorkerDetailView(obj);
+	};
+	detailWrap.prototype.getPlaceUI = function() {
+		return this.oView.getPlaceFrameUI();
+	};
+	detailWrap.prototype.getNotificationDetailUI = function(obj) {
+		return this.oView.buildNotificationItemDetailUI(obj);
+	};
 	return (new detailWrap());
 });
 
