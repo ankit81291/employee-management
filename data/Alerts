@@ -1,0 +1,73 @@
+
+db.alerts.save({
+	alert_type: 'RiskRegionEnter',
+    reason: 'This worker enters to a work site without permission',
+    created_time: ISODate("2014-12-03T09:00:00Z"),
+    status: 'open',
+    place_name: 'work site 23',
+    details: {
+    	'First Name': 'miny',
+        'Second Name': 'kalan',
+        'Worker ID': 'worker20150118225A',
+        'Enter Time': ISODate("2014-12-03T13:00:00.000Z"),
+        'Supervisor Email': 'Saeed.ajmal@gmail.com'
+    }
+})
+
+db.alerts.save({
+	alert_type: 'WorkerLate',
+	reason: 'This worker is late for fix floor task in work site 32',
+	create_time: ISODate("2014-12-03T09:00:00Z"),
+    status: 'open',
+    place_name: 'work site 23',
+    details: {
+		'First Name': 'miny',
+        'Second Name': 'kalan',
+        'Worker ID': 'worker20150118225A',
+        'Task Name': 'Fix floor',
+        'Planned Start Time': ISODate("2014-12-03T13:00:00.000Z"),
+        'Supervisor Email': 'Saeed.ajmal@gmail.com'
+    }
+})
+
+db.alerts.save({
+	alert_type: 'EquipmentLate',
+    reason: 'Equipment is late for floor fixing task in Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00.000Z"),
+    status: 'open',
+    place_name: 'Work Site 23',
+    details:
+     { 'Supervisor Email': 'aron.william@gmail.com',
+       'Task Name': 'modeling',
+       'Equipment ID': 'act11234122',
+       'Equipment Name': 'Croal'
+     }
+})
+
+db.alerts.save({
+	alert_type: 'TaskLate',
+    reason: 'No enough materials for task modeling in Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00.000Z"),
+    status: 'open',
+    place_name: 'Work Site 23',
+    details:
+     { 'Task': 'modeling',
+       'Supervisor Email': 'aron.william@gmail.com',
+       'Supervisor ID': '3254543543542' }
+})
+
+db.alerts.save({
+	alert_type: 'EquipmentMaintenance',
+    reason: 'This equipment is required to be maintained',
+    created_time: ISODate("2014-12-03T13:00:00.000Z"),
+    status: 'open',
+    place_name: 'Work Site 23',
+    details:
+     { 'Task': 'Fix Engine',
+       'Estimated Time': '2 hours',
+       'Scheduled Time':  ISODate("2014-12-03T13:00:00.000Z"),
+       'Repairer ID': '44f3eaeaf4',
+       'Repairer Name': 'Cliff',
+       'Equipment ID': 'act11234122',
+       'Equipment Name': 'Coral' }
+})

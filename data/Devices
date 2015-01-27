@@ -1,0 +1,35 @@
+
+
+db.devices.save( {
+	device_name: 'gate_reader12',
+    device_id: 'device201501123B',
+    device_type: 'Passive RFID Reader',
+    vendor: 'Alien',
+    place_name: 'work site 23',
+    created_time: ISODate("2014-12-03T09:00:00Z"),
+    status: 'open'
+}
+
+db.devices.save(
+{
+	device_name: 'region_reader23',
+    device_id: 'device201501123C',
+    device_type: 'Passive RFID Reader',
+    vendor: 'Alien',
+    place_name: 'work site 34',
+    created_time: ISODate("2014-12-03T09:00:00Z"),
+    status: 'open'
+}
+)
+
+db.devices.save(
+{
+	device_name: 'region_reader24',
+    device_id: 'device201501123D',
+    device_type: 'Passive RFID Reader',
+    vendor: 'Alien',
+    place_name: 'work site 35',
+    created_time: ISODate("2014-12-03T09:00:00Z"),
+    status: 'open'
+}
+)

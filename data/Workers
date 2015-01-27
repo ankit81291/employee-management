@@ -1,0 +1,145 @@
+db.workers.save(
+{
+    first_name: 'Abdul',
+    second_name: 'Rashid',
+    worker_id: 'worker20150118001',
+    tag_id: 'tag20150120001W',
+    email: 'Abdul.Rashid@gmail.com',
+    phone: '057-132-2342',
+    sex: 'male'
+})
+
+db.workers.save(
+{
+    first_name: 'Mohamed',
+    second_name: 'Kaif',
+    worker_id: 'worker20150118002',
+    tag_id: 'tag20150120002W',
+    email: 'Mohamed.Kaif@gmail.com',
+    phone: '050-653-7773',
+    sex: 'male'
+})
+
+db.workers.save(
+{
+    first_name: 'Zaheer',
+    second_name: 'Ahmed',
+    worker_id: 'worker20150118003',
+    tag_id: 'tag20150120003W',
+    email: 'Zaheer.Ahmed@gmail.com',
+    phone: '050-553-3342',
+    sex: 'male'
+})
+
+db.workers.save(
+{
+    first_name: 'Imran',
+    second_name: 'Khan',
+    worker_id: 'worker20150118004',
+    tag_id: 'tag20150120004W',
+    email: 'Imran.Khan@gmail.com',
+    phone: '050-553-6634',
+    sex: 'male'
+})
+
+db.workers.save(
+{
+    first_name: 'Moin',
+    second_name: 'Khan',
+    worker_id: 'worker20150118005',
+    tag_id: 'tag20150120005W',
+    email: 'Moin.Khan@gmail.com',
+    phone: '050-662-7745',
+    sex: 'male'
+})
+
+db.workers.save(
+{
+    first_name: 'Rameez',
+    second_name: 'Raja',
+    worker_id: 'worker20150118006',
+    tag_id: 'tag20150120006W',
+    email: 'Rameez.Raja@gmail.com',
+    phone: '050-442-5523',
+    sex: 'male'
+})
+
+db.workers.save(
+{
+    first_name: 'Mohammad',
+    second_name: 'Sami',
+    worker_id: 'worker20150118007',
+    tag_id: 'tag20150120007W',
+    email: 'Mohammad.Sami@gmail.com',
+    phone: '050-334-6678',
+    sex: 'male'
+})
+
+db.workers.save(
+{
+    first_name: 'Naziruddin',
+    second_name: 'Shah',
+    worker_id: 'worker20150118008',
+    tag_id: 'tag20150120008W',
+    email: 'Naziruddin.Sami@gmail.com',
+    phone: '050-553-5526',
+    sex: 'male'
+})
+
+db.workers.save(
+{
+    first_name: 'Irfan',
+    second_name: 'Khan',
+    worker_id: 'worker20150118009',
+    tag_id: 'tag20150120009W',
+    email: 'Irfan.Khan@gmail.com',
+    phone: '050-445-7745',
+    sex: 'male'
+})
+
+db.workers.save(
+{
+    first_name: 'Shoaib',
+    second_name: 'Malik',
+    worker_id: 'worker20150118010',
+    tag_id: 'tag20150120010W',
+    email: 'Shoaib.Malik@gmail.com',
+    phone: '050-443-7654',
+    sex: 'male'
+})
+
+db.workers.save(
+{
+    first_name: 'Abdul',
+    second_name: 'Razzaq',
+    worker_id: 'worker20150118010',
+    tag_id: 'tag20150120010W',
+    email: 'Abdul.Razzaq@gmail.com',
+    phone: '050-223-5223',
+    sex: 'male'
+})
+
+db.workers.save(
+{
+    first_name: 'Wasim',
+    second_name: 'Akram',
+    worker_id: 'worker20150118010',
+    tag_id: 'tag20150120010W',
+    email: 'Wasim.Akram@gmail.com',
+    phone: '057-334-5423',
+    sex: 'male'
+})
+
+db.workers.save(
+{
+    first_name: 'Saeed',
+    second_name: 'Ajmal',
+    worker_id: 'worker20150118010',
+    tag_id: 'tag20150120010W',
+    email: 'Saeed.Ajmal@gmail.com',
+    phone: '056-885-3324',
+    sex: 'male'
+})
+
+
+

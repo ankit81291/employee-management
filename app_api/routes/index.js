@@ -9,4 +9,5 @@ module.exports = function(app){
   require('./staffs')(app);
   require('./equips')(app);
   require('./materials')(app);
+  require('./projects')(app);
 };
