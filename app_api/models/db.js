@@ -55,3 +55,5 @@ require('./tasks');
 require('./workers');
 require('./equips');
 require('./materials');
+require('./projects');
+

@@ -28,7 +28,7 @@ var buildStaffsList = function(req, res, results) {
 
         staffs.push({
             'first_name': doc.first_name,
-            'Ssecond_name': doc.second_name,
+            'Second_name': doc.second_name,
             'staff_id': doc.staff_id,
             'tag_id': doc.tag_id,
             'email': doc.email,

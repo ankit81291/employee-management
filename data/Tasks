@@ -1,0 +1,37 @@
+
+db.tasks.save(
+{
+    task_name: 'pluming',
+    task_id: '4324344321431',
+	project_name: 'Ma aden home',
+	planned_start_time: ISODate('2014-12-03T13:00:00Z'),
+	planned_finish_time: ISODate('2014-12-03T15:00:00Z'),
+	start_time: ISODate('2014-12-03T14:00:00Z'),
+	finish_time: ISODate('2014-12-03T16:00:00Z'),
+	status: 'finished',
+	supervisor_id: 'sup32344343',
+	supervisor_email: 'sctest2004@gmail.com>',
+	place: {
+		'Place ID': 'place2312122',
+		'Name': 'head office',
+		'Address': '125 High Street, Reading, RG6 1PS',
+		coords: [
+			-0.9690884,
+			51.455041
+		],
+		'Organization': 'AZMEEL Construction'
+	},
+	workforce: [
+		{
+			'First Name': 'Saeed',
+			'Second Name': 'ajmal',
+			'Email': 'Saeed.ajmal@gmail.com',
+			'Phone': '650-334-1982',
+			'Tag ID': '33234232',
+			'Sex': 'male',
+			'Start Time': ISODate('2014-12-03T14:00:00Z'),
+            'Finish Time': ISODate('2014-12-03T16:00:00Z'),
+            'Status': 'finished'
+		}
+		]
+})

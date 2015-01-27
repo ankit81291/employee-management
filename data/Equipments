@@ -1,0 +1,247 @@
+
+
+db.equips.save({
+    equipment_name: 'Excavator 123',
+    equipment_id: 'YC35123',
+    equipment_type: 'Excavator',
+    vendor: 'Yuchai',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation',
+    tasks: [
+         {
+            'Task ID': 'task112345',
+            'Task Name':  'fix floor',
+            'Project Name': 'site construction',
+            'Planned Start Time': ISODate("2014-12-23T09:00:00.000Z"),
+            'Start Time': ISODate("2014-12-23T09:00:00.000Z"),
+            'Expected': '4 hours',
+            'Status': 'open'
+         },
+         {
+            'Task ID': 'task112236',
+            'Task Name':  'fix floor',
+            'Project Name': 'site construction',
+            'Planned Start Time': ISODate("2014-12-23T09:00:00.000Z"),
+            'Start Time': ISODate("2014-12-23T09:00:00.000Z"),
+            'Expected': '4 hours',
+            'Status': 'open'
+         }
+    ],
+    workforce: [
+        {
+            'First Name': 'aron',
+            'Second Name': 'william',
+            'Worker ID': 'worker20150118223A',
+            'Tag ID': 'tag2015011A',
+            'Email': 'aron.william@gmail.com',
+            'Phone': '650-334-4523',
+            'Status': 'planned',
+            'Task ID': '4324344321431',
+            'Task Name': 'mount light',
+            'Planned Time': ISODate("2014-12-03T13:00:00.000Z"),
+            'Start Time': ISODate("2014-12-03T13:00:00.000Z")
+        },
+        {
+            'First Name': 'miny',
+            'Second Name': 'kalan',
+            'Worker ID': 'worker20150118225B',
+            'Tag ID': 'tag20150120B',
+            'Email': 'miny.kalan@gmail.com',
+            'Phone': '998-432-2342',
+            'Status': 'planned',
+            'Task ID': '4324344321432',
+            'Task Name': 'paint wall',
+            'Planned Time': ISODate("2014-12-03T13:00:00.000Z"),
+            'Start Time': ISODate("2014-12-03T13:00:00.000Z")
+        }
+    ]
+})
+
+db.equips.save({
+    equipment_name: 'Crane Crawler',
+    equipment_id: 'equip20140601',
+    equipment_type: '7045',
+    vendor: 'Kobelco',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation'
+})
+
+db.equips.save({
+    equipment_name: 'Crane Mobile',
+    equipment_id: 'equip20140601',
+    equipment_type: 'TR80 M1',
+    vendor: 'Tadano',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation'
+})
+
+db.equips.save({
+    equipment_name: 'Bulldozer',
+    equipment_id: 'equip20140601',
+    equipment_type: 'd155a-2',
+    vendor: 'Komatzu',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation'
+})
+
+db.equips.save({
+    equipment_name: 'Concrete Mixer',
+    equipment_id: 'equip20140601',
+    equipment_type: 'FM9',
+    vendor: 'Volvo',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation'
+})
+
+db.equips.save({
+    equipment_name: 'Concrete Pump',
+    equipment_id: 'equip20140601',
+    equipment_type: 'BPA 500',
+    vendor: 'Schwing',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation'
+})
+
+db.equips.save({
+    equipment_name: 'Excavator',
+    equipment_id: 'equip20140601',
+    equipment_type: 'Yc35',
+    vendor: 'Yuchai',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation'
+})
+
+db.equips.save({
+    equipment_name: 'Trencher',
+    equipment_id: 'equip20140601',
+    equipment_type: 'Ctc 810',
+    vendor: 'Capitol',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation'
+})
+
+db.equips.save({
+    equipment_name: 'Wheel Excavator',
+    equipment_id: 'equip20140601',
+    equipment_type: '1202',
+    vendor: 'Atlas',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation'
+})
+
+db.equips.save({
+    equipment_name: 'Forklift',
+    equipment_id: 'equip20140601',
+    equipment_type: '410m 1C',
+    vendor: 'JCB',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation'
+})
+
+db.equips.save({
+    equipment_name: 'Forklift',
+    equipment_id: 'equip20140601',
+    equipment_type: '2fd60',
+    vendor: 'Toyota',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation'
+})
+
+db.equips.save({
+    equipment_name: 'Generator',
+    equipment_id: 'equip20140601',
+    equipment_type: '175 kva',
+    vendor: 'Denyo',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation'
+})
+
+db.equips.save({
+    equipment_name: 'Pavers',
+    equipment_id: 'equip20140601',
+    equipment_type: 'F16w',
+    vendor: 'Dynapac',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation'
+})
+
+db.equips.save({
+    equipment_name: 'Milling Machine',
+    equipment_id: 'equip20140601',
+    equipment_type: '2100dc',
+    vendor: 'Wrtgen',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation'
+})
+
+db.equips.save({
+    equipment_name: 'Scraper',
+    equipment_id: 'equip20140601',
+    equipment_type: '637',
+    vendor: 'Cat',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation'
+})
+
+db.equips.save({
+    equipment_name: 'Sweeper',
+    equipment_id: 'equip20140601',
+    equipment_type: '4100',
+    vendor: 'Ravo',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation'
+})
+
+db.equips.save({
+    equipment_name: 'Material Handler',
+    equipment_id: 'equip20140601',
+    equipment_type: 'mhl340',
+    vendor: 'Terex',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation'
+})
+
+db.equips.save({
+    equipment_name: 'Wheel Screen Crushing',
+    equipment_id: 'equip20140601',
+    equipment_type: 'logo stack 13m',
+    vendor: 'Cat',
+    commercial_type: 'rental',
+    place_name: 'Work Site 23',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'Operation'
+})

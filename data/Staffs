@@ -1,0 +1,66 @@
+
+
+db.staffs.save(
+{
+    first_name: 'Fawad',
+    second_name: 'Alam',
+    staff_id: 'staff20150118001',
+    tag_id: 'tag20150118001S',
+    email: 'Fawad.Alam@gmail.com',
+    phone: '050-432-2342',
+    sex: 'male',
+    position: 'Project Manager',
+    organization: 'Construction Development',
+})
+
+db.staffs.save(
+{
+    first_name: 'Wahab',
+    second_name: 'Riaz',
+    staff_id: 'staff20150118002',
+    tag_id: 'tag20150118002S',
+    email: 'Wahab.Riaz@gmail.com',
+    phone: '050-542-6729',
+    sex: 'male',
+    position: 'Base Supervisor',
+    organization: 'Second Division',
+})
+
+db.staffs.save(
+{
+    first_name: 'Sohail',
+    second_name: 'Tanvir',
+    staff_id: 'staff20150118003',
+    tag_id: 'tag20150118003S',
+    email: 'Sohail.Tanvir@gmail.com',
+    phone: '051-432-7773',
+    sex: 'male',
+    position: 'Inner Supervisor',
+    organization: 'Second Division',
+})
+
+db.staffs.save(
+{
+    first_name: 'Asad',
+    second_name: 'Shafiq',
+    staff_id: 'staff20150118004',
+    tag_id: 'tag20150118004S',
+    email: 'Asad.Shafiq@gmail.com',
+    phone: '051-523-6623',
+    sex: 'male',
+    position: 'Site Manager',
+    organization: 'Second Division',
+})
+
+db.staffs.save(
+{
+    first_name: 'Azhar',
+    second_name: 'Ali',
+    staff_id: 'staff20150118005',
+    tag_id: 'tag20150118005S',
+    email: 'sctest2004@gmail.com',
+    phone: '051-523-0976',
+    sex: 'male',
+    position: 'Site Manager',
+    organization: 'Second Division',
+})

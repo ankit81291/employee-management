@@ -1,0 +1,12 @@
+
+db.materials.save(
+{
+    name: 'Light Ball',
+    sku: 'material3321',
+    order_number: 'order1230092',
+    quantity: 20,
+    consumed: 6,
+    created_time: ISODate("2014-12-03T09:00:00Z"),
+    place_name: 'Work Site 23',
+}
+)
