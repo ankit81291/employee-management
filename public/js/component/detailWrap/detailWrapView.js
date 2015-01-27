@@ -112,7 +112,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 								else{
 									tempDiv="<div class='"+cssClass+"' onclick='window.app.component.handleItemListClick("+JsonString+");'>";
 								}
-						    var temp2Div=obj[i]['alert_type']+
+						    var temp2Div=obj[i]['task_name']+
 						            		'<span class="pull-right text-muted small"><em>'+obj[i]['status']+'</em>'+
 						            	'</div>';
 						    taskTempDiv = taskTempDiv+tempDiv+temp2Div;
@@ -246,9 +246,9 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 			projectName=obj["project_name"];
 			supervisor_email=obj["supervisor_email"];
 			workerId=obj["supervisor_id"];
-			organization=obj["place"]["organization"];
-			address=obj["place"]["address"];
-			name=obj["place"]["name"];
+			organization=obj["place"]["Organization"];
+			address=obj["place"]["Address"];
+			name=obj["place"]["Name"];
 		}
 		else{
 			taskName= "";
