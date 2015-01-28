@@ -7,7 +7,7 @@ function initialize() {
 
     var defaultBounds = new google.maps.LatLngBounds(
       //new google.maps.LatLng(-33.8902, 151.1759),
-      new google.maps.LatLng(12.910457,77.6128023));
+      new google.maps.LatLng(-0.9690884, 51.455041));
   map.fitBounds(defaultBounds);
 
   // Create the search box and link it to the UI element.

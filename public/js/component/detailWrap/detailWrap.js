@@ -55,6 +55,12 @@ define(["detailWrap/detailWrapView"], function(view){
 	detailWrap.prototype.getNotificationDetailUI = function(obj) {
 		return this.oView.buildNotificationItemDetailUI(obj);
 	};
+	detailWrap.prototype.cancelAction = function(obj) {
+		return this.oView.cancelAction();
+	};
+	detailWrap.prototype.saveChanges = function() {
+		return this.oView.saveChanges();
+	};
 	return (new detailWrap());
 });
 

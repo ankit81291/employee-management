@@ -68,6 +68,15 @@ define(["detailWrap/detailWrap","navBar/navBar","items/items"], function(detailW
 		this.detailWrap.getEditTaskUI(obj);
 	};
 	
+	Component.prototype.cancelAction = function(obj){
+		this.detailWrap.cancelAction();
+	};
+	
+	Component.prototype.saveChanges = function(obj){
+		this.detailWrap.saveChanges();
+	};
+	
+
 	Component.prototype.buildDonutChart = function(){
 		$("#morris-area-chart").empty();
 		  Morris.Donut({
