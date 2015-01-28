@@ -13,7 +13,7 @@ var sendJsonResponse = function(res, status, content) {
 };
 */
 
-module.exports.getWorkerNames = function(req, res) {
+module.exports.getNameList = function(req, res) {
     console.log("get work names")
     Worker.find().exec(function(err, results){
         if(err){

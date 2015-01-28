@@ -39,4 +39,27 @@ var buildPlacesList = function(req, res, results) {
         });
     });
     return places;
+}
+
+module.exports.getNameList = function(req, res) {
+    var results = Place.find().exec(function(err, results){
+        if(err){
+            throw err;
+        } else {
+            var places = buildNameList(req, res, results);
+            sendJsonResponse(res, 200, places);
+        }
+    })
+}
+
+var buildNameList = function (req, res, results) {
+    var placenames = [];
+
+    results.forEach(function (doc) {
+
+        placenames.push( {
+            name: doc.name
+        })
+    });
+    return placenames;
 };

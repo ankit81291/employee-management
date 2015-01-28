@@ -6,4 +6,5 @@ var ctrl = require('../controllers/staffs');
 
 module.exports = function(app){
     app.get('/api/staffs', ctrl.getStaffs);
+    app.get('/api/staffs/names', ctrl.getNameList)
 };

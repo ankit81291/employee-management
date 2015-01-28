@@ -42,3 +42,27 @@ var buildProjectsList = function(req, res, results) {
     });
     return projects;
 };
+
+module.exports.getNameList = function(req, res) {
+    var results = Project.find().exec(function(err, results){
+        if(err){
+            throw err;
+        } else {
+            var projects = buildNameList(req, res, results);
+            sendJsonResponse(res, 200, projects);
+        }
+    })
+}
+
+var buildNameList = function (req, res, results) {
+    var projectnames = [];
+
+    results.forEach(function (doc) {
+
+        projectnames.push( {
+            project_name: doc.project_name,
+            project_id: doc.project_id
+        })
+    });
+    return projectnames;
+};

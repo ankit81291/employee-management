@@ -40,4 +40,34 @@ var buildStaffsList = function(req, res, results) {
             activities: doc.activities        });
     });
     return staffs;
+}
+
+module.exports.getNameList = function(req, res) {
+    var results = Staff.find().exec(function(err, results){
+        if(err){
+            throw err;
+        } else {
+            var staffs = buildNameList(req, res, results);
+            sendJsonResponse(res, 200, staffs);
+        }
+    })
+}
+
+var buildNameList = function (req, res, results) {
+    var staffnames = [];
+
+    results.forEach(function (doc) {
+
+        staffnames.push( {
+            staff_id: doc.staff_id,
+            staff_name: capitalize(doc.first_name) + '  ' + capitalize(doc.second_name),
+            email: doc.email
+        })
+    });
+    return staffnames;
 };
+
+function capitalize(s)
+{
+    return s && s[0].toUpperCase() + s.slice(1);
+}
