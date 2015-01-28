@@ -8,7 +8,7 @@ db.tasks.save(
 	planned_finish_time: ISODate('2014-12-03T15:00:00Z'),
 	start_time: ISODate('2014-12-03T14:00:00Z'),
 	finish_time: ISODate('2014-12-03T16:00:00Z'),
-	status: 'open',
+	status: 'planned',
 	supervisor_id: 'staff20150118005',
 	supervisor_email: 'sctest2004@gmail.com>',
 	place_name: 'Al Qadisiyyah Rd Site',
@@ -25,7 +25,7 @@ db.tasks.save(
              planned_finish_time: ISODate('2014-12-03T14:00:00Z'),
 			 start_time: ISODate('2014-12-03T14:00:00Z'),
              finish_time: ISODate('2014-12-03T16:00:00Z'),
-             status: 'open'
+             status: 'planned'
 		}
 	]
 })

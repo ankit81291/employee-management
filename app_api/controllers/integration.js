@@ -27,7 +27,7 @@ new CronJob('0 * * * * 0-6', function(){
 
  */
 
-new CronJob('0 * * * * 0-6', function(){
+new CronJob('*/10 * * * * *', function(){
  checkLateWorker();
 //  console.log('Generate task late alert');
 }, null, true, "America/Los_Angeles");
@@ -182,26 +182,26 @@ var checkLateWorker = function() {
         places.forEach(function(place) {
             var workforce = place.workforce;
             workforce.forEach(function(worker) {
-                var expected_time = worker.planned_time;
-                var m = moment(new Date());
-                var p = moment(expected_time).add(10, 'second');
-                if(m.isAfter(p)) {
-                    Task.findOne({'task_id': worker.task_id}, function(err, task) {
+                Task.findOne({'task_id': worker.task_id}, function(err, task) {
                         if (err) return console.error(err);
-                        if(task !== null && worker.status === 'planned') {
-                            var obj = createWorkerLateAlert(place, worker, task);
-                            createWorkerLateEmail(obj, task);
-                            worker.status = 'alerted';
-                            place.save(function (err, pl) {
-                                if(err){
-                                    console.log('Oh dear', err);
-                                } else {
-                                    console.log('place saved: ');
-                                }
-                            });
-                        }
+
+                        if(task !== null && task.status === 'planned') {
+                            var expected_time = task.planned_start_time;
+                            var m = moment(new Date());
+                            var p = moment(expected_time).add(10, 'second');
+
+                            if(m.isAfter(p)) {
+                                var obj = createWorkerLateAlert(place, worker, task);
+                                createWorkerLateEmail(obj, task);
+                                task.update({status: "alerted"}, function (err, pl) {
+                                    if(err){
+                                        console.log('Oh dear', err);
+                                    } else {
+                                        console.log('Task saved: ');
+                                }})
+                            }
+                            }
                     })
-                }
             })
         })
     })
