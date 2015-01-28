@@ -27,7 +27,7 @@ module.exports.createTask= function(req, res) {
       finish_time:req.body.finish_time,
       status:req.body.status,
       supervisor_id: req.body.supervisor_id,
-      place: req.body.place,
+      place_name: req.body.place_name,
       workforce: req.body.workforce
   }, function(err, location) {
     if (err) {
@@ -91,7 +91,7 @@ module.exports.updateTask = function(req, res) {
 		status:req.params.status,
         supervisor_id: req.params.supervisor_id,
         supervisor_email: req.params.supervisor_email,
-        place: req.params.place,
+        place_name: req.params.place_name,
         workforce: req.params.workforce
   },
   { multi: true }
@@ -116,7 +116,7 @@ var tasks = [];
           'status':doc.status,
           'supervisor_id': doc.supervisor_id,
           'supervisor_email': doc.supervisor_email,
-          'place': doc.place,
+          'place_name': doc.place_name,
           workforce: doc.workforce
         });
     });

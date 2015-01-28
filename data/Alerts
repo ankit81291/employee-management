@@ -64,8 +64,8 @@ db.alerts.save({
     place_name: 'Work Site 23',
     details:
      { 'Task': 'Fix Engine',
-       'Estimated Time': '2 hours',
-       'Scheduled Time':  ISODate("2014-12-03T13:00:00.000Z"),
+       'Planned Start Time': ISODate("2014-12-03T11:00:00.000Z"),,
+       'Planned Finish Time':  ISODate("2014-12-03T13:00:00.000Z"),
        'Repairer ID': '44f3eaeaf4',
        'Repairer Name': 'Cliff',
        'Equipment ID': 'act11234122',

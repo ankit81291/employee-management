@@ -129,9 +129,14 @@ var handleMessage = function(mesObj) {
                     if (err) return console.error(err);
                     if(placeObj !== null) {
                         var worker = placeObj.workforce.filter(function (worker) {
+                               console.log(worker);
                                return worker.worker_id === workerObj.worker_id;
                             }).pop();
-                        if(worker !== null) {
+                        if(worker == null && worker == undefined) {
+                            createRiskEnterRegionAlert(placeObj, workerObj);
+                        }
+                        else {
+                            console.log(worker);
                             if(worker.status === 'planned' || worker.status === 'alerted') {
                                 worker.status = 'arrived';
                                 place.save(function (err, pl) {
@@ -143,10 +148,6 @@ var handleMessage = function(mesObj) {
                                 })
                             }
                         }
-                        else {
-                            createRiskEnterRegionAlert(placeObj, worker);
-                        }
-                        console.log(worker);
                     }
                   }
               )
@@ -159,12 +160,11 @@ var handleMessage = function(mesObj) {
 
 var createRiskEnterRegionAlert = function(place, worker) {
     var detail = new Object();
-    detail.worker_firstname = worker.first_name;
-    detail.worker_secondname = worker.second_name;
-    detail.worker_id = worker.worker_id;
-    detail.enter_time = new Date();
-    detail.task_name = worker.task_name;
-    detail.supervisor_email = place.supervisor_email;
+    detail["First Name"] = worker.first_name;
+    detail["Second Name"] = worker.second_name;
+    detail["Worker ID"] = worker.worker_id;
+    detail["Enter Time"] = new Date();
+    detail["Supervisor Email"] = place.supervisor_email;
 
     var obj = new Object();
     obj.alert_type = "RiskRegionEnter";
@@ -209,12 +209,12 @@ var checkLateWorker = function() {
 
 var createWorkerLateAlert = function(place, worker, task) {
     var detail = new Object();
-    detail.worker_firstname = worker.first_name;
-    detail.worker_secondname = worker.second_name;
-    detail.worker_id = worker.worker_id;
-    detail.task_name = worker.task_name;
-    detail.planned_start_time = task.planned_start_time;
-    detail.supervisor_email = task.supervisor_email;
+    detail["First Name"] = worker.first_name;
+    detail["Second Name"] = worker.second_name;
+    detail["Worker ID"] = worker.worker_id;
+    detail["Task Name"] = worker.task_name;
+    detail["Planned Start Time"] = task.planned_start_time;
+    detail["Supervisor Email"] = place.supervisor_email;
 
     var obj = new Object();
     obj.alert_type = "WorkerLate";
@@ -286,10 +286,10 @@ var createAlert = function(anode) {
 
 var generateEquipmentlateAlert = function() {
   var detail = new Object();
-  detail.equipment_name = "Croal";
-  detail.equipment_id = "11";
-  detail.task_name = "modeling";
-    detail.supervisor_email = "aron.william@gmail.com";
+  detail["Equipment Name"] = "Croal";
+  detail["Equipment ID"] = "11";
+  detail["Task Name"] = "modeling";
+    detail["Supervisor Email"] = "aron.william@gmail.com";
 
   var obj = new Object();
   obj.alert_type = "EquipmentLate";
@@ -308,13 +308,13 @@ var generateEquipmentlateAlert = function() {
 
 var generateEquipmentmaintenanceAlert = function() {
   var detail = new Object();
-  detail.equipment_name = "Coral";
-  detail.equipment_id = "act11234122";
-  detail.repairer = "Cliff";
-  detail.repairer_id = "44f3eaeaf4";
-  detail.scheduled_time =  new Date(2014, 12, 03, 9, 39, 52, 808);
-  detail.estimated_time = "2 hours";
-  detail.task = "Fix Engine";
+  detail["Equipment Name"] = "Coral";
+  detail["Equipment ID"] = "act11234122";
+  detail["Repairer"] = "Cliff";
+  detail["Repairer ID"] = "44f3eaeaf4";
+  detail["Planned Start Time"] =  new Date(2014, 12, 03, 9, 39, 52, 808);
+  detail["Planned Finish Time"] = new Date(2014, 12, 03, 11, 39, 52, 808);;
+  detail["Task Name"] = "Fix Engine";
 
     var obj = new Object();
     obj.alert_type = "EquipmentMaintenance";

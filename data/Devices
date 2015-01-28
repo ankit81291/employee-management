@@ -2,34 +2,33 @@
 
 db.devices.save( {
 	device_name: 'gate_reader12',
-    device_id: 'device201501123B',
+    device_id: 'device20150118',
     device_type: 'Passive RFID Reader',
     vendor: 'Alien',
-    place_name: 'work site 23',
+    place_name: 'Al Qadisiyyah Work Site 01',
     created_time: ISODate("2014-12-03T09:00:00Z"),
-    status: 'open'
-}
+    status: 'operation'
+})
 
 db.devices.save(
 {
 	device_name: 'region_reader23',
-    device_id: 'device201501123C',
+    device_id: 'device20150119',
     device_type: 'Passive RFID Reader',
     vendor: 'Alien',
-    place_name: 'work site 34',
+    place_name: 'Al Qadisiyyah Work Site 01',
     created_time: ISODate("2014-12-03T09:00:00Z"),
-    status: 'open'
-}
-)
+    status: 'operation'
+})
 
 db.devices.save(
 {
-	device_name: 'region_reader24',
-    device_id: 'device201501123D',
-    device_type: 'Passive RFID Reader',
-    vendor: 'Alien',
-    place_name: 'work site 35',
+	device_name: 'gate_camera24',
+    device_id: 'device20150120',
+    device_type: 'Camera',
+    vendor: 'Sony',
+    place_name: 'Al Qadisiyyah Work Site 01',
     created_time: ISODate("2014-12-03T09:00:00Z"),
-    status: 'open'
-}
-)
+    status: 'operation'
+})
+

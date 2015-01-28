@@ -1,40 +1,22 @@
 
 db.projects.save(
 {
-    project_name: 'pluming',
-    project_id: '4324344321431',
+    project_name: 'Karan Suites and Towers',
+    project_id: 'proj20150128001',
 	created_time: ISODate('2014-12-03T13:00:00Z'),
 	planned_start_time: ISODate('2014-12-03T13:00:00Z'),
 	planned_finish_time: ISODate('2014-12-03T15:00:00Z'),
 	start_time: ISODate('2014-12-03T14:00:00Z'),
 	finish_time: ISODate('2014-12-03T16:00:00Z'),
-	status: 'started',
+	status: 'open',
 	supervisor_id: 'sup32344343',
+    place_name: 'Al Qadisiyyah Work Site',
 	supervisor_email: 'sctest2004@gmail.com>',
 	tasks: [
         {
-            'task_id':  '4324344321431',
-            'task_name':  'fix floor',
-            'planned_start_time': ISODate("2014-12-03T09:00:00.000Z"),
-            'planned_finish_time': ISODate("2014-12-03T09:00:00.000Z"),
-            'start_time': ISODate("2014-12-03T09:00:00.000Z"),
-            'finish_time': ISODate("2014-12-03T09:00:00.000Z"),
-            'Status': 'close',
-            'place_name': 'Work Site 23',
-            'supervisor_id': 'sup32344343',
-            'supervisor_email': 'sctest2004@gmail.com>',
-        },
-        {
-            'task_id':  '4324344321443',
-            'task_name':  'fix floor',
-            'planned_start_time': ISODate("2014-12-03T09:00:00.000Z"),
-            'planned_finish_time': ISODate("2014-12-03T09:00:00.000Z"),
-            'start_time': ISODate("2014-12-03T09:00:00.000Z"),
-            'finish_time': ISODate("2014-12-03T09:00:00.000Z"),
-            'Status': 'close',
-            'place_name': 'Work Site 23',
-            'supervisor_id': 'sup32344343',
-            'supervisor_email': 'sctest2004@gmail.com>',
+            task_id: 'task20150128001con',
+            task_name: 'Concrete',
+            project_name: 'Karan Suites and Towers'
         }
      ]
 })
@@ -111,7 +93,7 @@ db.projects.save(
 
 db.projects.save(
 {
-    project_name: 'Karan suites and towers',
+    project_name: 'Karan Suites and Towers',
     project_id: '4324344321431',
     created_time: ISODate('2014-12-03T13:00:00Z'),
     planned_start_time: ISODate('2014-12-03T13:00:00Z'),

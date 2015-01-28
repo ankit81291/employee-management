@@ -6,7 +6,14 @@ db.workers.save(
     tag_id: 'tag20150120001W',
     email: 'Abdul.Rashid@gmail.com',
     phone: '057-132-2342',
-    sex: 'male'
+    sex: 'male',
+    tasks: [
+        {
+            task_name: 'Concrete',
+            task_id: 'task20150128001con',
+            project_name: 'Karan Suites and Towers'
+        }
+    ]
 })
 
 db.workers.save(
@@ -112,8 +119,8 @@ db.workers.save(
 {
     first_name: 'Abdul',
     second_name: 'Razzaq',
-    worker_id: 'worker20150118010',
-    tag_id: 'tag20150120010W',
+    worker_id: 'worker20150118011',
+    tag_id: 'tag20150120011W',
     email: 'Abdul.Razzaq@gmail.com',
     phone: '050-223-5223',
     sex: 'male'
@@ -123,8 +130,8 @@ db.workers.save(
 {
     first_name: 'Wasim',
     second_name: 'Akram',
-    worker_id: 'worker20150118010',
-    tag_id: 'tag20150120010W',
+    worker_id: 'worker20150118012',
+    tag_id: 'tag20150120012W',
     email: 'Wasim.Akram@gmail.com',
     phone: '057-334-5423',
     sex: 'male'
@@ -134,8 +141,8 @@ db.workers.save(
 {
     first_name: 'Saeed',
     second_name: 'Ajmal',
-    worker_id: 'worker20150118010',
-    tag_id: 'tag20150120010W',
+    worker_id: 'worker20150118013',
+    tag_id: 'tag20150120013W',
     email: 'Saeed.Ajmal@gmail.com',
     phone: '056-885-3324',
     sex: 'male'

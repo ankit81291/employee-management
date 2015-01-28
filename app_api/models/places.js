@@ -7,10 +7,7 @@ var mongoose = require( 'mongoose' );
 var taskSchema = new mongoose.Schema({
     task_id: {type: String, required: true},
     task_name: {type: String, required: true},
-    project_name: {type: String, required: true},
-    start_time: {type: Date, "default": Date.now},
-    expected: {type: String, required: true},
-    status: {type: String, required: true}
+    project_name: {type: String, required: true}
 });
 
 var workerSchema = new mongoose.Schema({
@@ -18,13 +15,10 @@ var workerSchema = new mongoose.Schema({
     second_name: {type: String, required: true},
     worker_id: {type: String, required: true},
     tag_id: {type: String, required: true},
-    status: {type: String, required: true},
     email: String,
     phone: String,
     task_id: {type: String, required: true},
-    task_name: {type: String, required: true},
-    planned_time: {type: Date, "default": Date.now},
-    start_time: {type: Date, "default": Date.now}
+    task_name: {type: String, required: true}
 });
 
 var placeSchema = new mongoose.Schema({

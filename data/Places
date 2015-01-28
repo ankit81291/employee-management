@@ -2,96 +2,131 @@
 
 db.places.save(
 {
-	name: 'work site 23',
-    address: '125 High Street, Reading, RG6 1PS',
-    coords: [-0.9690884, 51.455041],
-    organization: 'Customer 234',
-    supervisor_id: 'staff20140304123A',
-    supervisor_email: 'sctest2004@gmail.com',
-    tasks: [
-     	{
-     	    'Task ID':  '4324344321431',
-     	    'Task Name':  'fix floor',
-     	    'Project Name': 'Ma aden home',
-     	    'Start Time': ISODate("2014-12-03T09:00:00.000Z"),
-     	    'Expected': '4 hours',
-     	    'Status': 'close'
-     	},
-     	{
-     	    'Task ID':  '4324344321435',
-     	    'Task Name':  'fix floor',
-     	    'Start Time': ISODate("2014-12-03T13:00:00.000Z"),
-     	    'Expected': '4 hours',
-     	    'Project Name': 'Ma aden home',
-     	    'Status': 'open'
-     	}
-     ],
-     workforce: [
-    	{
-    	    'First Name': 'aron',
-            'Second Name': 'william',
-            'Worker ID': 'worker20150118223A',
-            'Tag ID': 'tag2015011A',
-            'Email': 'aron.william@gmail.com',
-            'Phone': '650-334-4523',
-            'Status': 'planned',
-            'Task Name': 'mount light',
-            'Planned Time': ISODate("2014-12-03T13:00:00.000Z"),
-            'Start Time': ISODate("2014-12-03T13:00:00.000Z")
-     	},
-     	{
-    	    'First Name': 'miny',
-            'Second Name': 'kalan',
-            'Worker ID': 'worker20150118225B',
-            'Tag ID': 'tag20150120B',
-            'Email': 'miny.kalan@gmail.com',
-            'Phone': '998-432-2342',
-            'Status': 'planned',
-            'Task Name': 'paint wall',
-            'Planned Time': ISODate("2014-12-03T13:00:00.000Z"),
-            'Start Time': ISODate("2014-12-03T13:00:00.000Z")
-     	}
-    ]
- })
-
-db.places.save(
-{
 	name: 'Al Qadisiyyah Rd Site',
     address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
-    coords: [21.459, 39.96]
-}
+    coords: [21.459, 39.96],
+    organization: 'Al- Jabr project',
+    supervisor_id: 'staff20150118005',
+    supervisor_email: 'sctest2004@gmail.com'
+ })
+
 
 db.places.save(
 {
-	name: 'Al Qadisiyyah Rd Site',
-    address: '34 Al Muhandes Umar Qadi, Mecca, Makkah Province, Saudi Arabia',
-    coords: [21.459, 39.948]
-}
+    name: 'Al Qadisiyyah Work Site 01',
+    address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+    coords: [21.458785, 39.960421],
+    parent_place: 'Al Qadisiyyah Rd Site',
+    organization: 'Al- Jabr project',
+    supervisor_id: 'staff20150118005',
+    supervisor_email: 'sctest2004@gmail.com',
+    tasks: [
+        {
+            task_id: 'task20150128001con',
+            task_name: 'Concrete',
+            project_name: 'Karan Suites and Towers'
+        }
+     ],
+     workforce: [
+        {
+            first_name: 'Abdul',
+            second_name: 'Rashid',
+            worker_id: 'worker20150118001',
+            tag_id: 'tag20150120001W',
+            email: 'Abdul.Rashid@gmail.com',
+            phone: '057-132-2342',
+            sex: 'male',
+            task_id: 'task20150128001con',
+            task_name: 'Concrete',
+            status: 'planned'
+        }
+    ]
+})
+
+db.places.save(
+{
+    name: 'Al Qadisiyyah Work Site 02',
+    address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+    coords: [21.457505, 39.961789],
+    parent_place: 'Al Qadisiyyah Rd Site',
+    organization: 'Al- Jabr project',
+    supervisor_id: 'staff20150118005',
+    supervisor_email: 'sctest2004@gmail.com'
+})
+
+db.places.save(
+{
+    name: 'Al Qadisiyyah Work Site 03',
+    address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+    coords: [21.457264, 39.957406],
+    parent_place: 'Al Qadisiyyah Rd Site',
+    organization: 'Al- Jabr project',
+    supervisor_id: 'staff20150118005',
+    supervisor_email: 'sctest2004@gmail.com'
+})
+
+db.places.save(
+{
+    name: 'Al Qadisiyyah Work Site 04',
+    address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+    coords: [21.456370, 39.958954],
+    parent_place: 'Al Qadisiyyah Rd Site',
+    organization: 'Al- Jabr project',
+    supervisor_id: 'staff20150118005',
+    supervisor_email: 'sctest2004@gmail.com'
+})
+
+db.places.save(
+{
+    name: 'Al Qadisiyyah Work Site 05',
+    address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+    coords: [21.455828, 39.960401],
+    parent_place: 'Al Qadisiyyah Rd Site',
+    organization: 'Al- Jabr project',
+    supervisor_id: 'staff20150118005',
+    supervisor_email: 'sctest2004@gmail.com'
+})
+
 
 db.places.save(
 {
 	name: 'Jabal An Nur Site',
     address: 'Jabal An Nur, Mecca 24238 6818, Saudi Arabia',
     coords: [21.444253, 39.856144]
-}
+})
 
 db.places.save(
 {
 	name: 'Al Hamra Site',
     address: 'Al Hamra and Umm Al Jud, Mecca Saudi Arabia',
     coords: [21.384373, 39.700977]
-}
+})
 
 db.places.save(
 {
 	name: 'College of Technology',
     address: 'College of Technology, Mecca 24412, Saudi Arabia',
     coords: [21.486916, 39.795718]
-}
+})
 
 db.places.save(
 {
 	name: 'At Taniem Site',
     address: '2944, At Taniem, Mecca 24223 8317, Saudi Arabia',
     coords: [21.479942, 39.802677]
-}
+})
+
+db.places.save(
+{
+	name: 'King Abdul Aziz Athletic City',
+    address: 'King Abdul Aziz Athletic City, As Sail Rd, Mecca 24275, Saudi Arabia',
+    coords: [21.479942, 39.802677]
+})
+
+db.places.save(
+{
+	name: 'King Abdul Aziz Athletic City',
+    address: 'King Abdul Aziz Athletic City, As Sail Rd, Mecca 24275, Saudi Arabia',
+    coords: [21.460306, 39.940259]
+})
+
