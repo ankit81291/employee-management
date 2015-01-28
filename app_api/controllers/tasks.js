@@ -123,6 +123,7 @@ var tasks = [];
 
 
 module.exports.getNameList = function(req, res) {
+    console.log("test");
     var results = tasks.find().exec(function(err, results){
         if(err){
             throw err;
@@ -138,7 +139,7 @@ var buildNameList = function (req, res, results) {
 
     results.forEach(function (doc) {
 
-        placenames.push( {
+        tasknames.push( {
             task_name: doc.task_name
         })
     });
