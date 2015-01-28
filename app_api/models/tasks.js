@@ -15,6 +15,14 @@ var workerSchema = new mongoose.Schema({
     status: {type: String, required: true}
 });
 
+var placeSchema = {
+    place_id: {type: String, required: true},
+    name: {type: String, required: true},
+    address: {type: String, required: true},
+    coords: {type: [Number], required: false},
+    organization: {type: String, required: true}
+};
+
 var taskSchema = new mongoose.Schema({
     task_name: {type: String, required: true},
     task_id: {type: String, required: true},
@@ -26,7 +34,7 @@ var taskSchema = new mongoose.Schema({
     status: {type: String, required: true},
     supervisor_id: String,
     supervisor_email: String,
-    place_name: String,
+    place: placeSchema,
     workforce: {type: [workerSchema], required: true}
 });
 

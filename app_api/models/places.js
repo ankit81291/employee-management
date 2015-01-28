@@ -23,6 +23,7 @@ var workerSchema = new mongoose.Schema({
 
 var placeSchema = new mongoose.Schema({
     name: {type: String, required: true},
+    place_id: {type: String, required: true},
     address: {type: String, required: true},
     coords: {type: [Number], required: false},
     orgnization: String,

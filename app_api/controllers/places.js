@@ -28,12 +28,13 @@ var buildPlacesList = function(req, res, results) {
     results.forEach(function(doc) {
 
         places.push({
-            'name': doc.name,
-            'address': doc.address,
+            name: doc.name,
+            place_id: doc.place_id,
+            address: doc.address,
             coords: doc.coords,
-            'organization': doc.organization,
-            'supervisor_id': doc.supervisor_id,
-            'supervisor_email': doc.supervisor_email,
+            organization: doc.organization,
+            supervisor_id: doc.supervisor_id,
+            supervisor_email: doc.supervisor_email,
             tasks: doc.tasks,
             workforce: doc.workforce
         });
@@ -58,7 +59,8 @@ var buildNameList = function (req, res, results) {
     results.forEach(function (doc) {
 
         placenames.push( {
-            name: doc.name
+            name: doc.name,
+            place_id: doc.place_id
         })
     });
     return placenames;

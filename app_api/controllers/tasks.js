@@ -13,8 +13,6 @@ var sendJsonResponse = function(res, status, content) {
 };
 */
 
-
-
 module.exports.createTask= function(req, res) {
   console.log(req.body);
   tasks.create({
@@ -27,7 +25,7 @@ module.exports.createTask= function(req, res) {
       finish_time:req.body.finish_time,
       status:req.body.status,
       supervisor_id: req.body.supervisor_id,
-      place_name: req.body.place_name,
+      place: req.body.place,
       workforce: req.body.workforce
   }, function(err, location) {
     if (err) {
@@ -91,7 +89,7 @@ module.exports.updateTask = function(req, res) {
 		status:req.params.status,
         supervisor_id: req.params.supervisor_id,
         supervisor_email: req.params.supervisor_email,
-        place_name: req.params.place_name,
+        place: req.params.place,
         workforce: req.params.workforce
   },
   { multi: true }
@@ -116,7 +114,7 @@ var tasks = [];
           'status':doc.status,
           'supervisor_id': doc.supervisor_id,
           'supervisor_email': doc.supervisor_email,
-          'place_name': doc.place_name,
+          'place': doc.place,
           workforce: doc.workforce
         });
     });
@@ -124,6 +122,28 @@ var tasks = [];
 };
 
 
+module.exports.getNameList = function(req, res) {
+    var results = tasks.find().exec(function(err, results){
+        if(err){
+            throw err;
+        } else {
+            var places = buildNameList(req, res, results);
+            sendJsonResponse(res, 200, places);
+        }
+    })
+}
+
+var buildNameList = function (req, res, results) {
+    var tasknames = [];
+
+    results.forEach(function (doc) {
+
+        placenames.push( {
+            task_name: doc.task_name
+        })
+    });
+    return tasknames;
+};
 /*
 
 var mongoose = require( 'mongoose' );
