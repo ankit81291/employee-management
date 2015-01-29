@@ -76,7 +76,7 @@ module.exports.updateTask = function(req, res) {
     });
     return;
   }
-
+	console.log(req.params);
   tasks.update(
   {task_id: req.params.task_id},
   {
@@ -88,8 +88,8 @@ module.exports.updateTask = function(req, res) {
 		start_time: req.params.start_time,
 		finish_time:req.params.finish_time,
 		status:req.params.status,
-        supervisor_id: req.params.supervisor_id,
-        supervisor_email: req.params.supervisor_email,
+        supervisor_id: "test123",
+        supervisor_email: "test",
         performance: req.params.performance,
         place: req.params.place,
         workforce: req.params.workforce

@@ -1,4 +1,4 @@
-function initialize() {
+function initialize(lat,lng) {
 
   var markers = [];
   var map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -7,7 +7,7 @@ function initialize() {
 
     var defaultBounds = new google.maps.LatLngBounds(
       //new google.maps.LatLng(-33.8902, 151.1759),
-      new google.maps.LatLng(-0.9690884, 51.455041));
+      new google.maps.LatLng(lat, lng));
   map.fitBounds(defaultBounds);
 
   // Create the search box and link it to the UI element.

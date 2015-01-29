@@ -76,6 +76,9 @@ define(["detailWrap/detailWrap","navBar/navBar","items/items"], function(detailW
 		this.detailWrap.saveChanges();
 	};
 	
+	Component.prototype.sendEmail = function(){
+		this.detailWrap.sendEmail();
+	};
 
 	Component.prototype.buildDonutChart = function(){
 		$("#morris-area-chart").empty();

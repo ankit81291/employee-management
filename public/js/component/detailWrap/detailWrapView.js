@@ -108,11 +108,11 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 							var JsonString = JSON.stringify(obj[i]);
 							cssClass=this.getStatusClass(obj[i]['status']);
 								if(i==0){
-									   tempDiv="<div class='firstSelect "+cssClass+"' onclick='window.app.component.handleItemListClick("+JsonString+");'>";	
+									   tempDiv="<div id='"+obj[i]["task_id"]+"' class='firstSelect listItem "+cssClass+"' onclick='window.app.component.handleItemListClick("+JsonString+");'>";	
 									   
 								}
 								else{
-									tempDiv="<div class='"+cssClass+"' onclick='window.app.component.handleItemListClick("+JsonString+");'>";
+									tempDiv="<div id='"+obj[i]["task_id"]+"' class='listItem "+cssClass+"' onclick='window.app.component.handleItemListClick("+JsonString+");'>";
 								}
 						    var temp2Div=obj[i]['task_name']+
 						            		'<span class="pull-right text-muted small"><em>'+obj[i]['status']+'</em>'+
@@ -248,9 +248,9 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 			projectName=obj["project_name"];
 			supervisor_email=obj["supervisor_email"];
 			workerId=obj["supervisor_id"];
-			organization=obj["place"]["Organization"];
-			address=obj["place"]["Address"];
-			name=obj["place"]["Name"];
+			organization=obj["place"]["organization"];
+			address=obj["place"]["address"];
+			name=obj["place"]["name"];
 		}
 		else{
 			taskName= "";
@@ -376,7 +376,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 								      '</div>'+
 								      '<div class="modal-footer">'+
 								        "<button type='button' class='btn btn-default'  data-dismiss='modal'>Cancel</button>"+
-								        "<button type='button' class='btn btn-primary'>Save changes</button>"+
+								        "<button type='button' class='btn btn-primary' onclick='window.app.component.sendEmail();'>Submit</button>"+
 								      '</div>'+
 								    '</div>'+
 								  '</div>'+
@@ -385,6 +385,8 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 			return taskDetailDiv1+taskDetailDiv2+taskdetailDiv3;
 	};
 	detailWrapView.prototype.buildTaskItemDetailUI = function(obj) {
+		$(".listItem").removeClass("firstSelect");
+		$("#"+obj["task_id"]).addClass("firstSelect");
 		$(".detailList").remove();
 		this.currentTaskObj=obj;
 		var div = this.createTaskDetailDiv(obj);
@@ -540,13 +542,13 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 							var tempDiv="";
 							var JsonString = JSON.stringify(obj[i]);
 								if(i==0){
-									   tempDiv="<div class='firstSelect alert alert-info' onclick='window.app.component.handleResorceWorkerListClick("+JsonString+");'>";	
+									   tempDiv="<div id='"+obj[i]["worker_id"]+"' class='firstSelect listItem alert alert-info' onclick='window.app.component.handleResorceWorkerListClick("+JsonString+");'>";	
 									   
 								}
 								else{
-									tempDiv="<div class='alert alert-info' onclick='window.app.component.handleResorceWorkerListClick("+JsonString+");'>";
+									tempDiv="<div id='"+obj[i]["worker_id"]+"' class='alert alert-info listItem' onclick='window.app.component.handleResorceWorkerListClick("+JsonString+");'>";
 								}
-						    var temp2Div=obj[i]['worker_name']+
+						    var temp2Div=obj[i]['first_name']+" "+obj[i]['second_name']+
 						            		'<span class="pull-right text-muted small"><em>'+obj[i]['sex']+'</em>'+
 						            	'</div>';
 						    ResourceTempDiv = ResourceTempDiv+tempDiv+temp2Div;
@@ -709,7 +711,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 		var phone="";
 		var sex="";
 		if(obj["worker_id"]!=undefined){
-			 workerName=obj["worker_name"];
+			 workerName=obj["first_name"]+" "+obj["second_name"];
 			 workerId=obj["worker_id"];
 			 tagId=obj["tag_id"];
 			 email=obj["email"];
@@ -729,7 +731,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 								'<div class="col-lg-5">'+
 									'<dl class="dl-horizontal">'+
 							        '<dt>Worker Name</dt>'+
-							        '<dd id="workerDetail"> <input id="WorkerName" style="display:inline; class="form-control taskField" placeholder="Worker Name" '+readOnly+' value="'+workerName+'"></dd>'+
+							        '<dd id="workerDetail"> <input id="WorkerName" class="form-control taskField" placeholder="Worker Name" '+readOnly+' value="'+workerName+'"></dd>'+
 							        '<dt>Worker Id</dt>'+
 							        '<dd><input class="form-control taskField" placeholder="Id" '+readOnly +' value="'+workerId+'"></dd>'+
 							        '<dt>Tag Id</dt>'+
@@ -759,6 +761,8 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 	};
 	
 	detailWrapView.prototype.buildResourcesWorkerDetailView = function(obj) {
+		$(".listItem").removeClass("firstSelect");
+		$("#"+obj["worker_id"]).addClass("firstSelect");
 		$(".detailListResource").remove();
 		var div = this.createResourceWorkerDetailDiv(obj);
 		$(".resourceMain").append(div);
@@ -773,7 +777,8 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 					'</div>';
 		var completeDiv=headDiv+content+footer;
 		$("#page-wrapper").append(completeDiv);
-		initialize();
+		var defaultCoords= taskObj[0]["place"]["coords"];
+		initialize(defaultCoords[0],defaultCoords[1]);
 		
 		var anim = google.maps.Animation.DROP;
 		var infowindow = new google.maps.InfoWindow();
@@ -788,8 +793,8 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 				marker.html='<div id="content">'+
 								'<h3>'+taskObj[i].task_name+'</h3>'+
 								'<hr>'+
-								'<h6>Organization  :'+taskObj[i]["place"].Organization +'</h6>'+
-								'<h6>Name :'+taskObj[i]["place"].Name +'</h6>'+    
+								'<h6>Organization  :'+taskObj[i]["place"].organization +'</h6>'+
+								'<h6>Name :'+taskObj[i]["place"].name +'</h6>'+    
 							'</div>';
 			google.maps.event.addListener(marker, 'click', function() {
 			  infowindow.setContent(this.html);
@@ -818,12 +823,12 @@ detailWrapView.prototype.saveChanges = function() {
 	taskObj["task_name"]= $("#taskName").val();
 	taskObj["task_id"]= $("#taskId").val();
 	taskObj["project_name"]=$("#projName").val();
-	taskObj["supervisor_email"]=$("#workerDetail").val();
+	taskObj["supervisor_email"]=$("#WorkerName").val();
 	taskObj["supervisor_id"]=$("#superId").val();
 	taskObj["place"]={};
-	taskObj["place"]["name"]=$("#Organization").val();
-	taskObj["place"]["address"]=$("#orgName").val();
-	taskObj["place"]["orgnization"]=$("#orgAddress").val();
+	taskObj["place"]["organization"]=$("#Organization").val();
+	taskObj["place"]["name"]=$("#orgName").val();
+	taskObj["place"]["address"]=$("#orgAddress").val();
 	var that =this;
 	if(this.newTask){
 		taskObj["status"]="open";
@@ -837,13 +842,30 @@ detailWrapView.prototype.saveChanges = function() {
 		}});
 	}
 	else{
-		
+		$.ajax({url:"http://localhost:3000/api/tasks/:"+taskObj["task_id"],json: taskObj,method : "PUT",success:function(taskUpdate){
+			var result=taskCreation;
+			$.ajax({url:"http://localhost:3000/api/tasks",success:function(resultTasks){
+				that.buildTaskDetail(resultTasks);
+			}});
+		},failure:function(error){
+			var errorobj=error;
+		}});
 	}
+};
+
+detailWrapView.prototype.sendEmail = function() {
+	var emailObj={};
+	$.ajax({url:"http://localhost:3000/api/sendRERAlertEmail",json: emailObj,method : "PUT",success:function(successEmail){
+		var result=successEmail;
+	}});
 };
 
 detailWrapView.prototype.getStatusClass = function(type) {
 	var cssClass="";
 	switch(type){
+		case "started":
+			cssClass="alert alert-info";
+			break;
 		case "open":
 			cssClass="alert alert-info";
 			break;
@@ -853,7 +875,7 @@ detailWrapView.prototype.getStatusClass = function(type) {
 		case "finished":
 			cssClass="alert alert-success";
 			break;
-		case "inprogress":
+		case "planned":
 			cssClass="alert alert-info";
 			break;
 		default:
