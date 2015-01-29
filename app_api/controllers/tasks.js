@@ -137,7 +137,6 @@ module.exports.getNameList = function(req, res) {
 }
 
 module.exports.getPerformanceData = function(req, res) {
-    console.log("test");
     var results = tasks.find().exec(function(err, results){
         if(err){
             throw err;

@@ -108,7 +108,7 @@ module.exports.deviceprocess = function(req, res) {
 
     devicemessageBatch(messagelist);
 
-  sendJsonResponse(res, 200, "");
+  sendJsonResponse(res, 200, "Message processed successfully");
 };
 
 var devicemessageBatch = function(messagelist) {
@@ -229,7 +229,29 @@ var createWorkerLateAlert = function(place, worker, task) {
     return obj;
 }
 
-var createRiskEnterRegionAlertEmail = function(obj, emailObj) {
+module.exports.sendRiskEnterRegionAlertEmail = function(req, res) {
+    var detail = new Object();
+    detail.first_name = req.params.first_name;
+    detail.second_name = req.params.second_name;
+    detail.worker_id = req.params.worker_id;
+    detail.enter_time = req.params.enter_time;
+    detail.supervisor_email = req.params.supervisor_email;
+
+    var obj = new Object();
+    obj.alert_type = req.params.alert_type;
+    obj.reason = req.params.reason;
+    obj.created_time = req.params.created_time;
+    obj.status = req.params.status;
+    obj.place_name = req.params.place_name;
+    obj.details = detail;
+
+    createRiskEnterRegionAlertEmail(obj);
+
+    sendJsonResponse(res, 200, "RiskEnterRegion Alert Email sent");
+
+}
+
+var createRiskEnterRegionAlertEmail = function(obj) {
     var body = '<b>Alert Type:  </b>' + obj.alert_type + '<hr>';
     body = body + '<p><b>Reason: </b>' + 'A worker enters a region without permission' + '<\p>';
     body = body + '<p><b>Worker First Name: </b>' + obj.details.worker_firstname + '<\p>';
@@ -239,7 +261,7 @@ var createRiskEnterRegionAlertEmail = function(obj, emailObj) {
     body = body + '<p><b>Enter Time: </b>' + obj.details.enter_time + '<\p>';
     body = body + '<p><b>Status: </b>' + obj.status + '<\p>';
 
-    var to = 'Task Manager <' + emailObj + '>';
+    var to = 'Task Manager <' + obj.details.supervisor_email + '>';
     var from = 'Project Manager <sctest2004@gmail.com>';
     var subject = 'Worker Enter A Region without Permission';
 

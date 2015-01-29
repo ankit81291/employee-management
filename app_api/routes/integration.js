@@ -8,4 +8,5 @@ module.exports = function(app){
     // device integration
     app.post('/api/deviceevent', ctrl.deviceprocess);
     app.post('/api/equipmentevent', ctrl.equipmentprocess)
+    app.put('/api/sendRERAlertEmail', ctrl.sendRiskEnterRegionAlertEmail)
 };
