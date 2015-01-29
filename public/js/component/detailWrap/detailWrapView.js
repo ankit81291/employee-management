@@ -376,7 +376,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 								      '</div>'+
 								      '<div class="modal-footer">'+
 								        "<button type='button' class='btn btn-default'  data-dismiss='modal'>Cancel</button>"+
-								        "<button type='button' class='btn btn-primary' onclick='window.app.component.sendEmail();'>Submit</button>"+
+								        "<button type='button' class='btn btn-primary' onclick='window.app.component.sendEmail("+JSON.stringify(obj)+"'>Submit</button>"+
 								      '</div>'+
 								    '</div>'+
 								  '</div>'+
@@ -743,9 +743,9 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 							        '<dt>Email</dt>'+
 							        '<dd><input id="PlaceName" style="display:inline;" class="form-control taskField" placeholder="emailId" '+readOnly +' value="'+email+'"></dd>'+
 							        '<dt>Phone</dt>'+
-							        '<dd><input class="form-control taskField" placeholder="phone number" '+readOnly +' value="'+phone+'"></dd>'+
+							        '<dd><input id="Phone" class="form-control taskField" placeholder="phone number" '+readOnly +' value="'+phone+'"></dd>'+
 							        '<dt>Sex</dt>'+
-							        '<dd><input class="form-control taskField" placeholder="Gender" '+readOnly +' value="'+sex+'"></dd>'+
+							        '<dd><input id="Sex" class="form-control taskField" placeholder="Gender" '+readOnly +' value="'+sex+'"></dd>'+
 						        '</dl>'+
 						        '<div class="parentButton">'+
 						        '</div>'+						        
@@ -853,9 +853,9 @@ detailWrapView.prototype.saveChanges = function() {
 	}
 };
 
-detailWrapView.prototype.sendEmail = function() {
-	var emailObj={};
-	$.ajax({url:"http://localhost:3000/api/sendRERAlertEmail",data: emailObj,type : "PUT",success:function(successEmail){
+detailWrapView.prototype.sendEmail = function(obj) {
+	
+	$.ajax({url:"http://localhost:3000/api/sendRERAlertEmail",data: obj,type : "POST",success:function(successEmail){
 		var result=successEmail;
 	}});
 };
