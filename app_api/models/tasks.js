@@ -23,6 +23,13 @@ var placeSchema = {
     organization: {type: String, required: true}
 };
 
+var performanceSchema = {
+    completion: {type: Number, "default": 0.0},
+    equipment_available: {type: Number, "default": 0.0},
+    workforce_available: {type: Number, "default": 0.0},
+    material_available:  {type: Number, "default": 0.0}
+};
+
 var taskSchema = new mongoose.Schema({
     task_name: {type: String, required: true},
     task_id: {type: String, required: true},
@@ -34,6 +41,7 @@ var taskSchema = new mongoose.Schema({
     status: {type: String, required: true},
     supervisor_id: String,
     supervisor_email: String,
+    performance: performanceSchema,
     place: placeSchema,
     workforce: {type: [workerSchema], required: true}
 });

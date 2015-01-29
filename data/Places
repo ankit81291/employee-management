@@ -134,11 +134,3 @@ db.places.save(
     coords: [21.479942, 39.802677]
 })
 
-db.places.save(
-{
-	name: 'King Abdul Aziz Athletic City',
-    place_id: 'place000000011',
-    address: 'King Abdul Aziz Athletic City, As Sail Rd, Mecca 24275, Saudi Arabia',
-    coords: [21.460306, 39.940259]
-})
-

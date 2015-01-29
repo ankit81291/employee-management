@@ -5,5 +5,5 @@ module.exports = function(app){
   app.post('/api/tasks/create', ctrl.createTask);
   app.put('/api/tasks/:taskname',ctrl.updateTask);
   app.get('/api/tasks/names', ctrl.getNameList);
-
+  app.get('/api/performancedata', ctrl.getPerformanceData);
 };

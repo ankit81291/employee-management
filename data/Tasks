@@ -1,7 +1,7 @@
 
 db.tasks.save(
 {
-    task_name: 'Concrete',
+    task_name: 'Concrete 0012',
     task_id: 'task20150128001con',
 	project_name: 'Karan Suites and Towers',
 	planned_start_time: ISODate('2014-12-03T13:00:00Z'),
@@ -11,7 +11,20 @@ db.tasks.save(
 	status: 'planned',
 	supervisor_id: 'staff20150118005',
 	supervisor_email: 'sctest2004@gmail.com>',
-	place_name: 'Al Qadisiyyah Rd Site',
+    performance: {
+        completion: 0.0,
+        equipment_available: 0.4,
+        workforce_available: 0.0,
+        material_available:  0.6
+    },
+    place: {
+        name: 'Al Qadisiyyah Work Site 01',
+        place_id: 'place000000002',
+        address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+        coords: [21.458785, 39.960421],
+        parent_place: 'Al Qadisiyyah Rd Site',
+        organization: 'Al- Jabr project'
+    },
 	workforce: [
 		{
 			 first_name: 'Abdul',
@@ -32,71 +45,246 @@ db.tasks.save(
 
 db.tasks.save(
 {
-    task_name: 'Concrete',
-    task_id: '4324344321431',
-    project_name: 'Ma aden home',
+    task_name: 'Concrete 0013',
+    task_id: 'task20150128002con',
+    project_name: 'Karan Suites and Towers',
     planned_start_time: ISODate('2014-12-03T13:00:00Z'),
     planned_finish_time: ISODate('2014-12-03T15:00:00Z'),
     start_time: ISODate('2014-12-03T14:00:00Z'),
     finish_time: ISODate('2014-12-03T16:00:00Z'),
-    status: 'finished',
+    status: 'started',
     supervisor_id: 'sup32344343',
-    supervisor_email: 'sctest2004@gmail.com>'
+    supervisor_email: 'sctest2004@gmail.com>',
+        performance: {
+        completion: 0.8,
+        equipment_available: 0.5,
+        workforce_available: 0.6,
+        material_available:  0.9
+    },
+    place: {
+            name: 'Al Qadisiyyah Work Site 02',
+            place_id: 'place000000003',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.457505, 39.961789],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    }
 })
 
 db.tasks.save(
 {
-    task_name: 'Demolition',
-    task_id: '4324344321431',
-    project_name: 'Ma aden home',
+    task_name: 'Demolition 332',
+    task_id: 'task20150128003con',
+    project_name: 'Karan Suites and Towers',
     planned_start_time: ISODate('2014-12-03T13:00:00Z'),
     planned_finish_time: ISODate('2014-12-03T15:00:00Z'),
     start_time: ISODate('2014-12-03T14:00:00Z'),
     finish_time: ISODate('2014-12-03T16:00:00Z'),
-    status: 'finished',
+    status: 'started',
     supervisor_id: 'sup32344343',
-    supervisor_email: 'sctest2004@gmail.com>'
+    supervisor_email: 'sctest2004@gmail.com>',
+        performance: {
+        completion: 0.2,
+        equipment_available: 0.5,
+        workforce_available: 0.9,
+        material_available:  1.2
+    },
+    place: {
+            name: 'Al Qadisiyyah Work Site 03',
+            place_id: 'place000000004',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.457264, 39.957406],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    }
 })
 
 db.tasks.save(
 {
-    task_name: 'Piping',
-    task_id: '4324344321431',
-    project_name: 'Ma aden home',
+    task_name: 'Piping 221',
+    task_id: 'task20150128004con',
+    project_name: 'Karan Suites and Towers',
     planned_start_time: ISODate('2014-12-03T13:00:00Z'),
     planned_finish_time: ISODate('2014-12-03T15:00:00Z'),
     start_time: ISODate('2014-12-03T14:00:00Z'),
     finish_time: ISODate('2014-12-03T16:00:00Z'),
-    status: 'finished',
+    status: 'started',
     supervisor_id: 'sup32344343',
-    supervisor_email: 'sctest2004@gmail.com>'
+    supervisor_email: 'sctest2004@gmail.com>',
+        performance: {
+        completion: 0.6,
+        equipment_available: 0.2,
+        workforce_available: 0.8,
+        material_available:  0.9
+    },
+    place: {
+            name: 'Al Qadisiyyah Work Site 04',
+            place_id: 'place000000005',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.456370, 39.958954],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    }
 })
 
 db.tasks.save(
 {
-    task_name: 'Electricity',
-    task_id: '4324344321431',
-    project_name: 'Ma aden home',
+    task_name: 'Electricity 542',
+    task_id: 'task20150128005con',
+    project_name: 'Karan Suites and Towers',
     planned_start_time: ISODate('2014-12-03T13:00:00Z'),
     planned_finish_time: ISODate('2014-12-03T15:00:00Z'),
     start_time: ISODate('2014-12-03T14:00:00Z'),
     finish_time: ISODate('2014-12-03T16:00:00Z'),
-    status: 'finished',
+    status: 'started',
     supervisor_id: 'sup32344343',
-    supervisor_email: 'sctest2004@gmail.com>'
+    supervisor_email: 'sctest2004@gmail.com>',
+        performance: {
+        completion: 0.5,
+        equipment_available: 0.7,
+        workforce_available: 0.9,
+        material_available:  0.4
+    },
+    place: {
+            name: 'Al Qadisiyyah Work Site 05',
+            place_id: 'place000000005',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.455828, 39.960401],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    }
 })
 
 db.tasks.save(
 {
-    task_name: 'Painting',
-    task_id: '4324344321431',
-    project_name: 'Ma aden home',
+    task_name: 'Painting 123',
+    task_id: 'task20150128006con',
+    project_name: 'Al- Jabr project',
+    planned_start_time: ISODate('2014-12-03T13:00:00Z'),
+    planned_finish_time: ISODate('2014-12-03T15:00:00Z'),
+    start_time: ISODate('2014-12-03T14:00:00Z'),
+    finish_time: ISODate('2014-12-03T16:00:00Z'),
+    status: 'started',
+    supervisor_id: 'sup32344343',
+    supervisor_email: 'sctest2004@gmail.com>',
+        performance: {
+        completion: 0.7,
+        equipment_available: 0.5,
+        workforce_available: 0.3,
+        material_available:  0.5
+    },
+    place: {
+            name: 'Jabal An Nur Site',
+            place_id: 'place000000006',
+            address: 'Jabal An Nur, Mecca 24238 6818, Saudi Arabia',
+            coords: [21.444253, 39.856144],
+            organization: 'Al- Jabr project'
+    }
+})
+
+db.tasks.save(
+{
+    task_name: 'Eclectriciy 332',
+    task_id: 'task20150128007con',
+    project_name: 'Al Hamra project',
+    planned_start_time: ISODate('2014-12-03T13:00:00Z'),
+    planned_finish_time: ISODate('2014-12-03T15:00:00Z'),
+    start_time: ISODate('2014-12-03T14:00:00Z'),
+    finish_time: ISODate('2014-12-03T16:00:00Z'),
+    status: 'started',
+    supervisor_id: 'sup32344343',
+    supervisor_email: 'sctest2004@gmail.com>',
+        performance: {
+        completion: 0.5,
+        equipment_available: 0.2,
+        workforce_available: 0.6,
+        material_available:  0.7
+    },
+    place: {
+            name: 'Al Hamra Site',
+            place_id: 'place000000007',
+            address: 'Al Hamra and Umm Al Jud, Mecca Saudi Arabia',
+            coords: [21.384373, 39.700977]
+    }
+})
+
+db.tasks.save(
+{
+    task_name: 'Demolition 543',
+    task_id: 'task20150128008con',
+    project_name: 'College of Technology project',
     planned_start_time: ISODate('2014-12-03T13:00:00Z'),
     planned_finish_time: ISODate('2014-12-03T15:00:00Z'),
     start_time: ISODate('2014-12-03T14:00:00Z'),
     finish_time: ISODate('2014-12-03T16:00:00Z'),
     status: 'finished',
     supervisor_id: 'sup32344343',
-    supervisor_email: 'sctest2004@gmail.com>'
+    supervisor_email: 'sctest2004@gmail.com>',
+        performance: {
+        completion: 0.5,
+        equipment_available: 0.3,
+        workforce_available: 0.5,
+        material_available:  0.7
+    },
+    place: {
+            name: 'College of Technology',
+            place_id: 'place000000008',
+            address: 'College of Technology, Mecca 24412, Saudi Arabia',
+            coords: [21.486916, 39.795718]
+    }
 })
+
+db.tasks.save(
+{
+    task_name: 'Concrete 998',
+    task_id: 'task20150128009con',
+    project_name: 'At Taniem project',
+    planned_start_time: ISODate('2014-12-03T13:00:00Z'),
+    planned_finish_time: ISODate('2014-12-03T15:00:00Z'),
+    start_time: ISODate('2014-12-03T14:00:00Z'),
+    finish_time: ISODate('2014-12-03T16:00:00Z'),
+    status: 'started',
+    supervisor_id: 'sup32344343',
+    supervisor_email: 'sctest2004@gmail.com>',
+        performance: {
+        completion: 0.5,
+        equipment_available: 0.6,
+        workforce_available: 0.7,
+        material_available:  0.8
+    },
+    place: {
+            name: 'At Taniem Site',
+            place_id: 'place000000009',
+            address: '2944, At Taniem, Mecca 24223 8317, Saudi Arabia',
+            coords: [21.479942, 39.802677]
+    }
+})
+
+db.tasks.save(
+{
+    task_name: 'Demolition 225',
+    task_id: 'task20150128010con',
+    project_name: 'King Abdul project',
+    planned_start_time: ISODate('2014-12-03T13:00:00Z'),
+    planned_finish_time: ISODate('2014-12-03T15:00:00Z'),
+    start_time: ISODate('2014-12-03T14:00:00Z'),
+    finish_time: ISODate('2014-12-03T16:00:00Z'),
+    status: 'started',
+    supervisor_id: 'sup32344343',
+    supervisor_email: 'sctest2004@gmail.com>',
+        performance: {
+        completion: 0.7,
+        equipment_available: 0.4,
+        workforce_available: 0.6,
+        material_available:  0.8
+    },
+    place: {
+            name: 'King Abdul Aziz Athletic City',
+            place_id: 'place000000010',
+            address: 'King Abdul Aziz Athletic City, As Sail Rd, Mecca 24275, Saudi Arabia',
+            coords: [21.479942, 39.802677]
+    }
+})
+
+
 

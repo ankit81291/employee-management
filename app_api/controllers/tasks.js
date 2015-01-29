@@ -25,6 +25,7 @@ module.exports.createTask= function(req, res) {
       finish_time:req.body.finish_time,
       status:req.body.status,
       supervisor_id: req.body.supervisor_id,
+      performance: reg.body.performance,
       place: req.body.place,
       workforce: req.body.workforce
   }, function(err, location) {
@@ -89,6 +90,7 @@ module.exports.updateTask = function(req, res) {
 		status:req.params.status,
         supervisor_id: req.params.supervisor_id,
         supervisor_email: req.params.supervisor_email,
+        performance: req.params.performance,
         place: req.params.place,
         workforce: req.params.workforce
   },
@@ -104,17 +106,18 @@ var buildTasksList = function(req, res, results) {
 var tasks = [];
   results.forEach(function(doc) {
       tasks.push({
-          'task_name': doc.task_name,
-          'task_id': doc.task_id,
-          'project_name': doc.project_name,
-          'planned_start_time': doc.planned_start_time,
-          'planned_finish_time': doc.planned_finish_time,
-          'start_time': doc.start_time,
-          'finish_time':doc.finish_time,
-          'status':doc.status,
-          'supervisor_id': doc.supervisor_id,
-          'supervisor_email': doc.supervisor_email,
-          'place': doc.place,
+          task_name: doc.task_name,
+          task_id: doc.task_id,
+          project_name: doc.project_name,
+          planned_start_time: doc.planned_start_time,
+          planned_finish_time: doc.planned_finish_time,
+          start_time: doc.start_time,
+          finish_time:doc.finish_time,
+          status:doc.status,
+          supervisor_id: doc.supervisor_id,
+          supervisor_email: doc.supervisor_email,
+          performance: doc.performance,
+          place: doc.place,
           workforce: doc.workforce
         });
     });
@@ -123,7 +126,6 @@ var tasks = [];
 
 
 module.exports.getNameList = function(req, res) {
-    console.log("test");
     var results = tasks.find().exec(function(err, results){
         if(err){
             throw err;
@@ -133,6 +135,37 @@ module.exports.getNameList = function(req, res) {
         }
     })
 }
+
+module.exports.getPerformanceData = function(req, res) {
+    console.log("test");
+    var results = tasks.find().exec(function(err, results){
+        if(err){
+            throw err;
+        } else {
+            var places = buildPerformanceData(req, res, results);
+            sendJsonResponse(res, 200, places);
+        }
+    })
+}
+
+var buildPerformanceData = function(req, res, results) {
+    var performElements = [];
+
+    results.forEach(function (doc) {
+
+        performElements.push( {
+            task_name: doc.task_name,
+            project_name: doc.project_name,
+            location: doc.place.name,
+            completion: doc.performance.completion,
+            equipment_available: doc.performance.equipment_available,
+            workforce_available: doc.performance.workforce_available,
+            material_available: doc.performance.material_available
+        })
+    });
+    return performElements;
+};
+
 
 var buildNameList = function (req, res, results) {
     var tasknames = [];
