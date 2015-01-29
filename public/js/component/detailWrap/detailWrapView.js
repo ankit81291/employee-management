@@ -733,9 +733,9 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 							        '<dt>Worker Name</dt>'+
 							        '<dd id="workerDetail"> <input id="WorkerName" class="form-control taskField" placeholder="Worker Name" '+readOnly+' value="'+workerName+'"></dd>'+
 							        '<dt>Worker Id</dt>'+
-							        '<dd><input class="form-control taskField" placeholder="Id" '+readOnly +' value="'+workerId+'"></dd>'+
+							        '<dd><input class="form-control taskField" id="workerId" placeholder="Id" '+readOnly +' value="'+workerId+'"></dd>'+
 							        '<dt>Tag Id</dt>'+
-							        '<dd><input class="form-control taskField" placeholder="TagId" '+readOnly +' value="'+tagId+'"></dd>'+
+							        '<dd><input class="form-control taskField" id="tagId" placeholder="TagId" '+readOnly +' value="'+tagId+'"></dd>'+
 							        '</dl>'+
 							     '</div>';
 		var taskDetailDiv2 ='<div class="col-lg-5">'+
@@ -842,8 +842,8 @@ detailWrapView.prototype.saveChanges = function() {
 		}});
 	}
 	else{
-		$.ajax({url:"http://localhost:3000/api/tasks/:"+taskObj["task_id"],json: taskObj,method : "PUT",success:function(taskUpdate){
-			var result=taskCreation;
+		$.ajax({url:"http://localhost:3000/api/tasks/updateTask/",data: taskObj,type : "POST",success:function(taskUpdate){
+			var result=taskUpdate;
 			$.ajax({url:"http://localhost:3000/api/tasks",success:function(resultTasks){
 				that.buildTaskDetail(resultTasks);
 			}});
@@ -855,7 +855,7 @@ detailWrapView.prototype.saveChanges = function() {
 
 detailWrapView.prototype.sendEmail = function() {
 	var emailObj={};
-	$.ajax({url:"http://localhost:3000/api/sendRERAlertEmail",json: emailObj,method : "PUT",success:function(successEmail){
+	$.ajax({url:"http://localhost:3000/api/sendRERAlertEmail",data: emailObj,type : "PUT",success:function(successEmail){
 		var result=successEmail;
 	}});
 };

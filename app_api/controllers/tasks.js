@@ -66,40 +66,62 @@ module.exports.getTasks = function(req, res) {
         }) */
     })
 };
+/*
+ * 
+ * db.products.update(
+   { _id: 100 },
+   { $set:
+      {
+        quantity: 500,
+        details: { model: "14Q3", make: "xyz" },
+        tags: [ "coats", "outerwear", "clothing" ]
+      }
+   }
+)
 
+db.people.findAndModify({
+    query: { name: "Andy" },
+    sort: { rating: 1 },
+    update: { $inc: { score: 1 } },
+    upsert: true
+})
+ */
 
 /* PUT /api/tasks/:taskname */
 module.exports.updateTask = function(req, res) {
-  if (!req.params.task_id) {
+	
+	
+  if (!req.body.task_id) {
     sendJsonResponse(res, 404, {
       "message": "Not found, locationid is required"
     });
     return;
   }
 	console.log(req.params);
-  tasks.update(
-  {task_id: req.params.task_id},
-  {
-		task_name: req.params.task_name,
-        task_id: req.params.task_id,
-		project_name: req.params.project_name,
-		planned_start_time: req.params.planned_start_time,
-		planned_finish_time: req.params.planned_finish_time,
-		start_time: req.params.start_time,
-		finish_time:req.params.finish_time,
-		status:req.params.status,
-        supervisor_id: "test123",
-        supervisor_email: "test",
-        performance: req.params.performance,
-        place: req.params.place,
-        workforce: req.params.workforce
-  },
-  { multi: true }
-  );
-   sendJsonResponse(res, 200, {
-      "message": "Successfully Updated"
-    });
-};
+	
+	tasks.update({task_id:req.body.task_id}, {$set:
+	
+	{	
+		task_name: req.body.task_name,	
+        task_id: req.body.task_id,
+		project_name: req.body.project_name,
+        supervisor_id: req.body.supervisor_id,
+        supervisor_email: req.body.supervisor_email
+    }},
+        
+        function(err, result) {
+	    if (err)
+	        {
+	    		console.log("Error"+err);
+	        }
+	    else{
+	    	sendJsonResponse(res, 200, {
+	    	      "message": "Successfully Updated"
+	    	    });
+	    }
+	});
+  
+	};
 
 
 var buildTasksList = function(req, res, results) {
