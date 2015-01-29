@@ -70,7 +70,7 @@ module.exports.getTasks = function(req, res) {
 
 /* PUT /api/tasks/:taskname */
 module.exports.updateTask = function(req, res) {
-  if (!req.params.taskname) {
+  if (!req.params.task_id) {
     sendJsonResponse(res, 404, {
       "message": "Not found, locationid is required"
     });
@@ -78,7 +78,7 @@ module.exports.updateTask = function(req, res) {
   }
 
   tasks.update(
-  {task_name: req.params.taskname},
+  {task_id: req.params.task_id},
   {
 		task_name: req.params.task_name,
         task_id: req.params.task_id,
