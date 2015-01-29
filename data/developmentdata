@@ -1,0 +1,16 @@
+{
+	"action": "email",
+	"alertid" : "54ca62fff7cdc30c06d4b928",
+	"alert_type" : "RiskRegionEnter",
+	"reason" : "This worker enters to a work site without permission",
+	"created_time" : "2015-01-29T16:42:39.412Z",
+	"status" : "open",
+	"place_name" : "Al Qadisiyyah Work Site 01",
+	"details" : {
+		"Supervisor Email" : "sctest2004@gmail.com",
+		"Enter Time" : "2015-01-29T16:42:39.412Z",
+		"Worker ID" : "worker20150118013",
+		"Second Name" : "Ajmal",
+		"First Name" : "Saeed"
+	}
+}

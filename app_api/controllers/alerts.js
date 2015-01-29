@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Alert = mongoose.model('Alert');
+var integration = require('./integration');
 
 
 var sendJsonResponse = function(res, status, content) {
@@ -61,29 +62,79 @@ module.exports.getAlerts = function(req, res) {
 
 /* PUT /api/alerts/:alertid */
 module.exports.updateAlert = function(req, res) {
-  if (!req.params.alertid) {
+  if (!req.body.alertid) {
     sendJsonResponse(res, 404, {
       "message": "Not found, locationid is required"
     });
     return;
   }
-  
-  tasks.update( 
-  {_id: req.params.alertid},
-  {
-			alert_type: req.params.alert_type,
-      reason: req.params.reason,
-			created_time: req.params.created_time,
-			status: req.params.status,
-			place_name: req.params.place_name,
-			details: req.params.details
-  },
-  { multi: true }
-  );
-   sendJsonResponse(res, 200, {
-      "message": "Successfully Updated"
-    });
-};  
+
+    if(req.body.action == "email") {
+
+        sendAlertEmail(req, res);
+
+        Alert.update(
+            {_id: req.body.alertid},
+            {
+                alert_type: req.body.alert_type,
+                reason: req.body.reason,
+                created_time: req.body.created_time,
+                status: req.body.status,
+                place_name: req.body.place_name,
+                details: req.body.details
+            },
+            {multi: true}
+        );
+        sendJsonResponse(res, 200, {
+            "message": "Alert updated"
+        })
+    }
+};
+
+var sendAlertEmail = function(req, res) {
+
+    if(req.body.alert_type == "RiskRegionEnter") {
+        var detail = new Object();
+        detail.first_name = req.body.first_name;
+        detail.second_name = req.body.second_name;
+        detail.worker_id = req.body.worker_id;
+        detail.enter_time = req.body.enter_time;
+        detail.supervisor_email = req.body.supervisor_email;
+
+        var obj = new Object();
+        obj.alert_type = req.body.alert_type;
+        obj.reason = req.body.reason;
+        obj.created_time = req.body.created_time;
+        obj.status = req.body.status;
+        obj.place_name = req.body.place_name;
+        obj.details = detail;
+
+        createRiskEnterRegionAlertEmail(req, res, obj);
+
+        sendJsonResponse(res, 200, "RiskEnterRegion Alert Email sent");
+    }
+    else {
+        sendJsonResponse(res, 404, "Wrong Alert Type");
+    }
+}
+
+var createRiskEnterRegionAlertEmail = function(req, res, obj) {
+    var body = '<b>Alert Type:  </b>' + req.body.alert_type + '<hr>';
+    body = body + '<p><b>Reason: </b>' + 'A worker enters a region without permission' + '<\p>';
+    body = body + '<p><b>Worker First Name: </b>' + req.body.details.worker_firstname + '<\p>';
+    body = body + '<p><b>Worker Second Name: </b>' + req.body.details.worker_secondname + '<\p>';
+    body = body + '<p><b>Worker ID: </b>' + req.body.details.worker_id + '<\p>';
+    body = body + '<p><b>Place: </b>' + req.body.place_name + '<\p>';
+    body = body + '<p><b>Enter Time: </b>' + req.body.details.enter_time + '<\p>';
+
+    var to = 'Task Manager <' + req.body.details['Supervisor Email'] + '>';
+    var from = 'Project Manager <sctest2004@gmail.com>';
+    var subject = 'Worker Enter A Region without Permission';
+
+    integration.sendEmail(body, from, to, subject);
+}
+
+
   
 module.exports.getAlert = function(req, res) {   
   if (req.params && req.params.alerttype) {

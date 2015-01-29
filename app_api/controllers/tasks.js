@@ -97,10 +97,8 @@ module.exports.updateTask = function(req, res) {
     });
     return;
   }
-	console.log(req.params);
-	
+
 	tasks.update({task_id:req.body.task_id}, {$set:
-	
 	{	
 		task_name: req.body.task_name,	
         task_id: req.body.task_id,

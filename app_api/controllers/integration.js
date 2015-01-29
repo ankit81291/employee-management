@@ -229,44 +229,6 @@ var createWorkerLateAlert = function(place, worker, task) {
     return obj;
 }
 
-module.exports.sendRiskEnterRegionAlertEmail = function(req, res) {
-    var detail = new Object();
-    detail.first_name = req.params.first_name;
-    detail.second_name = req.params.second_name;
-    detail.worker_id = req.params.worker_id;
-    detail.enter_time = req.params.enter_time;
-    detail.supervisor_email = req.params.supervisor_email;
-
-    var obj = new Object();
-    obj.alert_type = req.params.alert_type;
-    obj.reason = req.params.reason;
-    obj.created_time = req.params.created_time;
-    obj.status = req.params.status;
-    obj.place_name = req.params.place_name;
-    obj.details = detail;
-
-    createRiskEnterRegionAlertEmail(obj);
-
-    sendJsonResponse(res, 200, "RiskEnterRegion Alert Email sent");
-
-}
-
-var createRiskEnterRegionAlertEmail = function(obj) {
-    var body = '<b>Alert Type:  </b>' + obj.alert_type + '<hr>';
-    body = body + '<p><b>Reason: </b>' + 'A worker enters a region without permission' + '<\p>';
-    body = body + '<p><b>Worker First Name: </b>' + obj.details.worker_firstname + '<\p>';
-    body = body + '<p><b>Worker Second Name: </b>' + obj.details.worker_secondname + '<\p>';
-    body = body + '<p><b>Worker ID: </b>' + obj.details.worker_id + '<\p>';
-    body = body + '<p><b>Place: </b>' + obj.place_name + '<\p>';
-    body = body + '<p><b>Enter Time: </b>' + obj.details.enter_time + '<\p>';
-    body = body + '<p><b>Status: </b>' + obj.status + '<\p>';
-
-    var to = 'Task Manager <' + obj.details.supervisor_email + '>';
-    var from = 'Project Manager <sctest2004@gmail.com>';
-    var subject = 'Worker Enter A Region without Permission';
-
-    sendEmail(body, from, to, subject);
-}
 
 var createWorkerLateEmail = function(obj, task) {
     var body = '<b>Alert Type:  </b>' + obj.alert_type + '<hr>';
@@ -286,7 +248,7 @@ var createWorkerLateEmail = function(obj, task) {
     sendEmail(body, from, to, subject);
 }
 
-var sendEmail = function(body, from, to, subject) {
+module.exports.sendEmail = function(body, from, to, subject) {
     var msg = {};
     msg.html = body;
     msg.from = from;
