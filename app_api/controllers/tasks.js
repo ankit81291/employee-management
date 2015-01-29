@@ -25,9 +25,9 @@ module.exports.createTask= function(req, res) {
       finish_time:req.body.finish_time,
       status:req.body.status,
       supervisor_id: req.body.supervisor_id,
-      performance: reg.body.performance,
-      place: req.body.place,
-      workforce: req.body.workforce
+      performance: "",
+      place: "",
+      workforce: ""
   }, function(err, location) {
     if (err) {
       console.log(err);

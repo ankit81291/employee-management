@@ -22,16 +22,16 @@ var workerSchema = new mongoose.Schema({
 });
 
 var placeSchema = new mongoose.Schema({
-    name: {type: String, required: true},
-    place_id: {type: String, required: true},
-    address: {type: String, required: true},
-    coords: {type: [Number], required: false},
+    name: {type: String},
+    place_id: {type: String},
+    address: {type: String},
+    coords: {type: [Number]},
     orgnization: String,
     parent_place: String,
     supervisor_id: String,
     supervisor_email: String,
-    tasks: {type: [taskSchema], required: true},
-    workforce: {type: [workerSchema], required: true}
+    tasks: {type: [taskSchema]},
+    workforce: {type: [workerSchema]}
 });
 
 mongoose.model('Place', placeSchema);

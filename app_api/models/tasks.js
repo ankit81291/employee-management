@@ -16,11 +16,11 @@ var workerSchema = new mongoose.Schema({
 });
 
 var placeSchema = {
-    place_id: {type: String, required: true},
-    name: {type: String, required: true},
-    address: {type: String, required: true},
-    coords: {type: [Number], required: false},
-    organization: {type: String, required: true}
+    place_id: {type: String},
+    name: {type: String},
+    address: {type: String},
+    coords: {type: [Number]},
+    organization: {type: String}
 };
 
 var performanceSchema = {
@@ -38,12 +38,12 @@ var taskSchema = new mongoose.Schema({
     planned_finish_time: {type: Date, "default": Date.now},
     start_time: {type: Date, "default": Date.now},
     finish_time: {type: Date, "default": Date.now},
-    status: {type: String, required: true},
+    status: {type: String},
     supervisor_id: String,
     supervisor_email: String,
     performance: performanceSchema,
     place: placeSchema,
-    workforce: {type: [workerSchema], required: true}
+    workforce: {type: [workerSchema]}
 });
 
 mongoose.model('Task', taskSchema);
