@@ -93,14 +93,13 @@ module.exports.updateAlert = function(req, res) {
 };
 
 var sendAlertEmail = function(req, res) {
-
     if(req.body.alert_type == "RiskRegionEnter") {
         var detail = new Object();
-        detail.first_name = req.body.first_name;
-        detail.second_name = req.body.second_name;
-        detail.worker_id = req.body.worker_id;
-        detail.enter_time = req.body.enter_time;
-        detail.supervisor_email = req.body.supervisor_email;
+        detail.first_name = req.body.details["First Name"];
+        detail.second_name = req.body.details["Second Name"];
+        detail.worker_id = req.body.details["Worker ID"];
+        detail.enter_time = Date.now();
+        detail.supervisor_email = req.body.details["Supervisor Email"];
 
         var obj = new Object();
         obj.alert_type = req.body.alert_type;
@@ -110,7 +109,7 @@ var sendAlertEmail = function(req, res) {
         obj.place_name = req.body.place_name;
         obj.details = detail;
 
-        createRiskEnterRegionAlertEmail(req, res, obj);
+        createRiskEnterRegionAlertEmail(obj);
 
         sendJsonResponse(res, 200, "RiskEnterRegion Alert Email sent");
     }
@@ -119,16 +118,16 @@ var sendAlertEmail = function(req, res) {
     }
 }
 
-var createRiskEnterRegionAlertEmail = function(req, res, obj) {
-    var body = '<b>Alert Type:  </b>' + req.body.alert_type + '<hr>';
+var createRiskEnterRegionAlertEmail = function(obj) {
+    var body = '<b>Alert Type:  </b>' + obj.alert_type + '<hr>';
     body = body + '<p><b>Reason: </b>' + 'A worker enters a region without permission' + '<\p>';
-    body = body + '<p><b>Worker First Name: </b>' + req.body.details.worker_firstname + '<\p>';
-    body = body + '<p><b>Worker Second Name: </b>' + req.body.details.worker_secondname + '<\p>';
-    body = body + '<p><b>Worker ID: </b>' + req.body.details.worker_id + '<\p>';
-    body = body + '<p><b>Place: </b>' + req.body.place_name + '<\p>';
-    body = body + '<p><b>Enter Time: </b>' + req.body.details.enter_time + '<\p>';
+    body = body + '<p><b>Worker First Name: </b>' + obj.details.first_name + '<\p>';
+    body = body + '<p><b>Worker Second Name: </b>' + obj.details.second_name + '<\p>';
+    body = body + '<p><b>Worker ID: </b>' + obj.details.worker_id + '<\p>';
+    body = body + '<p><b>Place: </b>' + obj.place_name + '<\p>';
+    body = body + '<p><b>Enter Time: </b>' + obj.details.enter_time + '<\p>';
 
-    var to = 'Task Manager <' + req.body.details['Supervisor Email'] + '>';
+    var to = 'Task Manager <' + obj.details.supervisor_email + '>';
     var from = 'Project Manager <sctest2004@gmail.com>';
     var subject = 'Worker Enter A Region without Permission';
 
