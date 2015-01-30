@@ -248,6 +248,18 @@ var createWorkerLateEmail = function(obj, task) {
     sendEmail(body, from, to, subject);
 }
 
+var sendEmail = function(body, from, to, subject) {
+    var msg = {};
+    msg.html = body;
+    msg.from = from;
+    msg.to = to;
+    msg.subject = subject;
+
+    transporter.sendMail(msg, function (err) {
+        if (err) console.log('Sending to ' + msg.to + ' failed: ' + err);
+    })
+};
+
 module.exports.sendEmail = function(body, from, to, subject) {
     var msg = {};
     msg.html = body;

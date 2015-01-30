@@ -22,11 +22,11 @@ var workerSchema = new mongoose.Schema({
 });
 
 var placeSchema = new mongoose.Schema({
-    name: {type: String},
-    place_id: {type: String},
+    name: {type: String, required: true},
+    place_id: {type: String, required: true},
     address: {type: String},
     coords: {type: [Number]},
-    orgnization: String,
+    organization: String,
     parent_place: String,
     supervisor_id: String,
     supervisor_email: String,

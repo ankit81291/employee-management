@@ -10,7 +10,7 @@ db.tasks.save(
 	finish_time: ISODate('2014-12-03T16:00:00Z'),
 	status: 'planned',
 	supervisor_id: 'staff20150118005',
-	supervisor_email: 'sctest2004@gmail.com>',
+	supervisor_email: 'sctest2004@gmail.com',
     performance: {
         completion: 0.0,
         equipment_available: 0.4,
@@ -22,7 +22,6 @@ db.tasks.save(
         place_id: 'place000000002',
         address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
         coords: [21.458785, 39.960421],
-        parent_place: 'Al Qadisiyyah Rd Site',
         organization: 'Al- Jabr project'
     },
 	workforce: [
@@ -54,7 +53,7 @@ db.tasks.save(
     finish_time: ISODate('2014-12-03T16:00:00Z'),
     status: 'started',
     supervisor_id: 'sup32344343',
-    supervisor_email: 'sctest2004@gmail.com>',
+    supervisor_email: 'sctest2004@gmail.com',
         performance: {
         completion: 0.8,
         equipment_available: 0.5,
@@ -82,7 +81,7 @@ db.tasks.save(
     finish_time: ISODate('2014-12-03T16:00:00Z'),
     status: 'started',
     supervisor_id: 'sup32344343',
-    supervisor_email: 'sctest2004@gmail.com>',
+    supervisor_email: 'sctest2004@gmail.com',
         performance: {
         completion: 0.2,
         equipment_available: 0.5,
@@ -110,7 +109,7 @@ db.tasks.save(
     finish_time: ISODate('2014-12-03T16:00:00Z'),
     status: 'started',
     supervisor_id: 'sup32344343',
-    supervisor_email: 'sctest2004@gmail.com>',
+    supervisor_email: 'sctest2004@gmail.com',
         performance: {
         completion: 0.6,
         equipment_available: 0.2,
@@ -138,7 +137,7 @@ db.tasks.save(
     finish_time: ISODate('2014-12-03T16:00:00Z'),
     status: 'started',
     supervisor_id: 'sup32344343',
-    supervisor_email: 'sctest2004@gmail.com>',
+    supervisor_email: 'sctest2004@gmail.com',
         performance: {
         completion: 0.5,
         equipment_available: 0.7,
@@ -166,7 +165,7 @@ db.tasks.save(
     finish_time: ISODate('2014-12-03T16:00:00Z'),
     status: 'started',
     supervisor_id: 'sup32344343',
-    supervisor_email: 'sctest2004@gmail.com>',
+    supervisor_email: 'sctest2004@gmail.com',
         performance: {
         completion: 0.7,
         equipment_available: 0.5,
@@ -193,7 +192,7 @@ db.tasks.save(
     finish_time: ISODate('2014-12-03T16:00:00Z'),
     status: 'started',
     supervisor_id: 'sup32344343',
-    supervisor_email: 'sctest2004@gmail.com>',
+    supervisor_email: 'sctest2004@gmail.com',
         performance: {
         completion: 0.5,
         equipment_available: 0.2,
@@ -219,7 +218,7 @@ db.tasks.save(
     finish_time: ISODate('2014-12-03T16:00:00Z'),
     status: 'finished',
     supervisor_id: 'sup32344343',
-    supervisor_email: 'sctest2004@gmail.com>',
+    supervisor_email: 'sctest2004@gmail.com',
         performance: {
         completion: 0.5,
         equipment_available: 0.3,
@@ -245,7 +244,7 @@ db.tasks.save(
     finish_time: ISODate('2014-12-03T16:00:00Z'),
     status: 'started',
     supervisor_id: 'sup32344343',
-    supervisor_email: 'sctest2004@gmail.com>',
+    supervisor_email: 'sctest2004@gmail.com',
         performance: {
         completion: 0.5,
         equipment_available: 0.6,
@@ -271,7 +270,7 @@ db.tasks.save(
     finish_time: ISODate('2014-12-03T16:00:00Z'),
     status: 'started',
     supervisor_id: 'sup32344343',
-    supervisor_email: 'sctest2004@gmail.com>',
+    supervisor_email: 'sctest2004@gmail.com',
         performance: {
         completion: 0.7,
         equipment_available: 0.4,

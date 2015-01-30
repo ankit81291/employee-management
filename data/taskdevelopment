@@ -1,0 +1,23 @@
+{
+    "task_name": "Concrete 0012",
+    "task_id": "task20150128001con",
+    "project_name": "Karan Suites and Towers",
+    "planned_start_time": "2014-12-03T13:00:00Z",
+    "status": "open",
+    "supervisor_id": "staff20150118005",
+    "supervisor_email": "sctest2004@gmail.com",
+    "performance": {
+        "completion": 0,
+        "equipment_available": 0,
+        "workforce_available": 0,
+        "material_available": 0
+    },
+    "place": {
+        "place_id": "place000000002"
+    },
+    "workforce": [
+        {
+            "worker_id": "worker20150118001"
+        }
+    ]
+}
