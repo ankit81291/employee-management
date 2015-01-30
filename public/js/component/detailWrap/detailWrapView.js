@@ -915,7 +915,7 @@ detailWrapView.prototype.sendEmail = function(obj) {
 		action="email";
 	}
 	obj["action"]=action;
-	$.ajax({url:"http://localhost:3000/api/alert/:"+alertid,data: JSON.stringify(obj),type : "PUT",contentType: 'application/json',success:function(successEmail){
+	$.ajax({url:"http://localhost:3000/api/alert/:"+obj["alertid"],data: JSON.stringify(obj),type : "PUT",contentType: 'application/json',success:function(successEmail){
 		var result=successEmail;
 	}});
 };
