@@ -30,7 +30,7 @@ module.exports.createTask= function(req, res) {
 
             var task = createTaskObject(req, res, place, worker);
             addTaskToPlace(req, res, place, task, worker);
-            sendJsonResponse(res, 200, "Task created.");
+            sendJsonResponse(res, 201, "Task created.");
         })
     })
 }
