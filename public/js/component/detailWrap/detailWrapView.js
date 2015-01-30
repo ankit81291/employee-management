@@ -242,6 +242,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 		var organization="";
 		var address="";
 		var name="";
+		var plannedTime="";
 		if(obj["task_name"]!=undefined){
 			taskName= obj["task_name"];
 			taskId= obj["task_id"];
@@ -251,6 +252,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 			organization=obj["place"]["organization"];
 			address=obj["place"]["address"];
 			name=obj["place"]["name"];
+			plannedTime=obj["planned_start_time"]
 		}
 		else{
 			taskName= "";
@@ -261,6 +263,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 			organization="";
 			address="";
 			name="";
+			plannedTime="";
 			readOnly="";
 		}
 		var taskDetailDiv1 ='<div class="panel-body">'+
@@ -268,7 +271,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 									'<dl class="dl-horizontal">'+
 							        '<dt>Task</dt>'+
 							        '<dd> <input id="taskName" class="form-control taskField" placeholder="Task" '+readOnly+' value="'+taskName+'"></dd>'+
-							        '<dt>Type</dt>'+
+							        '<dt>Task Id</dt>'+
 							        '<dd><input id="taskId" class="form-control taskField" placeholder="Task Id" '+readOnly +' value="'+taskId+'"></dd>'+
 							        '<dt>Project Name</dt>'+
 							        '<dd><input id="projName" class="form-control taskField" placeholder="Project Name" '+readOnly +' value="'+projectName+'"></dd>'+
@@ -276,13 +279,15 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 							        '<dd id="workerDetail"><input id="WorkerName" style="display:inline;" class="form-control taskField" placeholder="Supervisor Email" '+readOnly +' value="'+supervisor_email+'"></dd>'+
 							        '<dt>Supervisor Id</dt>'+
 							        '<dd><input id="superId" class="form-control taskField" placeholder="Project Name" '+readOnly +' value="'+workerId+'"></dd>'+
+							        '<dt>Planned Start Time</dt>'+
+							        '<dd><input type="datetime-local" id="plannedStart" class="form-control taskField"'+readOnly +' value="'+plannedTime+'"></dd>'+
 							        '</dl>'+
 							     '</div>';
 		var taskDetailDiv2 ='<div class="col-lg-5">'+
 								'<dl class="dl-horizontal">'+
 							        '<dt>Organization</dt>'+
 							        '<dd><input id="Organization" style="display:inline;" class="form-control taskField" placeholder="Organization" '+readOnly +' value="'+organization+'"></dd>'+
-							        '<dt>Organization Name</dt>'+
+							        '<dt>Location</dt>'+
 							        '<dd><input id="orgName" class="form-control taskField" placeholder="Organization Name" '+readOnly +' value="'+name+'"></dd>'+
 							        '<dt>Organization Address</dt>'+
 							        '<dd><input  id="orgAddress" style="width:100%;" class="form-control taskField" placeholder="Address" '+readOnly +' value="'+address+'"></dd>'+
@@ -376,7 +381,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 								      '</div>'+
 								      '<div class="modal-footer">'+
 								        "<button type='button' class='btn btn-default'  data-dismiss='modal'>Cancel</button>"+
-								        "<button type='button' class='btn btn-primary' onclick='window.app.component.sendEmail("+JSON.stringify(obj)+"'>Submit</button>"+
+								        "<button type='button' class='btn btn-primary' onclick='window.app.component.sendEmail("+JSON.stringify(obj)+")'>Submit</button>"+
 								      '</div>'+
 								    '</div>'+
 								  '</div>'+
@@ -829,6 +834,7 @@ detailWrapView.prototype.saveChanges = function() {
 	taskObj["place"]["organization"]=$("#Organization").val();
 	taskObj["place"]["name"]=$("#orgName").val();
 	taskObj["place"]["address"]=$("#orgAddress").val();
+	taskObj["planned_start_time"]=$("#plannedStart").val();
 	var that =this;
 	if(this.newTask){
 		taskObj["status"]="open";
@@ -854,8 +860,15 @@ detailWrapView.prototype.saveChanges = function() {
 };
 
 detailWrapView.prototype.sendEmail = function(obj) {
-	
-	$.ajax({url:"http://localhost:3000/api/sendRERAlertEmail",data: obj,type : "POST",success:function(successEmail){
+	var action="";
+	if($("#optionsRadios1")[0].checked){
+		action="SMS";
+	}
+	else if($("#optionsRadios2")[0].checked){
+		action="email";
+	}
+	obj["action"]=action;
+	$.ajax({url:"http://localhost:3000/api/alert/:"+alertid,data: JSON.stringify(obj),type : "PUT",contentType: 'application/json',success:function(successEmail){
 		var result=successEmail;
 	}});
 };

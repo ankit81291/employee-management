@@ -61,8 +61,8 @@ define(["detailWrap/detailWrapView"], function(view){
 	detailWrap.prototype.saveChanges = function() {
 		return this.oView.saveChanges();
 	};
-	detailWrap.prototype.sendEmail = function() {
-		return this.oView.sendEmail();
+	detailWrap.prototype.sendEmail = function(obj) {
+		return this.oView.sendEmail(obj);
 	};
 	return (new detailWrap());
 });

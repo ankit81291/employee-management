@@ -76,8 +76,8 @@ define(["detailWrap/detailWrap","navBar/navBar","items/items"], function(detailW
 		this.detailWrap.saveChanges();
 	};
 	
-	Component.prototype.sendEmail = function(){
-		this.detailWrap.sendEmail();
+	Component.prototype.sendEmail = function(obj){
+		this.detailWrap.sendEmail(obj);
 	};
 
 	Component.prototype.buildDonutChart = function(){

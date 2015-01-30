@@ -35,55 +35,59 @@ define(["component"],function(component) {
 	
 	
 	Application.prototype.buildTable = function(){
-		$("#morris-area-chart").empty();
-		var tableHeader=$('<div class="table-responsive">');
-			
-		 var content = $('<table class="table table-bordered table-hover table-striped">');
-		 var myList=tableDataRow;
-		 var columnSet = [];
-		    var headerTr$ = $('<tr/>');
+		$.ajax({url:"http://localhost:3000/api/performancedata",success:function(resultPerformaceData){
+			$("#morris-area-chart").empty();
+			var tableHeader=$('<div class="table-responsive">');
+			tableDataRow = resultPerformaceData;
+			 var content = $('<table class="table table-bordered table-hover table-striped">');
+			 var myList=tableDataRow;
+			 var columnSet = [];
+			    var headerTr$ = $('<tr/>');
 
-		    for (var i = 0 ; i < myList.length ; i++) {
-		        var rowHash = myList[i];
-		        for (var key in rowHash) {
-		            if ($.inArray(key, columnSet) == -1){
-		                columnSet.push(key);
-		                headerTr$.append($('<th/>').html(key));
-		            }
-		        }
-		    }
-		    content.append(headerTr$);
+			    for (var i = 0 ; i < myList.length ; i++) {
+			        var rowHash = myList[i];
+			        for (var key in rowHash) {
+			            if ($.inArray(key, columnSet) == -1){
+			                columnSet.push(key);
+			                headerTr$.append($('<th/>').html(key));
+			            }
+			        }
+			    }
+			    content.append(headerTr$);
 
-		    var columns= columnSet;
-		    var rows=$('');
-		    for (var i = 0 ; i < myList.length ; i++) {
-		        var row$ = $('<tr/>');
-		        for (var colIndex = 0 ; colIndex < columns.length ; colIndex++) {
-		            var cellValue = myList[i][columns[colIndex]];
+			    var columns= columnSet;
+			    var rows=$('');
+			    for (var i = 0 ; i < myList.length ; i++) {
+			        var row$ = $('<tr/>');
+			        for (var colIndex = 0 ; colIndex < columns.length ; colIndex++) {
+			            var cellValue = myList[i][columns[colIndex]];
 
-		            if (cellValue == null) { cellValue = ""; }
+			            if (cellValue == null) { cellValue = ""; }
 
-		            row$.append($('<td/>').html(cellValue));
-		        }
-		        content.append(row$);
-		    }
-		    
-		    tableHeader.append(content);
-		 $("#morris-area-chart").append(tableHeader);
-		 
+			            row$.append($('<td/>').html(cellValue));
+			        }
+			        content.append(row$);
+			    }
+			    
+			    tableHeader.append(content);
+			 $("#morris-area-chart").append(tableHeader);
+
+		}});		 
 	};
 	Application.prototype.buildChart = function(){
-		$("#morris-area-chart").empty();
-	  Morris.Bar({
-	        element: 'morris-area-chart',
-	        data: tableDataRow,
-	        xkey: 'Location',
-	        ykeys: ['Task Performace', 'Resource'],
-	        labels: ['Task Performace', 'Resource'],
-	        pointSize: 2,
-	        hideHover: 'auto',
-	        resize: true
-	    });
+		$.ajax({url:"http://localhost:3000/api/performancedata",success:function(resultPerformaceData){
+			$("#morris-area-chart").empty();
+			  Morris.Bar({
+			        element: 'morris-area-chart',
+			        data: resultPerformaceData,
+			        xkey: 'location',
+			        ykeys: ['completion', 'equipment_available','workforce_available','material_available'],
+			        labels: ['completion', 'equipment_available','workforce_available','material_available'],
+			        pointSize: 2,
+			        hideHover: 'auto',
+			        resize: true
+			    });
+		}});
 	};
 	return Application;	
 });
