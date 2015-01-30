@@ -36,6 +36,7 @@ module.exports.getAlerts = function(req, res) {
         results.forEach(function(doc){
 
 		alertCollections.push({
+            'alertid': doc.id,
 			'alert_type': doc.alert_type,
       'reason': doc.reason,
       'created_time': doc.created_time,
@@ -157,6 +158,7 @@ var alerts = [];
 results.forEach(function(doc) {
   
   alerts.push({
+      alertid: doc.id,
       alert_type: doc.alert_type,
       reason: doc.reason,
       created_time: doc.created_time,
