@@ -468,3 +468,14 @@ html, body, #map-canvas {
     font-size: 13px;
     font-weight: 300;
   }
+  .dynamicTable{
+	  border:1px solid black;
+  }
+  .dynamicTable th{
+	  padding: 4px;
+  	border: 1px solid black;
+  }
+  .dynamicTable td{
+	  padding: 4px;
+  	border: 1px solid black;
+  }

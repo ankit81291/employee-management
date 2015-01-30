@@ -243,6 +243,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 		var address="";
 		var name="";
 		var plannedTime="";
+		var workforce=[];
 		if(obj["task_name"]!=undefined){
 			taskName= obj["task_name"];
 			taskId= obj["task_id"];
@@ -252,7 +253,8 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 			organization=obj["place"]["organization"];
 			address=obj["place"]["address"];
 			name=obj["place"]["name"];
-			plannedTime=obj["planned_start_time"]
+			plannedTime=obj["planned_start_time"];
+			workforce=obj["workforce"];
 		}
 		else{
 			taskName= "";
@@ -265,7 +267,48 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 			name="";
 			plannedTime="";
 			readOnly="";
+			workforce=[{
+				        "first_name": "",
+				        "second_name": "",
+				        "tag_id": "",
+				        "email": "",
+				        "phone": "",
+				        "sex": "",
+				        "status": "",
+				      }]
 		}
+		
+		var array = typeof workforce != 'object' ? JSON.parse(workforce) : workforce;
+		 
+	    var str = '<table id="" class="dynamicTable">';
+	     var headerCount=0;
+	     var cellCount=0;
+	    // table head
+	        str += '<thead><tr>';
+	        for (var index in array[0]) {
+	        	str += '<th scope="col">' + index + ' </th>';
+	        	headerCount=headerCount+1;
+	        	if(headerCount>2){
+	        		break;
+	        	}
+	        }
+	        str += '</tr></thead>';	     
+	    // table body
+	    str += '<tbody>';
+	    for (var i = 0; i < array.length; i++) {
+	        str += (i % 2 == 0) ? '<tr class="alt">' : '<tr>';
+	        for (var index in array[i]) {
+	            str += '<td>' + array[i][index] + '</td>';
+	            cellCount=cellCount+1;
+	            if(cellCount>2){
+	            	break;
+	            }
+	        }
+	        str += '</tr>';
+	        }
+	    str += '</tbody>'
+	    str += '</table>';
+
 		var taskDetailDiv1 ='<div class="panel-body">'+
 								'<div class="col-lg-5">'+
 									'<dl class="dl-horizontal">'+
@@ -276,7 +319,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 							        '<dt>Project Name</dt>'+
 							        '<dd><input id="projName" class="form-control taskField" placeholder="Project Name" '+readOnly +' value="'+projectName+'"></dd>'+
 							        '<dt>Supervisor Email</dt>'+
-							        '<dd id="workerDetail"><input id="WorkerName" style="display:inline;" class="form-control taskField" placeholder="Supervisor Email" '+readOnly +' value="'+supervisor_email+'"></dd>'+
+							        '<dd><input id="WorkerName" style="display:inline;" class="form-control taskField" placeholder="Supervisor Email" '+readOnly +' value="'+supervisor_email+'"></dd>'+
 							        '<dt>Supervisor Id</dt>'+
 							        '<dd><input id="superId" class="form-control taskField" placeholder="Project Name" '+readOnly +' value="'+workerId+'"></dd>'+
 							        '<dt>Planned Start Time</dt>'+
@@ -291,6 +334,8 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 							        '<dd><input id="orgName" class="form-control taskField" placeholder="Organization Name" '+readOnly +' value="'+name+'"></dd>'+
 							        '<dt>Organization Address</dt>'+
 							        '<dd><input  id="orgAddress" style="width:100%;" class="form-control taskField" placeholder="Address" '+readOnly +' value="'+address+'"></dd>'+
+							        '<dt>WorkForce</dt>'+
+							        '<dd id="workerDetail">'+str+'</dd>'+
 						        '</dl>'+
 						        '<div class="parentButton">'+
 						        '</div>'+
@@ -326,7 +371,9 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
         								tempDiv2=tempDiv2+tempDiv3;
         							}
         				
-        			var taskTempDiv4='</dl>'+
+        			var taskTempDiv4='<dt></dt>'+
+			        						'<dd><img src="img/regionEnter.jpg"></dd>'+
+        								'</dl>'+
 	        								'<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">'+
 	        								'Take Action'+
 	        								'</button>'+
