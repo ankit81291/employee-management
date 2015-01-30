@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2a753123-b8ea-48ef-824f-9b885cb5d39e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_api/controllers/alerts.js" afterPath="$PROJECT_DIR$/app_api/controllers/alerts.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="getting-MEAN.iws" />
@@ -40,8 +39,8 @@
       <file leaf-file-name="alerts.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app_api/controllers/alerts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.6090226" vertical-offset="0" max-vertical-offset="2940">
-              <caret line="160" column="22" selection-start-line="160" selection-start-column="22" selection-end-line="160" selection-end-column="22" />
+            <state vertical-scroll-proportion="-2.6466165" vertical-offset="2090" max-vertical-offset="2940">
+              <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -967,8 +966,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app_api/controllers/alerts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.6090226" vertical-offset="0" max-vertical-offset="2940">
-          <caret line="160" column="22" selection-start-line="160" selection-start-column="22" selection-end-line="160" selection-end-column="22" />
+        <state vertical-scroll-proportion="-2.6466165" vertical-offset="2090" max-vertical-offset="2940">
+          <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
           <folding />
         </state>
       </provider>
