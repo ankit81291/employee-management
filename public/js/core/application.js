@@ -11,17 +11,22 @@ define(["component"],function(component) {
 		var ItemDivContent;
 		var detailWrapDivContent;
 		var that=this;
+		var itemCount={};
 		$.ajax({url:"http://localhost:3000/api/alerts",success:function(resultAlert){
 				alertObj=resultAlert;
+				itemCount["Alert"]=alertObj.length;
 				$.ajax({url:"http://localhost:3000/api/tasks",success:function(resultTasks){
 					taskObj=resultTasks;
+					itemCount["Task"]=taskObj.length;
 					$.ajax({url:"http://localhost:3000/api/workers",success:function(resultWorker){
 						workerObj=resultWorker;
 						$.ajax({url:"http://localhost:3000/api/devices",success:function(resultdevice){
 							deviceObj=resultdevice;
+							itemCount["Place"]=taskObj.length;
+							itemCount["Resources"]="3";
 						navDivContent = that.component.buildNavContent(obj);
 						$("#wrapper").prepend(navDivContent);
-						ItemDivContent = that.component.buildItemContent(obj);
+						ItemDivContent = that.component.buildItemContent(itemCount);
 						$("#page-wrapper").append(ItemDivContent);
 						detailWrapDivContent = that.component.buildDetailWrapContent(obj);
 						$("#page-wrapper").append(detailWrapDivContent);

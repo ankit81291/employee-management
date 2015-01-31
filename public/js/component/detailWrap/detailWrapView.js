@@ -428,7 +428,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 								      '</div>'+
 								      '<div class="modal-footer">'+
 								        "<button type='button' class='btn btn-default'  data-dismiss='modal'>Cancel</button>"+
-								        "<button type='button' class='btn btn-primary' onclick='window.app.component.sendEmail("+JSON.stringify(obj)+")'>Submit</button>"+
+								        "<button type='button' class='btn btn-primary' data-dismiss='modal' onclick='window.app.component.sendEmail("+JSON.stringify(obj)+")'>Submit</button>"+
 								      '</div>'+
 								    '</div>'+
 								  '</div>'+

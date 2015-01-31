@@ -6,7 +6,7 @@ define(["items/itemsController"], function(controller){
 	};
 	itemsView.prototype.createContent = function(obj) {
 		var CreateItembarDiv='<div class="row">';
-		var CreateItemDiv= this.createItemDiv();
+		var CreateItemDiv= this.createItemDiv(obj);
 		var  ItemBarDivFinish='</div>';
 		var div = CreateItembarDiv+CreateItemDiv+ItemBarDivFinish;
 		return div;
@@ -16,7 +16,7 @@ define(["items/itemsController"], function(controller){
 		return this.oController;
 	};
 	
-	itemsView.prototype.createItemDiv = function() {
+	itemsView.prototype.createItemDiv = function(itemCount) {
 		var itemModel = obj;
 		var ItemDiv="";
 		for(var i=0;i<itemModel.length;i++){
@@ -29,7 +29,7 @@ define(["items/itemsController"], function(controller){
 					                    '<i class="'+itemModel[i]["class-icon"]+'"></i>'+
 					                '</div>'+
 					                '<div class="col-xs-9 text-right">'+
-					                    '<div class="huge">'+itemModel[i]["count"]+'</div>'+
+					                    '<div class="huge">'+itemCount[itemModel[i]["title"]]+'</div>'+
 					                    '<div>'+itemModel[i]["title"]+'</div>'+
 					                '</div>'+
 					            '</div>'+
