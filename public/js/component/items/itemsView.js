@@ -30,13 +30,12 @@ define(["items/itemsController"], function(controller){
 					                '</div>'+
 					                '<div class="col-xs-9 text-right">'+
 					                    '<div class="huge">'+itemCount[itemModel[i]["title"]]+'</div>'+
-					                    '<div>'+itemModel[i]["title"]+'</div>'+
 					                '</div>'+
 					            '</div>'+
 					        '</div>'+
 					        '<a href="#">'+
 					            '<div class="panel-footer">'+
-					                '<span class="pull-left">View Details</span>'+
+					                '<span class="pull-left"><b>'+itemModel[i]["title"]+'</b></span>'+
 					                '<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>'+
 					                '<div class="clearfix"></div>'+
 					            '</div>'+
