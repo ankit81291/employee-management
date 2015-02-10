@@ -1,8 +1,8 @@
 var obj = [
 			   { "id": "Bundle1", "title":"Task","class":"panel panel-green","count":"10","class-icon":"fa fa-tasks fa-5x"},
-			   { "id": "Bundle2", "title":"Resources","class":"panel panel-yellow","count":"15","class-icon":"fa fa-shopping-cart fa-5x"},
-			   { "id": "Bundle3", "title":"Place","class":"panel panel-red","count":"20","class-icon":"fa fa-support fa-5x"},
-			   { "id": "Bundle4", "title":"Alert","class":"panel panel-primary","count":"5","class-icon":"fa fa-comments fa-5x"}
+			   { "id": "Bundle2", "title":"Resources","class":"panel panel-yellow","count":"15","class-icon":"fa fa-briefcase fa-5x"},
+			   { "id": "Bundle3", "title":"Place","class":"panel panel-red","count":"20","class-icon":"fa fa-globe fa-5x"},
+			   { "id": "Bundle4", "title":"Alert","class":"panel panel-primary","count":"5","class-icon":"fa fa-exclamation-triangle fa-5x"}
 		];
 
 var deviceObj=[{device_name: 'gate_reader12',class:'alert alert-info',device_id: 'device201501123B',device_type: 'Passive RFID Reader',vendor: 'Alien',place_name: 'work site 23',created_time: new Date(),status: 'open'},

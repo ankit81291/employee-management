@@ -932,6 +932,9 @@ detailWrapView.prototype.getStatusClass = function(type) {
 		case "delay":
 			cssClass="alert alert-danger";
 			break;
+		case "alerted":
+			cssClass="alert alert-danger";
+			break;
 		case "finished":
 			cssClass="alert alert-success";
 			break;
