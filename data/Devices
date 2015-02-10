@@ -32,3 +32,13 @@ db.devices.save(
     status: 'operation'
 })
 
+db.devices.save(
+{
+    device_name: 'region_reader23',
+    device_id: 'device20150121',
+    device_type: 'Mobile Reader',
+    vendor: 'Samsung',
+    place_name: 'Al Qadisiyyah Work Site 03',
+    created_time: ISODate("2014-12-03T09:00:00Z"),
+    status: 'operation'
+})

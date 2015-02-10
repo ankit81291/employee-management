@@ -4,8 +4,8 @@
   "controller_id": "dc402345",
   "timestamp": "2014-01-14T21:08:12Z",
   "message_id": "becf248b-d620-4bba-8a0b-0b8c8116a650",
-  "device_id": "device3220040",
-  "equipment_id": "equipment22343243",
-  "type": "issue",
-  "tag": "equipment2014020300012"
+  "device_id": "device20150121",
+  "equipment_id": "equip20140601",
+  "type": "not working",
+  "tag": "equipment20140203000001"
 }

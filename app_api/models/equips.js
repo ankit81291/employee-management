@@ -4,6 +4,14 @@
 
 var mongoose = require( 'mongoose' );
 
+var placeSchema = {
+    place_id: {type: String},
+    name: {type: String},
+    address: {type: String},
+    coords: {type: [Number]},
+    organization: {type: String}
+};
+
 var taskSchema = new mongoose.Schema({
     task_id: {type: String, required: true},
     task_name: {type: String, required: true},
@@ -38,7 +46,8 @@ var equipSchema = new mongoose.Schema({
     created_time: {type: Date, required: true},
     status: {type: String, required: true},
     tasks: {type: [taskSchema], required: true},
-    workforce: {type: [workerSchema], required: true}
+    workforce: {type: [workerSchema], required: true},
+    place: placeSchema
 });
 
 mongoose.model('Equip', equipSchema);

@@ -31,11 +31,11 @@ var buildEquipmentsList = function(req, res, results) {
             'equipment_type': doc.equipment_type,
             'vendor': doc.vendor,
             'commercial_type': doc.commercial_type,
-            'place_name': doc.place_name,
             'created_time': doc.created_time,
             'status': doc.status,
             'tasks': doc.tasks,
-            'workforce' : doc.workforce
+            'workforce' : doc.workforce,
+            'place': doc.place
         });
     });
     return equipments;

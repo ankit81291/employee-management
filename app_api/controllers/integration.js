@@ -8,6 +8,7 @@ var Device = mongoose.model('Device');
 var Worker = mongoose.model('Worker');
 var Place = mongoose.model('Place');
 var Task = mongoose.model('Task');
+var Equip = mongoose.model('Equip');
 
 
 var nodemailer = require("nodemailer");
@@ -48,42 +49,23 @@ var sendJsonResponse = function(res, status, content) {
 };
 
 module.exports.equipmentprocess = function(req, res) {
-  var obj = new Object();
-  
-  /*
-  obj.batch_id = req.body.batch_id;
-  obj.carrier_id = req.body.carrier_id;
-  obj.controller_id = req.body.controller_id;
-  obj.send_time = req.body.timestamp;
-  obj.message_id = req.body.message_id;
-  obj.device_id = req.body.device_id;
-  obj.equipment_id = req.body.equipment_id;
-  obj.tag = req.body.tag;
-  obj.created_time = req.body.timestamp;
-  obj.equipment_id = req.body.equipment_id;
-  obj.created_time = req.body.created_time;
-  */
-  
-  obj.batch_id = "12345";
-  obj.carrier_id = "45678";
-  obj.controller_id = "12345";
-  obj.send_time = new Date();
-  
-  obj.message_id = "12345";
-  obj.device_id = "34567";
-  obj.equipment_id = "12345";
-  obj.tag = "tag";
-  obj.created_time = new Date();
-  obj.equipment_id = "12345";
-  obj.created_time = new Date();
-  
-  var messages = {};
-  var jsonString= JSON.stringify(obj);
-  console.log(jsonString);
+    console.log("equipmentprocess");
+    var obj = {};
+    obj.batch_id = req.body.batch_id;
+    obj.carrier_id = req.body.carrier_id;
+    obj.controller_id = req.body.controller_id;
+    obj.send_time = req.body.timestamp;
+    obj.message_id = req.body.message_id;
+    obj.device_id = req.body.device_id;
+    obj.equipment_id = req.body.equipment_id;
+    obj.status = req.body.type;
+    obj.tag = req.body.tag;
 
-  generateEquipmentmaintenanceAlert(obj);
+    if(obj.status == 'not working') {
+        handleEquipmentEvent(obj);
+    }
 
-  sendJsonResponse(res, 200, "");
+    sendJsonResponse(res, 200, "Equipment Message Processed Successfully");
 };
 
 module.exports.deviceprocess = function(req, res) {
@@ -92,7 +74,7 @@ module.exports.deviceprocess = function(req, res) {
   var messages = req.body.messages;
 
   for(var i = 0; i < messages.length; i++) {
-    var obj = new Object();
+    var obj = {};
     obj.batch_id = req.body.batch_id;
     obj.carrier_id = req.body.carrier_id;
     obj.controller_id = req.body.controller_id;
@@ -104,18 +86,18 @@ module.exports.deviceprocess = function(req, res) {
     obj.tag = messages[i].tag;
     obj.created_time = messages[i].timestamp;
     messagelist.push(obj);
-  };
+  }
 
     devicemessageBatch(messagelist);
 
-  sendJsonResponse(res, 200, "Message processed successfully");
+    sendJsonResponse(res, 200, "Message processed successfully");
 };
 
 var devicemessageBatch = function(messagelist) {
    for(var i = 0; i < messagelist.length; i++) {
      var obj = messagelist[i];
        handleMessage(obj);
-   };
+   }
 };
 
 var handleMessage = function(mesObj) {
@@ -159,14 +141,14 @@ var handleMessage = function(mesObj) {
 };
 
 var createRiskEnterRegionAlert = function(place, worker) {
-    var detail = new Object();
+    var detail = {};
     detail["First Name"] = worker.first_name;
     detail["Second Name"] = worker.second_name;
     detail["Worker ID"] = worker.worker_id;
     detail["Enter Time"] = new Date();
     detail["Supervisor Email"] = place.supervisor_email;
 
-    var obj = new Object();
+    var obj = {};
     obj.alert_type = "RiskRegionEnter";
     obj.reason = "This worker enters to a work site without permission";
     obj.created_time = new Date();
@@ -175,7 +157,7 @@ var createRiskEnterRegionAlert = function(place, worker) {
     obj.details = detail;
 
     createAlert(obj);
-}
+};
 
 var checkLateWorker = function() {
     Place.find({}, function(err, places) {
@@ -208,7 +190,7 @@ var checkLateWorker = function() {
 };
 
 var createWorkerLateAlert = function(place, worker, task) {
-    var detail = new Object();
+    var detail = {};
     detail.first_name = worker.first_name;
     detail.second_name = worker.second_name;
     detail.worker_id = worker.worker_id;
@@ -216,7 +198,7 @@ var createWorkerLateAlert = function(place, worker, task) {
     detail.planned_start_time = task.planned_start_time;
     detail.supervisor_email = place.supervisor_email;
 
-    var obj = new Object();
+    var obj = {};
     obj.alert_type = "WorkerLate";
     obj.reason = "This worker is late for task: " + worker.task_name + "in " + place.name;
     obj.created_time = new Date();
@@ -227,7 +209,7 @@ var createWorkerLateAlert = function(place, worker, task) {
     createAlert(obj);
 
     return obj;
-}
+};
 
 
 var createWorkerLateEmail = function(obj, task) {
@@ -246,7 +228,7 @@ var createWorkerLateEmail = function(obj, task) {
     var subject = 'Worker late for task';
 
     sendEmail(body, from, to, subject);
-}
+};
 
 var sendEmail = function(body, from, to, subject) {
     var msg = {};
@@ -281,15 +263,15 @@ var createAlert = function(anode) {
 
 
 var generateEquipmentlateAlert = function() {
-  var detail = new Object();
+  var detail = {};
   detail["Equipment Name"] = "Croal";
   detail["Equipment ID"] = "11";
   detail["Task Name"] = "modeling";
     detail["Supervisor Email"] = "aron.william@gmail.com";
 
-  var obj = new Object();
+  var obj = {};
   obj.alert_type = "EquipmentLate";
-    obj.reason = "Equipment is late for floor fixing task in Work Site 23"
+    obj.reason = "Equipment is late for floor fixing task in Work Site 23";
   obj.created_time = new Date();
   obj.status = "open";
   obj.place_name = "Work Site 23";
@@ -303,40 +285,82 @@ var generateEquipmentlateAlert = function() {
 };
 
 var generateEquipmentmaintenanceAlert = function() {
-  var detail = new Object();
+  var detail = {};
   detail["Equipment Name"] = "Coral";
   detail["Equipment ID"] = "act11234122";
   detail["Repairer"] = "Cliff";
   detail["Repairer ID"] = "44f3eaeaf4";
   detail["Planned Start Time"] =  new Date(2014, 12, 03, 9, 39, 52, 808);
-  detail["Planned Finish Time"] = new Date(2014, 12, 03, 11, 39, 52, 808);;
-  detail["Task Name"] = "Fix Engine";
+    detail["Planned Finish Time"] = new Date(2014, 12, 03, 11, 39, 52, 808);
+    detail["Task Name"] = "Fix Engine";
 
-    var obj = new Object();
+    var obj = {};
     obj.alert_type = "EquipmentMaintenance";
-    obj.reason = "This equipment is required to be maintained"
+    obj.reason = "This equipment is required to be maintained";
     obj.created_time = new Date();
     obj.status = "open";
     obj.place_name = "Work Site 23";
     obj.details = detail;
 
+    console.log(obj);
   createAlert(obj);
 
 };
 
-var generateTasklateAlert = function() {
-  var detail = new Object();
-  detail.supervisor_id = "3254543543542";
-    detail.supervisor_email = "aron.william@gmail.com";
-  detail.task = "modeling";
+var handleEquipmentEvent = function(obj) {
+console.log("handleEquipmentEvent");
+    Device.findOne({'device_id': obj.device_id}, function(err, deviceObj) {
+        if (err) return console.error(err);
+        if(deviceObj !== null) {
+            Equip.findOne({'equipment_id': obj.equipment_id}, function(err, equipObj) {
+                if (err) return console.error(err);
+                if (equipObj !== null) {
+                    generateEquipmentNotWorkingAlert(obj, equipObj);
 
-    var obj = new Object();
-    obj.alert_type = "TaskLate";
-    obj.reason = "No enough materials for task modeling in Work Site 23",
-    obj.created_time = new Date();
-    obj.status = "open";
-    obj.place_name = "Work Site 23";
-    obj.details = detail;
+                    equipObj.update({status: "not working"}, function (err, pl) {
+                        if(err){
+                            console.log('Oh dear', err);
+                        } else {
+                            console.log('Task saved: ');
+                        }});
+
+                    generateTasklateAlert(obj, equipObj);
+                }
+            })
+        }
+    })
+}
+
+
+var generateTasklateAlert = function(obj, equipObj) {
+    var detail = {};
+    detail.equipment_name = equipObj.equipment_name;
+    detail.equipment_id = equipObj.equipment_id;
+    detail.task = equipObj.tasks[0].task_name;
+
+    var obj1 = {};
+    obj1.alert_type = "TaskLate";
+    obj1.reason = "Potential task late caused by Equipment Name: " + equipObj.equipment_name + " Equipment ID: " + equipObj.equipment_id;
+    obj1.created_time = new Date();
+    obj1.status = "Open";
+    obj1.place_name = equipObj.place.name;
+    obj1.details = detail;
   
- createAlert(obj);
+    createAlert(obj1);
 };
+
+var generateEquipmentNotWorkingAlert = function(obj, equipObj) {
+    var detail = {};
+    detail.equipment_name = equipObj.equipment_name;
+    detail.equipment_id = equipObj.equipment_id;
+    detail.task = equipObj.tasks[0].task_name;
+
+    var obj1 = {};
+    obj1.alert_type = "EquipmentNotWorking";
+    obj1.reason = "Equipment has issue. Equipment Name: " + equipObj.equipment_name + " Equipment ID: " + equipObj.equipment_id;
+    obj1.created_time = obj.send_time;
+    obj1.status = "Open";
+    obj1.place_name = equipObj.place.name;
+    obj1.details = detail;
+    createAlert(obj1);
+}

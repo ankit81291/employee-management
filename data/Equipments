@@ -1,63 +1,5 @@
 
 
-db.equips.save({
-    equipment_name: 'Excavator 123',
-    equipment_id: 'YC35123',
-    equipment_type: 'Excavator',
-    vendor: 'Yuchai',
-    commercial_type: 'rental',
-    place_name: 'Work Site 23',
-    created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation',
-    tasks: [
-         {
-            'Task ID': 'task112345',
-            'Task Name':  'fix floor',
-            'Project Name': 'site construction',
-            'Planned Start Time': ISODate("2014-12-23T09:00:00.000Z"),
-            'Start Time': ISODate("2014-12-23T09:00:00.000Z"),
-            'Expected': '4 hours',
-            'Status': 'open'
-         },
-         {
-            'Task ID': 'task112236',
-            'Task Name':  'fix floor',
-            'Project Name': 'site construction',
-            'Planned Start Time': ISODate("2014-12-23T09:00:00.000Z"),
-            'Start Time': ISODate("2014-12-23T09:00:00.000Z"),
-            'Expected': '4 hours',
-            'Status': 'open'
-         }
-    ],
-    workforce: [
-        {
-            'First Name': 'aron',
-            'Second Name': 'william',
-            'Worker ID': 'worker20150118223A',
-            'Tag ID': 'tag2015011A',
-            'Email': 'aron.william@gmail.com',
-            'Phone': '650-334-4523',
-            'Status': 'planned',
-            'Task ID': '4324344321431',
-            'Task Name': 'mount light',
-            'Planned Time': ISODate("2014-12-03T13:00:00.000Z"),
-            'Start Time': ISODate("2014-12-03T13:00:00.000Z")
-        },
-        {
-            'First Name': 'miny',
-            'Second Name': 'kalan',
-            'Worker ID': 'worker20150118225B',
-            'Tag ID': 'tag20150120B',
-            'Email': 'miny.kalan@gmail.com',
-            'Phone': '998-432-2342',
-            'Status': 'planned',
-            'Task ID': '4324344321432',
-            'Task Name': 'paint wall',
-            'Planned Time': ISODate("2014-12-03T13:00:00.000Z"),
-            'Start Time': ISODate("2014-12-03T13:00:00.000Z")
-        }
-    ]
-})
 
 db.equips.save({
     equipment_name: 'Crane Crawler',
@@ -65,183 +7,385 @@ db.equips.save({
     equipment_type: '7045',
     vendor: 'Kobelco',
     commercial_type: 'rental',
-    place_name: 'Work Site 23',
     created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation'
+    status: 'idle',
+    place: {
+            name: 'Al Qadisiyyah Work Site 02',
+            place_id: 'place000000003',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.457505, 39.961789],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    },
+    tasks: [
+            {
+                task_name: 'Concrete',
+                task_id: 'task20150128001con',
+                project_name: 'Karan Suites and Towers'
+            }
+    ]
+})
+
+db.equips.save({
+    equipment_name: 'Crane Crawler',
+    equipment_id: 'equip20140701',
+    equipment_type: '7045',
+    vendor: 'Kobelco',
+    commercial_type: 'rental',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'operation',
+    place: {
+            name: 'Al Qadisiyyah Work Site 03',
+            place_id: 'place000000004',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.457264, 39.957406],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    }
+})
+
+db.equips.save({
+    equipment_name: 'Crane Crawler',
+    equipment_id: 'equip20140702',
+    equipment_type: '7045',
+    vendor: 'Kobelco',
+    commercial_type: 'rental',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'idle',
+    place: {
+            name: 'Al Qadisiyyah Work Site 03',
+            place_id: 'place000000004',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.457264, 39.957406],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    }
+})
+
+db.equips.save({
+    equipment_name: 'Crane Crawler',
+    equipment_id: 'equip20140703',
+    equipment_type: '7045',
+    vendor: 'Kobelco',
+    commercial_type: 'rental',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'operation',
+    place: {
+            name: 'Al Qadisiyyah Work Site 05',
+            place_id: 'place000000005',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.455828, 39.960401],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    }
+})
+
+db.equips.save({
+    equipment_name: 'Crane Crawler',
+    equipment_id: 'equip20140704',
+    equipment_type: '7045',
+    vendor: 'Kobelco',
+    commercial_type: 'rental',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'operation',
+    place: {
+            name: 'At Taniem Site',
+            place_id: 'place000000009',
+            address: '2944, At Taniem, Mecca 24223 8317, Saudi Arabia',
+            coords: [21.479942, 39.802677]
+    }
+})
+
+db.equips.save({
+    equipment_name: 'Crane Crawler',
+    equipment_id: 'equip20140705',
+    equipment_type: '7045',
+    vendor: 'Kobelco',
+    commercial_type: 'rental',
+    created_time: ISODate("2014-12-03T13:00:00Z"),
+    status: 'idle',
+    place: {
+            name: 'King Abdul Aziz Athletic City',
+            place_id: 'place000000010',
+            address: 'King Abdul Aziz Athletic City, As Sail Rd, Mecca 24275, Saudi Arabia',
+            coords: [21.479942, 39.802677]
+    }
 })
 
 db.equips.save({
     equipment_name: 'Crane Mobile',
-    equipment_id: 'equip20140601',
+    equipment_id: 'equip20140602',
     equipment_type: 'TR80 M1',
     vendor: 'Tadano',
     commercial_type: 'rental',
-    place_name: 'Work Site 23',
     created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation'
+    status: 'idle',
+    place: {
+            name: 'Al Qadisiyyah Work Site 03',
+            place_id: 'place000000004',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.457264, 39.957406],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    }
 })
 
 db.equips.save({
     equipment_name: 'Bulldozer',
-    equipment_id: 'equip20140601',
+    equipment_id: 'equip20140603',
     equipment_type: 'd155a-2',
     vendor: 'Komatzu',
     commercial_type: 'rental',
-    place_name: 'Work Site 23',
     created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation'
+    status: 'Operation',
+    place: {
+            name: 'Al Qadisiyyah Work Site 04',
+            place_id: 'place000000005',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.456370, 39.958954],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    }
 })
 
 db.equips.save({
     equipment_name: 'Concrete Mixer',
-    equipment_id: 'equip20140601',
+    equipment_id: 'equip20140604',
     equipment_type: 'FM9',
     vendor: 'Volvo',
     commercial_type: 'rental',
-    place_name: 'Work Site 23',
     created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation'
+    status: 'Operation',
+    place: {
+            name: 'Al Qadisiyyah Work Site 05',
+            place_id: 'place000000005',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.455828, 39.960401],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    }
 })
 
 db.equips.save({
     equipment_name: 'Concrete Pump',
-    equipment_id: 'equip20140601',
+    equipment_id: 'equip20140605',
     equipment_type: 'BPA 500',
     vendor: 'Schwing',
     commercial_type: 'rental',
-    place_name: 'Work Site 23',
     created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation'
+    status: 'Operation',
+    place: {
+            name: 'Jabal An Nur Site',
+            place_id: 'place000000006',
+            address: 'Jabal An Nur, Mecca 24238 6818, Saudi Arabia',
+            coords: [21.444253, 39.856144],
+            organization: 'Al- Jabr project'
+    }
 })
 
 db.equips.save({
     equipment_name: 'Excavator',
-    equipment_id: 'equip20140601',
+    equipment_id: 'equip20140606',
     equipment_type: 'Yc35',
     vendor: 'Yuchai',
     commercial_type: 'rental',
-    place_name: 'Work Site 23',
     created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation'
+    status: 'Operation',
+    place: {
+            name: 'Al Hamra Site',
+            place_id: 'place000000007',
+            address: 'Al Hamra and Umm Al Jud, Mecca Saudi Arabia',
+            coords: [21.384373, 39.700977]
+    }
 })
 
 db.equips.save({
     equipment_name: 'Trencher',
-    equipment_id: 'equip20140601',
+    equipment_id: 'equip20140607',
     equipment_type: 'Ctc 810',
     vendor: 'Capitol',
     commercial_type: 'rental',
-    place_name: 'Work Site 23',
     created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation'
+    status: 'Operation',
+    place: {
+            name: 'College of Technology',
+            place_id: 'place000000008',
+            address: 'College of Technology, Mecca 24412, Saudi Arabia',
+            coords: [21.486916, 39.795718]
+    }
 })
 
 db.equips.save({
     equipment_name: 'Wheel Excavator',
-    equipment_id: 'equip20140601',
+    equipment_id: 'equip20140608',
     equipment_type: '1202',
     vendor: 'Atlas',
     commercial_type: 'rental',
-    place_name: 'Work Site 23',
     created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation'
+    status: 'Operation',
+    place: {
+            name: 'At Taniem Site',
+            place_id: 'place000000009',
+            address: '2944, At Taniem, Mecca 24223 8317, Saudi Arabia',
+            coords: [21.479942, 39.802677]
+    }
 })
 
 db.equips.save({
     equipment_name: 'Forklift',
-    equipment_id: 'equip20140601',
+    equipment_id: 'equip20140609',
     equipment_type: '410m 1C',
     vendor: 'JCB',
     commercial_type: 'rental',
-    place_name: 'Work Site 23',
     created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation'
+    status: 'Operation',
+    place: {
+            name: 'King Abdul Aziz Athletic City',
+            place_id: 'place000000010',
+            address: 'King Abdul Aziz Athletic City, As Sail Rd, Mecca 24275, Saudi Arabia',
+            coords: [21.479942, 39.802677]
+    }
 })
 
 db.equips.save({
     equipment_name: 'Forklift',
-    equipment_id: 'equip20140601',
+    equipment_id: 'equip201406010',
     equipment_type: '2fd60',
     vendor: 'Toyota',
     commercial_type: 'rental',
-    place_name: 'Work Site 23',
     created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation'
+    status: 'Operation',
+    place: {
+            name: 'Al Qadisiyyah Work Site 02',
+            place_id: 'place000000003',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.457505, 39.961789],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    }
 })
 
 db.equips.save({
     equipment_name: 'Generator',
-    equipment_id: 'equip20140601',
+    equipment_id: 'equip20140611',
     equipment_type: '175 kva',
     vendor: 'Denyo',
     commercial_type: 'rental',
-    place_name: 'Work Site 23',
     created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation'
+    status: 'Operation',
+    place: {
+            name: 'Al Qadisiyyah Work Site 03',
+            place_id: 'place000000004',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.457264, 39.957406],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    }
 })
 
 db.equips.save({
     equipment_name: 'Pavers',
-    equipment_id: 'equip20140601',
+    equipment_id: 'equip20140612',
     equipment_type: 'F16w',
     vendor: 'Dynapac',
     commercial_type: 'rental',
-    place_name: 'Work Site 23',
     created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation'
+    status: 'Operation',
+    place: {
+            name: 'Al Qadisiyyah Work Site 03',
+            place_id: 'place000000004',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.457264, 39.957406],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    }
 })
 
 db.equips.save({
     equipment_name: 'Milling Machine',
-    equipment_id: 'equip20140601',
+    equipment_id: 'equip20140613',
     equipment_type: '2100dc',
     vendor: 'Wrtgen',
     commercial_type: 'rental',
-    place_name: 'Work Site 23',
     created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation'
+    status: 'Operation',
+    place: {
+            name: 'Al Qadisiyyah Work Site 04',
+            place_id: 'place000000005',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.456370, 39.958954],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    }
 })
 
 db.equips.save({
     equipment_name: 'Scraper',
-    equipment_id: 'equip20140601',
+    equipment_id: 'equip20140614',
     equipment_type: '637',
     vendor: 'Cat',
     commercial_type: 'rental',
-    place_name: 'Work Site 23',
     created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation'
+    status: 'Operation',
+    place: {
+            name: 'Al Qadisiyyah Work Site 04',
+            place_id: 'place000000005',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.456370, 39.958954],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    }
 })
 
 db.equips.save({
     equipment_name: 'Sweeper',
-    equipment_id: 'equip20140601',
+    equipment_id: 'equip20140615',
     equipment_type: '4100',
     vendor: 'Ravo',
     commercial_type: 'rental',
-    place_name: 'Work Site 23',
     created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation'
+    status: 'Operation',
+    place: {
+            name: 'Al Qadisiyyah Work Site 05',
+            place_id: 'place000000005',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.455828, 39.960401],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    }
 })
 
 db.equips.save({
     equipment_name: 'Material Handler',
-    equipment_id: 'equip20140601',
+    equipment_id: 'equip20140616',
     equipment_type: 'mhl340',
     vendor: 'Terex',
     commercial_type: 'rental',
-    place_name: 'Work Site 23',
     created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation'
+    status: 'Operation',
+    place: {
+            name: 'Al Qadisiyyah Work Site 05',
+            place_id: 'place000000005',
+            address: '23 Al Qadisiyyah Road, Mecca, Makkah Province, Saudi Arabia',
+            coords: [21.455828, 39.960401],
+            parent_place: 'Al Qadisiyyah Rd Site',
+            organization: 'Al- Jabr project',
+    }
 })
 
 db.equips.save({
     equipment_name: 'Wheel Screen Crushing',
-    equipment_id: 'equip20140601',
+    equipment_id: 'equip20140617',
     equipment_type: 'logo stack 13m',
     vendor: 'Cat',
     commercial_type: 'rental',
-    place_name: 'Work Site 23',
     created_time: ISODate("2014-12-03T13:00:00Z"),
-    status: 'Operation'
+    status: 'Operation',
+    place: {
+            name: 'Jabal An Nur Site',
+            place_id: 'place000000006',
+            address: 'Jabal An Nur, Mecca 24238 6818, Saudi Arabia',
+            coords: [21.444253, 39.856144],
+            organization: 'Al- Jabr project'
+    }
 })
