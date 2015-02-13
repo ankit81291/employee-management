@@ -79,7 +79,9 @@ define(["detailWrap/detailWrap","navBar/navBar","items/items"], function(detailW
 	Component.prototype.sendEmail = function(obj){
 		this.detailWrap.sendEmail(obj);
 	};
-
+	Component.prototype.showEquipment = function(){
+		this.detailWrap.showEquipment();
+	};
 	Component.prototype.buildDonutChart = function(){
 		$("#morris-area-chart").empty();
 		  Morris.Donut({

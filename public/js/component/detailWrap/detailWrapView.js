@@ -824,6 +824,14 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 		var headDiv='<div class="row detailwrap detailPlacewrap" >'+
 		'<div class="col-lg-12" style="height:440px;">';
 		var content='<input id="pac-input" class="controls" type="text" placeholder="Search Box">'+
+						/*'<div class="form-group">'+
+				        '<label>Track</label>'+
+				        '<select class="form-control">'+
+				        	'<option>All</option>'+
+				            "<option onclick='window.app.component.showEquipment();'>Equipment</option>"+
+				            '<option>Task</option>'+
+				        '</select>'+
+				    '</div>'+*/
 	    			'<div id="map-canvas"></div>';
 		var footer='</div>'+
 					'</div>';
@@ -836,22 +844,42 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 		var infowindow = new google.maps.InfoWindow();
 		for(var i=0;i<taskObj.length;i++){
 			var latitude=taskObj[i]["place"]["coords"];
-			var marker=new google.maps.Marker({
+			 taskMarker=new google.maps.Marker({
 			  position:new google.maps.LatLng(latitude[0],latitude[1]),
 			  map:window.app.googleMap,
 			  animation:anim
 			  });
-			marker.setMap(window.app.googleMap);
-				marker.html='<div id="content">'+
+			taskMarker.setMap(window.app.googleMap);
+			taskMarker.html='<div id="content">'+
 								'<h3>'+taskObj[i].task_name+'</h3>'+
 								'<hr>'+
 								'<h6>Organization  :'+taskObj[i]["place"].organization +'</h6>'+
 								'<h6>Name :'+taskObj[i]["place"].name +'</h6>'+    
 							'</div>';
-			google.maps.event.addListener(marker, 'click', function() {
+			google.maps.event.addListener(taskMarker, 'click', function() {
 			  infowindow.setContent(this.html);
 			  infowindow.open(window.app.googleMap,this);
 			  });
+	};
+	for(var i=0;i<equipmentobj.length;i++){
+		var latitude=equipmentobj[i]["place"]["coords"];
+		 equipMarker=new google.maps.Marker({
+		  position:new google.maps.LatLng(latitude[0],latitude[1]),
+		  icon:"img/equipment.png",
+		  map:window.app.googleMap,
+		  animation:anim
+		  });
+		 equipMarker.setMap(window.app.googleMap);
+		 equipMarker.html='<div id="content">'+
+							'<h3>'+equipmentobj[i].equipment_name+'</h3>'+
+							'<hr>'+
+							'<h6>Status  :'+equipmentobj[i].status +'</h6>'+
+							'<h6>Name :'+equipmentobj[i]["place"].name +'</h6>'+    
+						'</div>';
+		google.maps.event.addListener(equipMarker, 'click', function() {
+		  infowindow.setContent(this.html);
+		  infowindow.open(window.app.googleMap,this);
+		  });
 	};
 };
 
@@ -927,6 +955,9 @@ detailWrapView.prototype.getStatusClass = function(type) {
 			cssClass="alert alert-info";
 			break;
 		case "open":
+			cssClass="alert alert-info";
+			break;
+		case "Open":
 			cssClass="alert alert-info";
 			break;
 		case "delay":

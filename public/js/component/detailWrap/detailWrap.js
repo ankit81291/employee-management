@@ -64,6 +64,9 @@ define(["detailWrap/detailWrapView"], function(view){
 	detailWrap.prototype.sendEmail = function(obj) {
 		return this.oView.sendEmail(obj);
 	};
+	detailWrap.prototype.showEquipment = function() {
+		return this.oView.showEquipment();
+	};
 	return (new detailWrap());
 });
 

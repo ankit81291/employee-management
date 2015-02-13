@@ -4,7 +4,7 @@ var obj = [
 			   { "id": "Bundle3", "title":"Place","class":"panel panel-red","count":"20","class-icon":"fa fa-globe fa-5x"},
 			   { "id": "Bundle4", "title":"Alert","class":"panel panel-primary","count":"5","class-icon":"fa fa-exclamation-triangle fa-5x"}
 		];
-
+var equipmentobj=[];
 var deviceObj=[{device_name: 'gate_reader12',class:'alert alert-info',device_id: 'device201501123B',device_type: 'Passive RFID Reader',vendor: 'Alien',place_name: 'work site 23',created_time: new Date(),status: 'open'},
                {device_name: 'region_reader23',class:'alert alert-info',device_id: 'device201501123C',device_type: 'Passive RFID Reader',vendor: 'Alien',place_name: 'work site 34',created_time: new Date(),status: 'open'},
                {device_name: 'region_reader24',class:'alert alert-info',device_id: 'device201501123D',device_type: 'Passive RFID Reader',vendor: 'Alien',place_name: 'work site 35',created_time: new Date(),status: 'open'}

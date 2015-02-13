@@ -22,15 +22,19 @@ define(["component"],function(component) {
 						workerObj=resultWorker;
 						$.ajax({url:"http://localhost:3000/api/devices",success:function(resultdevice){
 							deviceObj=resultdevice;
-							itemCount["Place"]=taskObj.length;
-							itemCount["Resources"]="3";
-						navDivContent = that.component.buildNavContent(obj);
-						$("#wrapper").prepend(navDivContent);
-						ItemDivContent = that.component.buildItemContent(itemCount);
-						$("#page-wrapper").append(ItemDivContent);
-						detailWrapDivContent = that.component.buildDetailWrapContent(obj);
-						$("#page-wrapper").append(detailWrapDivContent);
-						that.buildChart();
+							$.ajax({url:"http://localhost:3000/api/equipments",success:function(resultequipments){
+								equipmentobj = resultequipments;
+								itemCount["Place"]=taskObj.length;
+								itemCount["Resources"]="3";
+								navDivContent = that.component.buildNavContent(obj);
+								$("#wrapper").prepend(navDivContent);
+								ItemDivContent = that.component.buildItemContent(itemCount);
+								$("#page-wrapper").append(ItemDivContent);
+								detailWrapDivContent = that.component.buildDetailWrapContent(obj);
+								$("#page-wrapper").append(detailWrapDivContent);
+								that.buildChart();
+							}});
+					
 						}});
 					}});
 				}});
