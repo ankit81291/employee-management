@@ -82,6 +82,9 @@ define(["detailWrap/detailWrap","navBar/navBar","items/items"], function(detailW
 	Component.prototype.showEquipment = function(){
 		this.detailWrap.showEquipment();
 	};
+	Component.prototype.showTask = function(){
+		this.detailWrap.showTask();
+	};
 	Component.prototype.buildDonutChart = function(){
 		$("#morris-area-chart").empty();
 		  Morris.Donut({

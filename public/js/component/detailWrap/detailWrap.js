@@ -67,6 +67,9 @@ define(["detailWrap/detailWrapView"], function(view){
 	detailWrap.prototype.showEquipment = function() {
 		return this.oView.showEquipment();
 	};
+	detailWrap.prototype.showTask = function() {
+		return this.oView.showTask();
+	};
 	return (new detailWrap());
 });
 

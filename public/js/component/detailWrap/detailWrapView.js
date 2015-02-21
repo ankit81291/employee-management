@@ -370,9 +370,9 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 							        '<dd><input id="Organization" style="display:inline;" class="form-control taskField" value="'+notificationObj[keyArray[j]]+'"></dd>';
         								tempDiv2=tempDiv2+tempDiv3;
         							}
-        				
+        	var alertImage=this.getAlertImage(obj["alert_type"]);			
         			var taskTempDiv4='<dt></dt>'+
-			        						'<dd><img src="img/regionEnter.jpg"></dd>'+
+			        						'<dd><img src='+alertImage+'></dd>'+
         								'</dl>'+
 	        								'<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">'+
 	        								'Take Action'+
@@ -824,14 +824,14 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 		var headDiv='<div class="row detailwrap detailPlacewrap" >'+
 		'<div class="col-lg-12" style="height:440px;">';
 		var content='<input id="pac-input" class="controls" type="text" placeholder="Search Box">'+
-						/*'<div class="form-group">'+
+						'<div class="form-group">'+
 				        '<label>Track</label>'+
-				        '<select class="form-control">'+
+				        "<select onclick='window.app.component.showEquipment();' id='selectOpt' class='form-control'>"+
 				        	'<option>All</option>'+
-				            "<option onclick='window.app.component.showEquipment();'>Equipment</option>"+
-				            '<option>Task</option>'+
+				            "<option>Equipment</option>"+
+				            "<option>Task</option>"+
 				        '</select>'+
-				    '</div>'+*/
+				    '</div>'+
 	    			'<div id="map-canvas"></div>';
 		var footer='</div>'+
 					'</div>';
@@ -839,7 +839,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 		$("#page-wrapper").append(completeDiv);
 		var defaultCoords= taskObj[0]["place"]["coords"];
 		initialize(defaultCoords[0],defaultCoords[1]);
-		
+		this.taskMarkerArray=[];
 		var anim = google.maps.Animation.DROP;
 		var infowindow = new google.maps.InfoWindow();
 		for(var i=0;i<taskObj.length;i++){
@@ -860,7 +860,9 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 			  infowindow.setContent(this.html);
 			  infowindow.open(window.app.googleMap,this);
 			  });
+			this.taskMarkerArray.push(taskMarker);
 	};
+	this.equipmentMarkerArray=[];
 	for(var i=0;i<equipmentobj.length;i++){
 		var latitude=equipmentobj[i]["place"]["coords"];
 		 equipMarker=new google.maps.Marker({
@@ -880,6 +882,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 		  infowindow.setContent(this.html);
 		  infowindow.open(window.app.googleMap,this);
 		  });
+		this.equipmentMarkerArray.push(equipMarker);
 	};
 };
 
@@ -976,6 +979,138 @@ detailWrapView.prototype.getStatusClass = function(type) {
 			cssClass=""	;
 	}
 	return cssClass;
+};
+
+detailWrapView.prototype.showEquipment = function() {
+	var selectedValue = document.getElementById('selectOpt').value
+	if(selectedValue=="Equipment"){
+		this.clearMap(null);
+		var anim = google.maps.Animation.DROP;
+		var infowindow = new google.maps.InfoWindow();
+		for(var i=0;i<equipmentobj.length;i++){
+			var latitude=equipmentobj[i]["place"]["coords"];
+			 equipMarker=new google.maps.Marker({
+			  position:new google.maps.LatLng(latitude[0],latitude[1]),
+			  icon:"img/equipment.png",
+			  map:window.app.googleMap,
+			  animation:anim
+			  });
+			 equipMarker.setMap(window.app.googleMap);
+			 equipMarker.html='<div id="content">'+
+								'<h3>'+equipmentobj[i].equipment_name+'</h3>'+
+								'<hr>'+
+								'<h6>Status  :'+equipmentobj[i].status +'</h6>'+
+								'<h6>Name :'+equipmentobj[i]["place"].name +'</h6>'+    
+							'</div>';
+			google.maps.event.addListener(equipMarker, 'click', function() {
+			  infowindow.setContent(this.html);
+			  infowindow.open(window.app.googleMap,this);
+			  });
+			this.equipmentMarkerArray.push(equipMarker);
+		};
+	}
+	else if(selectedValue=="Task"){
+		this.clearMap(null);
+		var anim = google.maps.Animation.DROP;
+		var infowindow = new google.maps.InfoWindow();
+		for(var i=0;i<taskObj.length;i++){
+			var latitude=taskObj[i]["place"]["coords"];
+			 taskMarker=new google.maps.Marker({
+			  position:new google.maps.LatLng(latitude[0],latitude[1]),
+			  map:window.app.googleMap,
+			  animation:anim
+			  });
+			taskMarker.setMap(window.app.googleMap);
+			taskMarker.html='<div id="content">'+
+								'<h3>'+taskObj[i].task_name+'</h3>'+
+								'<hr>'+
+								'<h6>Organization  :'+taskObj[i]["place"].organization +'</h6>'+
+								'<h6>Name :'+taskObj[i]["place"].name +'</h6>'+    
+							'</div>';
+			google.maps.event.addListener(taskMarker, 'click', function() {
+			  infowindow.setContent(this.html);
+			  infowindow.open(window.app.googleMap,this);
+			  });
+			this.taskMarkerArray.push(taskMarker);
+		};
+	}
+	else if(selectedValue=="All"){
+		var anim = google.maps.Animation.DROP;
+		var infowindow = new google.maps.InfoWindow();
+		for(var i=0;i<taskObj.length;i++){
+			var latitude=taskObj[i]["place"]["coords"];
+			 taskMarker=new google.maps.Marker({
+			  position:new google.maps.LatLng(latitude[0],latitude[1]),
+			  map:window.app.googleMap,
+			  animation:anim
+			  });
+			taskMarker.setMap(window.app.googleMap);
+			taskMarker.html='<div id="content">'+
+								'<h3>'+taskObj[i].task_name+'</h3>'+
+								'<hr>'+
+								'<h6>Organization  :'+taskObj[i]["place"].organization +'</h6>'+
+								'<h6>Name :'+taskObj[i]["place"].name +'</h6>'+    
+							'</div>';
+			google.maps.event.addListener(taskMarker, 'click', function() {
+			  infowindow.setContent(this.html);
+			  infowindow.open(window.app.googleMap,this);
+			  });
+			this.taskMarkerArray.push(taskMarker);
+	};
+	for(var i=0;i<equipmentobj.length;i++){
+		var latitude=equipmentobj[i]["place"]["coords"];
+		 equipMarker=new google.maps.Marker({
+		  position:new google.maps.LatLng(latitude[0],latitude[1]),
+		  icon:"img/equipment.png",
+		  map:window.app.googleMap,
+		  animation:anim
+		  });
+		 equipMarker.setMap(window.app.googleMap);
+		 equipMarker.html='<div id="content">'+
+							'<h3>'+equipmentobj[i].equipment_name+'</h3>'+
+							'<hr>'+
+							'<h6>Status  :'+equipmentobj[i].status +'</h6>'+
+							'<h6>Name :'+equipmentobj[i]["place"].name +'</h6>'+    
+						'</div>';
+		google.maps.event.addListener(equipMarker, 'click', function() {
+		  infowindow.setContent(this.html);
+		  infowindow.open(window.app.googleMap,this);
+		  });
+		this.equipmentMarkerArray.push(equipMarker);
+	};
+	}
+};
+
+detailWrapView.prototype.clearMap = function(map) {
+	for(var i=0;i<this.taskMarkerArray.length;i++){
+		this.taskMarkerArray[i].setMap(map);
+	};
+	for(var j=0;j<this.equipmentMarkerArray.length;j++){
+		this.equipmentMarkerArray[j].setMap(map);
+	};
+	this.equipmentMarkerArray=[];
+	this.taskMarkerArray=[];
+};
+
+detailWrapView.prototype.getAlertImage = function(type) {
+	var image="";
+	switch(type){
+		case "WorkerLate":
+			image="img/workerLate.jpg";
+			break;
+		case "EquipmentNotWorking":
+			image="img/equipment.jpg";
+			break;
+		case "RiskRegionEnter":
+			image="img/regionEnter.jpg";
+			break;
+		case "TaskLate":
+			image="img/taskLate.jpg";
+			break;
+		default:
+			cssClass=""	;
+	}
+	return image;
 };
 	return (new detailWrapView());
 });
