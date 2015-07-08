@@ -16,13 +16,14 @@ var sendJsonResponse = function(res, status, content) {
 */
 
 module.exports.createTask= function(req, res) {
-    Place.findOne({'place_id': req.body.place.place_id}, function(err, place) {
+    /*Place.findOne({'name': req.body.place.name}, function(err, place) {
         if (err) {
             sendJsonResponse(res, 400, err);
             return console.error(err);
-        }
+        }*/
 
-        Worker.findOne({'worker_id': req.body.workforce[0].worker_id}, function(err, worker) {
+
+        /*Worker.findOne({'worker_id': req.body.workforce[0].worker_id}, function(err, worker) {
             if (err) {
                 sendJsonResponse(res, 400, err);
                 return console.error(err);
@@ -31,9 +32,36 @@ module.exports.createTask= function(req, res) {
             var task = createTaskObject(req, res, place, worker);
             addTaskToPlace(req, res, place, task, worker);
             sendJsonResponse(res, 201, "Task created.");
-        })
-    })
-}
+        })*/
+        var worker =  {
+        first_name: "Anand",
+        second_name: "Hegde",
+        worker_id: 123,
+        tag_id: 123,
+        email: "anand.hegde@gmail.com",
+        phone: 8095941405,
+        sex: "Male",
+        skills: [],
+        tasks: [],
+        activities: []
+        };
+        var place= {
+                place_id: "1234",
+                name: "Some Place",
+                address: "Some Address",
+                coords: [1,0],
+                organization: "Some organization"
+            }
+        var task = createTaskObject(req, res, place, worker);
+            addTaskToPlace(req, res, place, task, worker);
+            sendJsonResponse(res, 200, "Task created.");
+
+
+
+
+
+  // })
+};
 
 var createTaskObject;
 createTaskObject = function (req, res, place, worker) {
@@ -55,7 +83,7 @@ createTaskObject = function (req, res, place, worker) {
     task["status"] = req.body.status;
     task["supervisor_id"] = req.body.supervisor_id;
     task["supervisor_email"] = req.body.supervisor_email;
-    task["performance"] = req.body.performance;
+    task["performance"] = "performance";
     task["place"] = po;
 
     Task.create(task, function(err, obj) {
@@ -85,15 +113,15 @@ var addTaskToPlace = function(req, res, place, task, worker) {
     wobj.task_name = task.task_name;
     wobj.status = task.status;
 
-    place["tasks"].push(tobj);
-    place["workforce"].push(wobj);
+    //place["tasks"].push(tobj);
+    //place["workforce"].push(wobj);
 
-    place.save(function (err, place){
+    /*place.save(function (err, place){
         if(err){
             sendJsonResponse(res, 400, err);
         } else {
             console.log('Place updated');
-        } });
+        } });*/
 }
 
 /* GET list of locations */
@@ -123,16 +151,16 @@ module.exports.getTasks = function(req, res) {
     })
 };
 /*
- * 
- * db.products.update(
-   { _id: 100 },
-   { $set:
+* 
+* db.products.update(
+  { _id: 100 },
+  { $set:
       {
         quantity: 500,
         details: { model: "14Q3", make: "xyz" },
         tags: [ "coats", "outerwear", "clothing" ]
       }
-   }
+  }
 )
 
 db.people.findAndModify({
@@ -141,12 +169,12 @@ db.people.findAndModify({
     update: { $inc: { score: 1 } },
     upsert: true
 })
- */
+*/
 
 /* PUT /api/tasks/:taskname */
 module.exports.updateTask = function(req, res) {
-	
-	
+
+
   if (!req.body.task_id) {
     sendJsonResponse(res, 404, {
       "message": "Not found, locationid is required"
@@ -154,28 +182,28 @@ module.exports.updateTask = function(req, res) {
     return;
   }
 
-	Task.update({task_id:req.body.task_id}, {$set:
-	{	
-		task_name: req.body.task_name,	
+Task.update({task_id:req.body.task_id}, {$set:
+{ 
+task_name: req.body.task_name, 
         task_id: req.body.task_id,
-		project_name: req.body.project_name,
+project_name: req.body.project_name,
         supervisor_id: req.body.supervisor_id,
         supervisor_email: req.body.supervisor_email
     }},
         
         function(err, result) {
-	    if (err)
-	        {
-	    		console.log("Error"+err);
-	        }
-	    else{
-	    	sendJsonResponse(res, 200, {
-	    	      "message": "Successfully Updated"
-	    	    });
-	    }
-	});
+    if (err)
+        {
+    console.log("Error"+err);
+        }
+    else{
+    sendJsonResponse(res, 200, {
+          "message": "Successfully Updated"
+        });
+    }
+});
   
-	};
+};
 
 
 var buildTasksList = function(req, res, results) {

@@ -8,6 +8,11 @@ define(["detailWrap/detailWrapView"], function(view){
 	detailWrap.prototype.getUI = function(obj) {
 		return this.oView.createContent(obj);
 	};
+
+	detailWrap.prototype.renderTimesheet = function() {
+		return this.oView.renderTimesheet();
+	};
+
 	detailWrap.prototype.getTaskUI = function(obj) {
 		return this.oView.buildTaskDetail(obj);
 	};

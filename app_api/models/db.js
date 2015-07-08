@@ -56,4 +56,5 @@ require('./workers');
 require('./equips');
 require('./materials');
 require('./projects');
+require('./timesheet');
 

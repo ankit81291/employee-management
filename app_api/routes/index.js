@@ -10,4 +10,5 @@ module.exports = function(app){
   require('./equips')(app);
   require('./materials')(app);
   require('./projects')(app);
+  require('./timesheet')(app);
 };

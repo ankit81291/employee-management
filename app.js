@@ -35,6 +35,7 @@ http.createServer(app).listen(app.get('port'), function(){
 var http = require('http');
 var fs=require('fs')
 var path = require('path');
+var cors = require('./cors');
 
 require('./app_api/models/db');
 var express = require('express');
@@ -43,6 +44,7 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 //app.set('views', path.join(__dirname, '/app_server/views'));
 app.set('view engine', 'jade');
+app.use(cors());
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());

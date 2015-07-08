@@ -1,5 +1,5 @@
 
-define(["detailWrap/detailWrapController","jquery-autocomplete"], function(controller,jquery){
+define(["detailWrap/detailWrapController","jquery-autocomplete", "../timesheet/timesheet"], function(controller,jquery, timesheet){
 
 	var detailWrapView = function(){
 		this.oController = controller;
@@ -9,13 +9,13 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 	var dashBoardChartDiv='<div class="row detailwrap" >'+
 						'<div class="col-lg-8">'+
 							'<div class="panel panel-default" style="height: 422px;overflow-y: scroll;">'+
-					                 '<div class="panel-heading">'+
-					                     '<i class="fa fa-bar-chart-o fa-fw"></i>Task Performance'+
-					                     '<div class="pull-right">'+
-					                         '<div class="btn-group">'+
-					                             '<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Actions'+
-					                                 '<span class="caret"></span>'+
-					                             '</button>'+
+									'<div class="panel-heading">'+
+										'<i class="fa fa-bar-chart-o fa-fw"></i>Task Performance'+
+										'<div class="pull-right">'+
+											'<div class="btn-group">'+
+												'<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Actions'+
+													'<span class="caret"></span>'+
+												'</button>'+
 					                             '<ul class="dropdown-menu pull-right" role="menu">'+
 					                             	'<li>'+
 					                             	'<a href="#">Chart Type <span class="fa arrow"></span></a>'+
@@ -96,6 +96,13 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 		$(".detailwrap").append(notificationNavDiv);
 		var notificationDetailDiv = this.createNotificationDetailDiv(obj[0]);
 		$(".detailwrap").append(notificationDetailDiv);
+	};
+
+	detailWrapView.prototype.renderTimesheet = function() {
+		$(".detailwrap").empty();
+		var timesheetDiv = "<div id='dp'></div>";
+		$(".detailwrap").append(timesheetDiv);
+		timesheet.renderUI();
 	};
 	
 	detailWrapView.prototype.createTask = function(obj) {
@@ -550,7 +557,7 @@ define(["detailWrap/detailWrapController","jquery-autocomplete"], function(contr
 	};
 	
 	detailWrapView.prototype.buildWorkerResourceDetail = function() {
-		var workerheadDiv= '<div class="tab-pane fade in active resourceMain" id="Worker">';
+		var workerheadDiv= '<div class="tab-pane fade in resourceMain" id="Worker">';
 		var workerDivList=this.createResourceWorker(workerObj);
 		var workerDivDetail = this.createResourceWorkerDetailDiv(workerObj[0]);
 		var workerFootDiv='</div>';
@@ -913,6 +920,7 @@ detailWrapView.prototype.saveChanges = function() {
 	taskObj["place"]["name"]=$("#orgName").val();
 	taskObj["place"]["address"]=$("#orgAddress").val();
 	taskObj["planned_start_time"]=$("#plannedStart").val();
+	taskObj["planned_finish_time"]=new Date($("#plannedEnd").val());
 	var that =this;
 	if(this.newTask){
 		taskObj["status"]="open";
